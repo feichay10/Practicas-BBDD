@@ -1,0 +1,413 @@
+SQL> SELECT SYSDATE
+  2  FROM DUAL;
+
+SYSDATE                                                                         
+---------                                                                       
+30-NOV-23                                                                       
+
+SQL> SELECT CURRENT_DATE
+  2  FROM DUAL;
+
+CURRENT_D                                                                       
+---------                                                                       
+30-NOV-23                                                                       
+
+SQL> SELECT TO_CHAR(FI, 'YYYY')
+  2  FROM PLAN_DOCENTE;
+
+TO_C                                                                            
+----                                                                            
+2005                                                                            
+2008                                                                            
+2009                                                                            
+2007                                                                            
+2009                                                                            
+2008                                                                            
+2006                                                                            
+2009                                                                            
+2009                                                                            
+2008                                                                            
+2009                                                                            
+
+TO_C                                                                            
+----                                                                            
+2011                                                                            
+2008                                                                            
+2010                                                                            
+2010                                                                            
+2008                                                                            
+2010                                                                            
+2009                                                                            
+2010                                                                            
+
+19 rows selected.
+
+SQL> SELECT TO_CHAR(FI, '2023')
+  2  FROM PLAN_DOCENTE;
+SELECT TO_CHAR(FI, '2023')
+                   *
+ERROR at line 1:
+ORA-01821: date format not recognized 
+
+
+SQL> SELECT EXTRACT(YEAR, FROM FI)
+  2  FROM PLAN_DOCENTE;
+SELECT EXTRACT(YEAR, FROM FI)
+                     *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> SELECT EXTRACT(YEAR FROM FI)
+  2  FROM PLAN_DOCENTE;
+
+EXTRACT(YEARFROMFI)                                                             
+-------------------                                                             
+               2005                                                             
+               2008                                                             
+               2009                                                             
+               2007                                                             
+               2009                                                             
+               2008                                                             
+               2006                                                             
+               2009                                                             
+               2009                                                             
+               2008                                                             
+               2009                                                             
+
+EXTRACT(YEARFROMFI)                                                             
+-------------------                                                             
+               2011                                                             
+               2008                                                             
+               2010                                                             
+               2010                                                             
+               2008                                                             
+               2010                                                             
+               2009                                                             
+               2010                                                             
+
+19 rows selected.
+
+SQL> SET LINESIZE 200
+SQL> REM 1
+SQL> SELECT * FROM PROFESOR;
+
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      1111 JUAN                                                                  6 CU                                                                                                                   
+      2222 CARLOS                                                                7 TU                                                                                                                   
+      3333 PEDRO                                                                 4 TEU                                                                                                                  
+      4444 MARIA                                                                 7 TU                                                                                                                   
+      5555 IVAN                                                                  1 CEU                                                                                                                  
+      6666 CARMEN                                                                3 CD                                                                                                                   
+      7777 MARIO                                                                 2 TU                                                                                                                   
+      8888 FRANCISCO                                                             5 TU                                                                                                                   
+      9999 ANGELA                                                                8 TEU                                                                                                                  
+      1010 DAVID                                                                 4 TU                                                                                                                   
+      2020 SOLEDAD                                                               7 CU                                                                                                                   
+
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      3030 JOSE MANUEL                                                           6 TEU                                                                                                                  
+
+12 rows selected.
+
+SQL> REM 2
+SQL> INSERT INTO PROFESOR
+  2  VALUES(4040,'CARMELO',7,'TU');
+
+1 row created.
+
+SQL> REM 3
+SQL> SELECT * FROM PROFESOR;
+
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      1111 JUAN                                                                  6 CU                                                                                                                   
+      2222 CARLOS                                                                7 TU                                                                                                                   
+      3333 PEDRO                                                                 4 TEU                                                                                                                  
+      4444 MARIA                                                                 7 TU                                                                                                                   
+      5555 IVAN                                                                  1 CEU                                                                                                                  
+      6666 CARMEN                                                                3 CD                                                                                                                   
+      7777 MARIO                                                                 2 TU                                                                                                                   
+      8888 FRANCISCO                                                             5 TU                                                                                                                   
+      9999 ANGELA                                                                8 TEU                                                                                                                  
+      1010 DAVID                                                                 4 TU                                                                                                                   
+      2020 SOLEDAD                                                               7 CU                                                                                                                   
+
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      3030 JOSE MANUEL                                                           6 TEU                                                                                                                  
+      4040 CARMELO                                                               7 TU                                                                                                                   
+
+13 rows selected.
+
+SQL> REM 4
+SQL> ROLLBACK WORK;
+
+Rollback complete.
+
+SQL> REM 5
+SQL> SELECT * FROM PROFESOR;
+
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      1111 JUAN                                                                  6 CU                                                                                                                   
+      2222 CARLOS                                                                7 TU                                                                                                                   
+      3333 PEDRO                                                                 4 TEU                                                                                                                  
+      4444 MARIA                                                                 7 TU                                                                                                                   
+      5555 IVAN                                                                  1 CEU                                                                                                                  
+      6666 CARMEN                                                                3 CD                                                                                                                   
+      7777 MARIO                                                                 2 TU                                                                                                                   
+      8888 FRANCISCO                                                             5 TU                                                                                                                   
+      9999 ANGELA                                                                8 TEU                                                                                                                  
+      1010 DAVID                                                                 4 TU                                                                                                                   
+      2020 SOLEDAD                                                               7 CU                                                                                                                   
+
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      3030 JOSE MANUEL                                                           6 TEU                                                                                                                  
+
+12 rows selected.
+
+SQL> REM 6
+SQL> INSERT INTO PROFESOR
+  2  VALUES(4040,'CARMELO',7,'TU');
+
+1 row created.
+
+SQL> REM 7
+SQL> COMMIT WORK;
+
+Commit complete.
+
+SQL> REM 8
+SQL> INSERT INTO PROFESOR
+  2  VALUES(5050,'CARINA',9,'CEU');
+INSERT INTO PROFESOR
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (ALU0101364544.SYS_C00410389) violated - parent key not found 
+
+
+SQL> REMARK: ERROR PORQUE NO EXISTE EL 9 COMO ASIGNATURA
+SQL> REM 9
+SQL> INSERT INTO PROFESOR
+  2  VALUES(5050,'CARINA',8,'CEU');
+
+1 row created.
+
+SQL> REM 10
+SQL> SELECT * FROM PROFESOR;
+
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      1111 JUAN                                                                  6 CU                                                                                                                   
+      2222 CARLOS                                                                7 TU                                                                                                                   
+      3333 PEDRO                                                                 4 TEU                                                                                                                  
+      4444 MARIA                                                                 7 TU                                                                                                                   
+      5555 IVAN                                                                  1 CEU                                                                                                                  
+      6666 CARMEN                                                                3 CD                                                                                                                   
+      7777 MARIO                                                                 2 TU                                                                                                                   
+      8888 FRANCISCO                                                             5 TU                                                                                                                   
+      9999 ANGELA                                                                8 TEU                                                                                                                  
+      1010 DAVID                                                                 4 TU                                                                                                                   
+      2020 SOLEDAD                                                               7 CU                                                                                                                   
+
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      3030 JOSE MANUEL                                                           6 TEU                                                                                                                  
+      4040 CARMELO                                                               7 TU                                                                                                                   
+      5050 CARINA                                                                8 CEU                                                                                                                  
+
+14 rows selected.
+
+SQL> spool off
+SQL> REM 13
+SQL> REM 13: En la sesion 2 se queda en espera porque la sesion 1 ha modificado una linea pero no ha confirmado
+SQL> REM 14
+SQL> COMMIT WORK;
+
+Commit complete.
+
+SQL> REM 17
+SQL> DELETE FROM PLAN_DOCENTE
+  2  WHERE DNI=4444;
+
+3 rows deleted.
+
+SQL> REM 18
+SQL> SELECT *
+  2  FROM PLAN_DOCENTE
+  3  WHERE DNI=4444;
+
+no rows selected
+
+SQL> REM 19
+SQL> SAVEPOINT P1;
+
+Savepoint created.
+
+SQL> REM 20
+SQL> DELETE FROM PLAN_DOCENTE
+  2  WHERE DNI=1010;
+
+3 rows deleted.
+
+SQL> REM 21
+SQL> SAVEPOINT P2;
+
+Savepoint created.
+
+SQL> REM 22
+SQL> DELETE FROM PLAN_DOCENTE
+  2  WHERE DNI=2222;
+
+2 rows deleted.
+
+SQL> REM 23
+SQL> SELECT * FROM PLAN_DOCENTE;
+
+       DNI        CAS        CTA        CPA        CLA FI        FF                                                                                                                                     
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                                                                              
+      1111          8          3        1.5        1.5 01-SEP-07 31-AUG-09                                                                                                                              
+      1111          8          3          0          0 01-SEP-09                                                                                                                                        
+      3030          8          0        1.5        1.5 01-SEP-09                                                                                                                                        
+      3333          2        1.5        1.5          3 01-SEP-08                                                                                                                                        
+      9999          7          3          3          0 01-SEP-10                                                                                                                                        
+      5555          6          3          3          0 31-MAR-10                                                                                                                                        
+      6666         10          3        1.5        1.5 01-SEP-08 31-AUG-11                                                                                                                              
+      8888         11          6          0          0 01-SEP-09                                                                                                                                        
+      2020          3        1.5          0        1.5 01-SEP-08                                                                                                                                        
+      7777         12        4.5          3          0 01-SEP-10                                                                                                                                        
+      3333          9        1.5          0        1.5 01-SEP-09                                                                                                                                        
+
+11 rows selected.
+
+SQL> REM 24
+SQL> INSERT INTO PLAN_DOCENTE
+  2  VALUES(1010,9,1.5,0,1.5,'01-SEP-09',NULL);
+
+1 row created.
+
+SQL> REM 25
+SQL> SELECT * FROM PLAN_DOCENTE;
+
+       DNI        CAS        CTA        CPA        CLA FI        FF                                                                                                                                     
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                                                                              
+      1111          8          3        1.5        1.5 01-SEP-07 31-AUG-09                                                                                                                              
+      1111          8          3          0          0 01-SEP-09                                                                                                                                        
+      3030          8          0        1.5        1.5 01-SEP-09                                                                                                                                        
+      3333          2        1.5        1.5          3 01-SEP-08                                                                                                                                        
+      9999          7          3          3          0 01-SEP-10                                                                                                                                        
+      5555          6          3          3          0 31-MAR-10                                                                                                                                        
+      6666         10          3        1.5        1.5 01-SEP-08 31-AUG-11                                                                                                                              
+      8888         11          6          0          0 01-SEP-09                                                                                                                                        
+      2020          3        1.5          0        1.5 01-SEP-08                                                                                                                                        
+      7777         12        4.5          3          0 01-SEP-10                                                                                                                                        
+      3333          9        1.5          0        1.5 01-SEP-09                                                                                                                                        
+
+       DNI        CAS        CTA        CPA        CLA FI        FF                                                                                                                                     
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                                                                              
+      1010          9        1.5          0        1.5 01-SEP-09                                                                                                                                        
+
+12 rows selected.
+
+SQL> REM 26
+SQL> ROLLBACK TO P2;
+
+Rollback complete.
+
+SQL> REM 27
+SQL> SELECT * FROM PLAN_DOCENTE;
+
+       DNI        CAS        CTA        CPA        CLA FI        FF                                                                                                                                     
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                                                                              
+      1111          8          3        1.5        1.5 01-SEP-07 31-AUG-09                                                                                                                              
+      1111          8          3          0          0 01-SEP-09                                                                                                                                        
+      3030          8          0        1.5        1.5 01-SEP-09                                                                                                                                        
+      2222          4        1.5          0        1.5 01-SEP-09                                                                                                                                        
+      2222          3        1.5          0        1.5 01-SEP-06 31-AUG-07                                                                                                                              
+      3333          2        1.5        1.5          3 01-SEP-08                                                                                                                                        
+      9999          7          3          3          0 01-SEP-10                                                                                                                                        
+      5555          6          3          3          0 31-MAR-10                                                                                                                                        
+      6666         10          3        1.5        1.5 01-SEP-08 31-AUG-11                                                                                                                              
+      8888         11          6          0          0 01-SEP-09                                                                                                                                        
+      2020          3        1.5          0        1.5 01-SEP-08                                                                                                                                        
+
+       DNI        CAS        CTA        CPA        CLA FI        FF                                                                                                                                     
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                                                                              
+      7777         12        4.5          3          0 01-SEP-10                                                                                                                                        
+      3333          9        1.5          0        1.5 01-SEP-09                                                                                                                                        
+
+13 rows selected.
+
+SQL> REM 28
+SQL> ROLLBACK TO P1;
+
+Rollback complete.
+
+SQL> REM 29
+SQL> SELECT * FROM PLAN_DOCENTE;
+
+       DNI        CAS        CTA        CPA        CLA FI        FF                                                                                                                                     
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                                                                              
+      1111          8          3        1.5        1.5 01-SEP-07 31-AUG-09                                                                                                                              
+      1111          8          3          0          0 01-SEP-09                                                                                                                                        
+      3030          8          0        1.5        1.5 01-SEP-09                                                                                                                                        
+      2222          4        1.5          0        1.5 01-SEP-09                                                                                                                                        
+      2222          3        1.5          0        1.5 01-SEP-06 31-AUG-07                                                                                                                              
+      1010          2        1.5        1.5          3 01-SEP-05 31-AUG-08                                                                                                                              
+      3333          2        1.5        1.5          3 01-SEP-08                                                                                                                                        
+      1010          9          3          0          3 01-SEP-08 31-AUG-09                                                                                                                              
+      1010          9        1.5          0        1.5 01-SEP-09                                                                                                                                        
+      9999          7          3          3          0 01-SEP-10                                                                                                                                        
+      5555          6          3          3          0 31-MAR-10                                                                                                                                        
+
+       DNI        CAS        CTA        CPA        CLA FI        FF                                                                                                                                     
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                                                                              
+      6666         10          3        1.5        1.5 01-SEP-08 31-AUG-11                                                                                                                              
+      8888         11          6          0          0 01-SEP-09                                                                                                                                        
+      2020          3        1.5          0        1.5 01-SEP-08                                                                                                                                        
+      7777         12        4.5          3          0 01-SEP-10                                                                                                                                        
+      3333          9        1.5          0        1.5 01-SEP-09                                                                                                                                        
+
+16 rows selected.
+
+SQL> REM 30
+SQL> ROLLBACK
+  2  ;
+
+Rollback complete.
+
+SQL> SELECT * FROM PLAN_DOCENTE;
+
+       DNI        CAS        CTA        CPA        CLA FI        FF                                                                                                                                     
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                                                                              
+      4444          1          3        1.5        1.5 01-SEP-11                                                                                                                                        
+      4444          4        1.5          0        1.5 01-SEP-08 31-AUG-10                                                                                                                              
+      4444          5          3          0          0 01-SEP-10                                                                                                                                        
+      1111          8          3        1.5        1.5 01-SEP-07 31-AUG-09                                                                                                                              
+      1111          8          3          0          0 01-SEP-09                                                                                                                                        
+      3030          8          0        1.5        1.5 01-SEP-09                                                                                                                                        
+      2222          4        1.5          0        1.5 01-SEP-09                                                                                                                                        
+      2222          3        1.5          0        1.5 01-SEP-06 31-AUG-07                                                                                                                              
+      1010          2        1.5        1.5          3 01-SEP-05 31-AUG-08                                                                                                                              
+      3333          2        1.5        1.5          3 01-SEP-08                                                                                                                                        
+      1010          9          3          0          3 01-SEP-08 31-AUG-09                                                                                                                              
+
+       DNI        CAS        CTA        CPA        CLA FI        FF                                                                                                                                     
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                                                                              
+      1010          9        1.5          0        1.5 01-SEP-09                                                                                                                                        
+      9999          7          3          3          0 01-SEP-10                                                                                                                                        
+      5555          6          3          3          0 31-MAR-10                                                                                                                                        
+      6666         10          3        1.5        1.5 01-SEP-08 31-AUG-11                                                                                                                              
+      8888         11          6          0          0 01-SEP-09                                                                                                                                        
+      2020          3        1.5          0        1.5 01-SEP-08                                                                                                                                        
+      7777         12        4.5          3          0 01-SEP-10                                                                                                                                        
+      3333          9        1.5          0        1.5 01-SEP-09                                                                                                                                        
+
+19 rows selected.
+
+SQL> REM 31
+SQL> SPOOL OFF
