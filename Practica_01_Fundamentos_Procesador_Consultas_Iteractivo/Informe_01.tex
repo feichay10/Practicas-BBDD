@@ -1,0 +1,176 @@
+\documentclass[11pt]{report}
+
+% Paquetes y configuraciones adicionales
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titling}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{wasysym}
+\usepackage{tikzsymbols}
+\usepackage{fancyvrb}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage{subcaption}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage[spanish]{babel}
+
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}
+}
+
+% Configura los márgenes
+\geometry{
+  left=2cm,   % Ajusta este valor al margen izquierdo deseado
+  right=2cm,  % Ajusta este valor al margen derecho deseado
+  top=3cm,
+  bottom=3cm,
+}
+
+% Configuración de los títulos de las secciones
+\titlespacing{\section}{0pt}{\parskip}{\parskip}
+\titlespacing{\subsection}{0pt}{\parskip}{\parskip}
+\titlespacing{\subsubsection}{0pt}{\parskip}{\parskip}
+
+% Redefinir el formato de los capítulos y añadir un punto después del número
+\makeatletter
+\renewcommand{\@makechapterhead}[1]{%
+  \vspace*{0\p@} % Ajusta este valor para el espaciado deseado antes del título del capítulo
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+        \huge\bfseries \thechapter.\ % Añade un punto después del número
+    \fi
+    \interlinepenalty\@M
+    #1\par\nobreak
+    \vspace{10pt} % Ajusta este valor para el espacio deseado después del título del capítulo
+  }}
+\makeatother
+
+% Configura para que cada \chapter no comience en una pagina nueva
+\makeatletter
+\renewcommand\chapter{\@startsection{chapter}{0}{\z@}%
+    {-3.5ex \@plus -1ex \@minus -.2ex}%
+    {2.3ex \@plus.2ex}%
+    {\normalfont\Large\bfseries}}
+\makeatother
+
+% Configurar los colores para el código
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Configurar el estilo para el código
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},   
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+\begin{document}
+
+% Portada del informe
+\title{Practica 01. Fundamentos procesador de consultas interactivo}
+\subtitle{Bases de Datos}
+\author{Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)}
+\date{\today}
+
+\maketitle
+
+\pagestyle{empty} % Desactiva la numeración de página para el índice
+
+% Índice
+\tableofcontents
+
+% Nueva página
+\cleardoublepage
+
+\pagestyle{plain} % Vuelve a activar la numeración de página
+\setcounter{page}{1} % Reinicia el contador de página a 1
+
+% Secciones del informe
+% Capitulo 1
+\chapter{Gestión sesión}
+\begin{itemize}
+  \item \textbf{CONNECT:} Conecta al usuario con una base de datos.
+  \item \textbf{PASSWORD:} Cambia la contraseña del usuario.
+  \item \textbf{DISCONNECT:} Desconecta al usuario de la base de datos.
+  \item \textbf{EXIT:} Cierra la aplicación.
+\end{itemize}
+
+% Capitulo 2
+\chapter{Gestión buffer de instrucciones}
+\begin{itemize}
+  \item \textbf{LIST:} Enumera una o más líneas del comando SQL o bloque ejecutado más recientemente que se almacena en el buffer SQL.
+  \item \textbf{INPUT:} Añade una o más líneas nuevas de texto después de la línea actual en el buffer.
+  \item \textbf{APPEND:} Agrega el texto especificado al final de la línea actual en el buffer SQL.
+  \item \textbf{CHANGE:} Cambia la primera aparición de antigua en la línea actual del buffer SQL.
+  \item \textbf{DEL:} elimina una o más líneas del buffer.
+  \item \textbf{SAVE:} guarda el contenido del buffer SQL en un archivo.
+  \item \textbf{GET:} carga una instrucción SQL o un bloque PL / SQL de un archivo al buffer SQL.
+  \item \textbf{RUN:}  enumera y ejecuta el comando SQL ejecutado más recientemente o el bloque PL / SQL que se almacena en el buffer SQL.
+\end{itemize}
+
+% Capitulo 3
+\chapter{Gestión de scripts}
+\begin{itemize}
+  \item \textbf{EDIT:} Para editar el contenido del buffer SQL.
+  \item \textbf{REMARK:} Hace un comentario en un script.
+  \item \textbf{START:} Ejecuta las sentencias SQL Plus en el script especificado.
+  \item \textbf{COPY:} Copia datos de una consulta a una tabla en la misma base de datos o en otra.
+\end{itemize}
+
+% Capitulo 4
+\chapter{Gestión del entorno SQL Plus}
+\begin{itemize}
+  \item \textbf{DESCRIBE:} Enumera las definiciones de columna para una tabla, vista o sinónimo, o las especificaciones para un función o procedimiento.
+  \item \textbf{SPOOL:} Almacena los resultados de la consulta en un archivo.
+  \item \textbf{SHOW:} Muestra el valor de una variable del sistema SQLPlus o el entorno actual.
+  \item \textbf{SET:} Establece una variable de sistema para alterar la configuración de SQLPlus para su sesión.
+  \item \textbf{HELP:} Accede al sistema de ayuda de la línea de comandos.
+  \item \textbf{HOST:} Ejecuta un comando del sistema operativo sin salir de SQLPlus.
+\end{itemize}
+
+% Capitulo 5
+\chapter{Gestión de variables}
+\begin{itemize}
+  \item \textbf{DEFINE:} Especifica una variable de sustitución y le asigna un valor CHAR, o enumera el valor y tipo de variable de una sola variable o de todas las variables.
+  \item \textbf{UNDEFINE:} Elimina una o más variables de sustitución que se definió
+  \item \textbf{VARIABLE:} Declara una variable de vinculación a la que se puede hacer referencia en PL / SQL, o enumera la pantalla actual características para una sola variable o todas las variables.
+  \item \textbf{PRINT:} Muestra los valores actuales de las variables de vinculación o enumera todas las variables de vinculación
+\end{itemize}
+
+% Capitulo 6
+\chapter{Gestión de informes}
+\begin{itemize}
+  \item \textbf{PAUSE:} Muestra el texto especificado y luego espera a que el usuario presione RETORNO.
+  \item \textbf{TITLE:} Coloca y formatea un título específico en la parte superior de cada página del informe.
+  \item \textbf{BITTLE:} Coloca y formatea un título en la parte inferior de cada página del informe.
+  \item \textbf{COLUMN:} Especifica los atributos de visualización para una columna determinada.
+\end{itemize}
+
+\end{document}

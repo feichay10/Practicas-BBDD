@@ -1,1 +1,14 @@
 *.gdoc
+*.dtmp
+*.bkp
+
+# Ignorar todos los archivos relacionados con Informe seguido de cualquier número excepto Informe.tex y Informe.pdf
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+
+*.backup

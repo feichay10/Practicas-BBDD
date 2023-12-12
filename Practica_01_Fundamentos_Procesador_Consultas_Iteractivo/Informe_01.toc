@@ -1,0 +1,7 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {chapter}{\numberline {1}Gestión sesión}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Gestión buffer de instrucciones}{1}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Gestión de scripts}{1}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Gestión del entorno SQL Plus}{1}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Gestión de variables}{2}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Gestión de informes}{2}{chapter.6}%
