@@ -1,7 +1,0 @@
-\babel@toc {spanish}{}\relax 
-\contentsline {chapter}{\numberline {1}Comprender el significado de los atributos y el sentido de las relaciones expresadas en las tablas}{1}{chapter.1}%
-\contentsline {chapter}{\numberline {2}Enumerar y justificar las implicaciones derivadas de las definiciones de claves primarias y ajenas realizadas en el diseño.}{1}{chapter.2}%
-\contentsline {chapter}{\numberline {3}Representar el diagrama de jerarquía referencial de este diseño y especificar un posible orden de creación/borrado de objetos.}{1}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Describir posibles políticas de mantenimiento de la integridad referencial para esta base de datos.}{2}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Representar gráficamente el esquema conceptual de la base de datos utilizando el modelo E/R.}{2}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Enuncia y justifica diferentes condiciones de integridad generales que, a tu juicio, deben satisfacerse en esta base de datos}{2}{chapter.6}%
