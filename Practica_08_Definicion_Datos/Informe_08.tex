@@ -1,0 +1,628 @@
+\documentclass[11pt]{report}
+
+% Paquetes y configuraciones adicionales
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titling}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{wasysym}
+\usepackage{tikzsymbols}
+\usepackage{fancyvrb}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage{subcaption}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage[spanish]{babel}
+
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}
+}
+
+% Configura los márgenes
+\geometry{
+  left=2cm,   % Ajusta este valor al margen izquierdo deseado
+  right=2cm,  % Ajusta este valor al margen derecho deseado
+  top=3cm,
+  bottom=3cm,
+}
+
+% Configuración de los títulos de las secciones
+\titlespacing{\section}{0pt}{\parskip}{\parskip}
+\titlespacing{\subsection}{0pt}{\parskip}{\parskip}
+\titlespacing{\subsubsection}{0pt}{\parskip}{\parskip}
+
+% Redefinir el formato de los capítulos y añadir un punto después del número
+\makeatletter
+\renewcommand{\@makechapterhead}[1]{%
+  \vspace*{0\p@} % Ajusta este valor para el espaciado deseado antes del título del capítulo
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+        \huge\bfseries \thechapter.\ % Añade un punto después del número
+    \fi
+    \interlinepenalty\@M
+    #1\par\nobreak
+    \vspace{10pt} % Ajusta este valor para el espacio deseado después del título del capítulo
+  }}
+\makeatother
+
+% Configura para que cada \chapter no comience en una pagina nueva
+\makeatletter
+\renewcommand\chapter{\@startsection{chapter}{0}{\z@}%
+    {-3.5ex \@plus -1ex \@minus -.2ex}%
+    {2.3ex \@plus.2ex}%
+    {\normalfont\Large\bfseries}}
+\makeatother
+
+% Configurar los colores para el código
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Configurar el estilo para el código
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},   
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+\begin{document}
+
+% Portada del informe
+\title{Practica 08. Definición de datos}
+\subtitle{Bases de Datos}
+\author{Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)}
+\date{\today}
+
+\maketitle
+
+\pagestyle{empty} % Desactiva la numeración de página para el índice
+
+% Índice
+\tableofcontents
+
+% Nueva página
+\cleardoublepage
+
+\pagestyle{plain} % Vuelve a activar la numeración de página
+\setcounter{page}{1} % Reinicia el contador de página a 1
+
+% Secciones del informe
+%Pregunta 1:
+\chapter{Crear una tabla llamada TITULACION con los atributos T (nombre de titulación) y FAC (nombre de facultad). La clave primaria es T. Especifica los tipos de datos que creas convenientes y razona tu elección.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 1
+SQL> CREATE TABLE TITULACION
+  2  (T CHAR(4) NOT NULL,
+  3  FAC VARCHAR(60),
+  4  PRIMARY KEY(T));
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Table created.
+  \end{verbatim}
+  \item{Explicación:} Los tipos de datos se han elegido en el caso de T, porque ya este parámetro existía en la tabla asignatura, y en cuanto a FAC, he elegido  varchar2 debido a que es una cadena de caracteres de longitud variable, lo que es perfecto para nombres largos.
+\end{itemize}
+
+%Pregunta 2:
+\chapter{Insertar, mediante una única instrucción, en la tabla TITULACION, los nombres de las TITULACION obtenidos a partir de la tabla ASIGNATURA.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 2
+SQL> INSERT INTO TITULACION(T)
+  2  SELECT DISTINCT T
+  3  FROM ASIGNATURA;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+4 rows created.
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 3:
+\chapter{Listar todos los registros de la tabla TITULACION.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 3
+SQL> SQL> SELECT * FROM TITULACION;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+T    FAC                                                                        
+---- ------------------------------------------------------------               
+GF                                                                              
+GM                                                                              
+GII                                                                             
+MII 
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 4:
+\chapter{Rellenar convenientemente el campo FAC de la tabla TITULACION.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 4
+SQL> UPDATE TITULACION
+  2  SET FAC='MASTER EN INFORMATICA'
+  3  WHERE T='MII';
+
+SQL> UPDATE TITULACION
+  2  SET FAC='GRADO EN INFORMATICA'
+  3  WHERE T='MII';
+
+SQL> UPDATE TITULACION
+  2  SET FAC='GRADO EN MATEMATICAS'
+  3  WHERE T='GM';
+
+SQL> UPDATE TITULACION
+  2  SET FAC='GRADO EN FISICA'
+  3  WHERE T='GF';
+
+SQL> SELECT * FROM TITULACION;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+T    FAC                                                                        
+---- ------------------------------------------------------------               
+GF   GRADO EN FISICA                                                            
+GM   GRADO EN MATEMATICAS                                                       
+GII  GRADO EN INFORMATICA                                                       
+MII  MASTER EN INFORMATICA 
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 5:
+\chapter{Crear un sinónimo denominado TIT para la tabla TITULACION.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 5
+SQL> CREATE SYNONYM TIT
+  2  FOR TITULACION;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Synonym created.
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 6:
+\chapter{Listar todos los registros de TIT.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 6
+SQL> SELECT * FROM TIT;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+T    FAC                                                                        
+---- ------------------------------------------------------------               
+GF   GRADO EN FISICA                                                            
+GM   GRADO EN MATEMATICAS                                                       
+GII  GRADO EN INFORMATICA                                                       
+MII  MASTER EN INFORMATICA  
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 7:
+\chapter{Añadir una condición de integridad referencial entre el atributo T de la tabla ASIGNATURAS y el atributo T de la tabla TITULACION con borrado en cascada.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 7
+SQL> ALTER TABLE ASIGNATURA
+  2  ADD FOREIGN KEY(T) REFERENCES TITULACION (T) ON DELETE CASCADE;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Table altered.
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 8:
+\chapter{Incrementar en dos caracteres la longitud del campo T en la tabla TITULACION.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 8
+SQL> ALTER TABLE TITULACION
+  2  MODIFY(T CHAR(6));
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+ALTER TABLE TITULACION
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (ALU0101364544.SYS_C00416035) violated - child 
+record found 
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 9:
+\chapter{Crear una vista, llamada ‘VISTA1’, sobre la tabla ASIGNATURAS, con los campos (CAS, A, T, CUR, CAR).}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> CREATE VIEW VISTA1
+  2  AS SELECT CAS, A, T, CUR, CAR
+  3  FROM ASIGNATURA;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+View created.
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 10:
+\chapter{Listar todas las t-uplas de la vista ‘VISTA1’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 10
+SQL> SELECT * FROM VISTA1;
+  \end{verbatim}
+  \item{Resultado:}
+\end{itemize}
+  \begin{verbatim}
+       CAS A                                                  T           CUR        CAR                                                                                            
+---------- -------------------------------------------------- ---- ---------- ----------                                                                                            
+          1 BASES DE DATOS                                    GII           3          7                                                                                            
+          2 INTELIGENCIA ARTIFICIAL                           GII           3          4                                                                                            
+          3 ALMACENES DE DATOS                                MII           1          7                                                                                            
+          4 MINERIA DE DATOS                                  MII           1          7                                                                                            
+          5 INFORMATICA BASICA                                GII           1          7                                                                                            
+          6 ALGEBRA                                           GII           1          1                                                                                            
+          7 CALCULO                                           GII           1          8                                                                                            
+          8 OPTIMIZACION                                      GII           1          6                                                                                            
+          9 GESTION DE RIESGOS                                GII           3          4                                                                                            
+        10 ASTRONOMIA                                         GF            2          3                                                                                            
+        11 DIDACTICA DE LA MATEMATICA                         GM            2          5                                                                                            
+
+        CAS A                                                 T           CUR        CAR                                                                                            
+---------- -------------------------------------------------- ---- ---------- ----------                                                                                            
+        12 ANALISIS COMPLEJO                                  GM            4          2                                                                                            
+
+12 rows selected.
+  \end{verbatim}
+
+%Pregunta 11:
+\chapter{Insertar la t-upla (13, ‘ESTADISTICA’, GII, 3, 7) en VISTA1.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 11
+SQL> INSERT INTO VISTA1
+  2  VALUES(13, 'ESTADISTICA', 'GII', 3, 7);
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+1 row created.
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 12:
+\chapter{Listar todas las t-uplas de la vista ‘VISTA1’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 12
+SQL> SELECT * FROM VISTA1;
+  \end{verbatim}
+  \item{Resultado:}
+\end{itemize}
+  \begin{verbatim}
+       CAS A                                                  T           CUR        CAR                                                                                            
+---------- -------------------------------------------------- ---- ---------- ----------                                                                                            
+         1 BASES DE DATOS                                     GII           3          7                                                                                            
+         2 INTELIGENCIA ARTIFICIAL                            GII           3          4                                                                                            
+         3 ALMACENES DE DATOS                                 MII           1          7                                                                                            
+         4 MINERIA DE DATOS                                   MII           1          7                                                                                            
+         5 INFORMATICA BASICA                                 GII           1          7                                                                                            
+         6 ALGEBRA                                            GII           1          1                                                                                            
+         7 CALCULO                                            GII           1          8                                                                                            
+         8 OPTIMIZACION                                       GII           1          6                                                                                            
+         9 GESTION DE RIESGOS                                 GII           3          4                                                                                            
+       10 ASTRONOMIA                                          GF            2          3                                                                                            
+       11 DIDACTICA DE LA MATEMATICA                          GM            2          5                                                                                            
+
+       CAS A                                                  T           CUR        CAR                                                                                            
+---------- -------------------------------------------------- ---- ---------- ----------                                                                                            
+        12 ANALISIS COMPLEJO                                  GM            4          2                                                                                            
+        13 ESTADISTICA                                        GII           3          7                                                                                            
+
+13 rows selected.
+  \end{verbatim}
+
+%Pregunta 13:
+\chapter{Listar todas las t-uplas de la tabla ASIGNATURAS.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 13
+SQL> SELECT * FROM ASIGNATURA;
+  \end{verbatim}
+  \item{Resultado:}
+\end{itemize}
+  \begin{verbatim}
+ CAS A                                    T    CUR     CAR         CT         CP        CL                                                           
+---- --------------------------------- ---- ------ ------- ---------- ---------- ---------                                                          
+         1 BASES DE DATOS               GII      3       7          3       1.5        1.5                                                           
+         2 INTELIGENCIA ARTIFICIAL      GII      3       4        1.5       1.5          3                                                           
+         3 ALMACENES DE DATOS           MII      1       7        1.5         0        1.5                                                           
+         4 MINERIA DE DATOS             MII      1       7        1.5         0        1.5                                                           
+         5 INFORMATICA BASICA           GII      1       7          3        1.5       1.5                                                           
+         6 ALGEBRA                      GII      1       1          3          3         0                                                           
+         7 CALCULO                      GII      1       8          3          3         0                                                           
+         8 OPTIMIZACION                 GII      1       6          3        1.5       1.5                                                           
+         9 GESTION DE RIESGOS           GII      3       4          3          0         3                                                           
+        10 ASTRONOMIA                    GF      2       3          3        1.5       1.5                                                           
+        11 DIDACTICA DE LA MATEMATICA    GM      2       5          6          0         0                                                           
+
+ CAS A                                    T    CUR     CAR         CT         CP        CL                                                           
+---- --------------------------------- ---- ------ ------- ---------- ---------- ---------                                                            
+        12 ANALISIS COMPLEJO             GM      4       2        4.5          3         0                                                           
+        13 ESTADISTICA                  GII      3       7          0          0         0                                                           
+
+13 rows selected.
+  \end{verbatim}
+
+
+%Pregunta 14:
+\chapter{Modificar el campo CAR en ‘VISTA1’ de la t-upla con CAS 13. El nuevo valor es 6.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 14
+SQL> UPDATE VISTA1
+  2  SET CAR = 6
+  3  WHERE CAS = 13;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+1 row updated.
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 15:
+\chapter{Listar todas las t-uplas de la vista ‘VISTA1’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 15
+SQL> SELECT * FROM VISTA1;
+  \end{verbatim}
+  \item{Resultado:}
+\end{itemize}
+  \begin{verbatim}
+       CAS A                                                  T           CUR        CAR                                                                                                                                                                                                                    
+---------- -------------------------------------------------- ---- ---------- ----------                                                                                                                                                                                                                    
+         1 BASES DE DATOS                                     GII           3          7                                                                                                                                                                                                                    
+         2 INTELIGENCIA ARTIFICIAL                            GII           3          4                                                                                                                                                                                                                    
+         3 ALMACENES DE DATOS                                 MII           1          7                                                                                                                                                                                                                    
+         4 MINERIA DE DATOS                                   MII           1          7                                                                                                                                                                                                                    
+         5 INFORMATICA BASICA                                 GII           1          7                                                                                                                                                                                                                    
+         6 ALGEBRA                                            GII           1          1                                                                                                                                                                                                                    
+         7 CALCULO                                            GII           1          8                                                                                                                                                                                                                    
+         8 OPTIMIZACION                                       GII           1          6                                                                                                                                                                                                                    
+         9 GESTION DE RIESGOS                                 GII           3          4                                                                                                                                                                                                                    
+        10 ASTRONOMIA                                         GF            2          3                                                                                                                                                                                                                    
+        11 DIDACTICA DE LA MATEMATICA                         GM            2          5                                                                                                                                                                                                                    
+
+        CAS A                                                  T           CUR        CAR                                                                                                                                                                                                                    
+---------- -------------------------------------------------- ---- ---------- ----------                                                                                                                                                                                                                    
+        12 ANALISIS COMPLEJO                                  GM            4          2                                                                                                                                                                                                                    
+        13 ESTADISTICA                                        GII           3          6                                                                                                                                                                                                                    
+
+13 rows selected.
+  \end{verbatim}
+
+%Pregunta 16:
+\chapter{¿Qué conclusiones sacas sobre las actualizaciones de ‘VISTA1’?}
+
+
+%Pregunta 17:
+\chapter{Crear una vista, llamada ‘VISTA2’, sobre la tabla ’PLAN\_DOCENTE’ y la vista ‘VISTA1’ que contenga los datos (DNI, A, T, CUR, CAR) relativos a las asignaturas impartidas por un profesor especificado por su DNI.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 17
+SQL> CREATE VIEW VISTA2
+  2  AS SELECT DNI, A, T, CUR, CAR
+  3  FROM VISTA1 NATURAL JOIN PLAN_DOCENTE
+  4  WHERE DNI=1111;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+View created.
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 18:
+\chapter{Listar todas las t-uplas de la vista ‘VISTA2’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 18
+SQL> SELECT * FROM VISTA2;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+       DNI A                                                  T           CUR        CAR                                                                                                                                                                                                                    
+---------- -------------------------------------------------- ---- ---------- ----------                                                                                                                                                                                                                    
+      1111 OPTIMIZACION                                       GII           1          6                                                                                                                                                                                                                    
+      1111 OPTIMIZACION                                       GII           1          6                                                                                                                                                                                                                        
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 19:
+\chapter{Modifica el campo A de alguna t-upla específica de ‘VISTA2’. Interpreta el resultado.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 19
+SQL> UPDATE VISTA2
+  2  SET A = 'MATEMATICAS'
+  3  WHERE A = 'ASTRONOMIA';
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+SET A = 'MATEMATICAS'
+    *
+ERROR at line 2:
+ORA-01779: cannot modify a column which maps to a non key-preserved table 
+  \end{verbatim}
+  \item{Explicación:} No deja ya que se está modificando un valor de varias tablas a la vez.
+\end{itemize}
+
+%Pregunta 20:
+\chapter{Obtener el esquema de la vista ‘VISTA2’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 20
+SQL> DESCRIBE VISTA2;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Name                                      Null?    Type
+----------------------------------------- -------- ----------------------------
+DNI                                       NOT NULL NUMBER(8)
+A                                         NOT NULL VARCHAR2(50)
+T                                         NOT NULL CHAR(4)
+CUR                                                NUMBER(1)
+CAR                                                NUMBER(3)
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 21:
+\chapter{Eliminar la vista ‘VISTA1’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 21
+SQL> DROP VIEW VISTA1
+  2  ;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+View dropped.
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 22:
+\chapter{Listar todas las t-uplas de la vista ‘VISTA2’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 22
+SQL> SELECT * FROM VISTA2;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+SELECT * FROM VISTA2
+              *
+ERROR at line 1:
+ORA-04063: view "ALU0101364544.VISTA2" has errors 
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 23:
+\chapter{Deshacer los cambios. ¿Se ha recuperado la vista VISTA1? ¿A qué crees que se debe?}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 23
+SQL> ROLLBACK;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Rollback complete.
+  \end{verbatim}
+  \item{Explicación:} No se ha recuperado porque antes se ha usado el DROP y no se puede recuperar
+\end{itemize}
+
+%Pregunta 24:
+\chapter{Crear un índice, llamado ‘INDICE1’, sobre el atributo P de la tabla ‘PROFESORES’. Listar los DNI de los profesores con nombre ‘JUAN’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 24
+SQL> CREATE INDEX INDICE1
+  2  ON PROFESOR(P);
+
+SQL> SELECT DNI
+  2  FROM PROFESOR
+  3  WHERE P='JUAN';
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+       DNI                                                                      
+----------                                                                      
+      1111  
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 25:
+\chapter{Eliminar el índice ‘INDICE1’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 25
+SQL> DROP INDEX INDICE1;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Index dropped.
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 26:
+\chapter{Crear un índice, llamado ‘INDICE2’, sobre el atributo CAR de la vista ‘VISTA1’. ¿Qué interpretas?}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 26
+SQL> CREATE INDEX INDICE2
+  2  ON VISTA1(CAR);
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+ON VISTA1(CAR)
+   *
+ ERROR at line 2:
+ ORA-00942: table or view does not exist
+  \end{verbatim}
+  \item{Explicación:} No se puede crear un índice sobre una vista.
+\end{itemize}
+\end{document}
