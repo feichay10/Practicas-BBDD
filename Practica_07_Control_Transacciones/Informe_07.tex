@@ -1,0 +1,766 @@
+\documentclass[11pt]{report}
+
+% Paquetes y configuraciones adicionales
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titling}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{wasysym}
+\usepackage{tikzsymbols}
+\usepackage{fancyvrb}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage{subcaption}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage[spanish]{babel}
+
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}
+}
+
+% Configura los márgenes
+\geometry{
+  left=2cm,   % Ajusta este valor al margen izquierdo deseado
+  right=2cm,  % Ajusta este valor al margen derecho deseado
+  top=3cm,
+  bottom=3cm,
+}
+
+% Configuración de los títulos de las secciones
+\titlespacing{\section}{0pt}{\parskip}{\parskip}
+\titlespacing{\subsection}{0pt}{\parskip}{\parskip}
+\titlespacing{\subsubsection}{0pt}{\parskip}{\parskip}
+
+% Redefinir el formato de los capítulos y añadir un punto después del número
+\makeatletter
+\renewcommand{\@makechapterhead}[1]{%
+  \vspace*{0\p@} % Ajusta este valor para el espaciado deseado antes del título del capítulo
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+        \huge\bfseries \thechapter.\ % Añade un punto después del número
+    \fi
+    \interlinepenalty\@M
+    #1\par\nobreak
+    \vspace{10pt} % Ajusta este valor para el espacio deseado después del título del capítulo
+  }}
+\makeatother
+
+% Configura para que cada \chapter no comience en una pagina nueva
+\makeatletter
+\renewcommand\chapter{\@startsection{chapter}{0}{\z@}%
+    {-3.5ex \@plus -1ex \@minus -.2ex}%
+    {2.3ex \@plus.2ex}%
+    {\normalfont\Large\bfseries}}
+\makeatother
+
+% Configurar los colores para el código
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Configurar el estilo para el código
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},   
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+\begin{document}
+
+% Portada del informe
+\title{Practica 07. Control de Transacciones}
+\subtitle{Bases de Datos}
+\author{Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)}
+\date{\today}
+
+\maketitle
+
+\pagestyle{empty} % Desactiva la numeración de página para el índice
+
+% Índice
+\tableofcontents
+
+% Nueva página
+\cleardoublepage
+
+\pagestyle{plain} % Vuelve a activar la numeración de página
+\setcounter{page}{1} % Reinicia el contador de página a 1
+
+% Secciones del informe
+% Pregunta 1
+\chapter{Listar todas las t-uplas de la tabla PROFESOR.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 1
+SQL> SELECT * FROM PROFESOR;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      1111 JUAN                                                                  6 CU                                                                                                                   
+      2222 CARLOS                                                                7 TU                                                                                                                   
+      3333 PEDRO                                                                 4 TEU                                                                                                                  
+      4444 MARIA                                                                 7 TU                                                                                                                   
+      5555 IVAN                                                                  1 CEU                                                                                                                  
+      6666 CARMEN                                                                3 CD                                                                                                                   
+      7777 MARIO                                                                 2 TU                                                                                                                   
+      8888 FRANCISCO                                                             5 TU                                                                                                                   
+      9999 ANGELA                                                                8 TEU                                                                                                                  
+      1010 DAVID                                                                 4 TU                                                                                                                   
+      2020 SOLEDAD                                                               7 CU                                                                                                                   
+
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      3030 JOSE MANUEL                                                           6 TEU                                                                                                                  
+
+12 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 2
+\chapter{Añadir la siguiente t-upla a la tabla PROFESOR: (4040, ‘CARMELO’, 7, TU).}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 2
+SQL> INSERT INTO PROFESOR
+  2  VALUES(4040,'CARMELO',7,'TU');
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+1 row created.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 3
+\chapter{Listar todas las t-uplas de la tabla PROFESOR.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 3
+SQL> SELECT * FROM PROFESOR;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      1111 JUAN                                                                  6 CU                                                                                                                   
+      2222 CARLOS                                                                7 TU                                                                                                                   
+      3333 PEDRO                                                                 4 TEU                                                                                                                  
+      4444 MARIA                                                                 7 TU                                                                                                                   
+      5555 IVAN                                                                  1 CEU                                                                                                                  
+      6666 CARMEN                                                                3 CD                                                                                                                   
+      7777 MARIO                                                                 2 TU                                                                                                                   
+      8888 FRANCISCO                                                             5 TU                                                                                                                   
+      9999 ANGELA                                                                8 TEU                                                                                                                  
+      1010 DAVID                                                                 4 TU                                                                                                                   
+      2020 SOLEDAD                                                               7 CU                                                                                                                   
+
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      3030 JOSE MANUEL                                                           6 TEU                                                                                                                  
+      4040 CARMELO                                                               7 TU                                                                                                                   
+
+13 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 4
+\chapter{Deshacer los cambios.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 4
+SQL> ROLLBACK WORK;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Rollback complete.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 5
+\chapter{Listar todas las t-uplas de la tabla PROFESOR.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 5
+SQL> SELECT * FROM PROFESOR;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+     DNI P                                                                     CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      1111 JUAN                                                                  6 CU                                                                                                                   
+      2222 CARLOS                                                                7 TU                                                                                                                   
+      3333 PEDRO                                                                 4 TEU                                                                                                                  
+      4444 MARIA                                                                 7 TU                                                                                                                   
+      5555 IVAN                                                                  1 CEU                                                                                                                  
+      6666 CARMEN                                                                3 CD                                                                                                                   
+      7777 MARIO                                                                 2 TU                                                                                                                   
+      8888 FRANCISCO                                                             5 TU                                                                                                                   
+      9999 ANGELA                                                                8 TEU                                                                                                                  
+      1010 DAVID                                                                 4 TU                                                                                                                   
+      2020 SOLEDAD                                                               7 CU                                                                                                                   
+
+       DNI P                                                                  CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      3030 JOSE MANUEL                                                           6 TEU                                                                                                                  
+
+12 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 6
+\chapter{Añadir la siguiente t-upla a la tabla PROFESOR: (4040, ‘CARMELO’, 7, TU).}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 6
+SQL> INSERT INTO PROFESOR
+  2  VALUES(4040,'CARMELO',7,'TU');
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+1 row created.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 7
+\chapter{Hacer permanentes los cambios.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 7
+SQL> COMMIT WORK;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Commit complete.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 8
+\chapter{Añadir la siguiente t-upla a la tabla PROFESOR: (5050, ‘CARINA’, 9, CEU). Explica qué ocurre.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 8
+SQL> INSERT INTO PROFESOR
+  2  VALUES(5050,'CARINA',9,'CEU');
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+INSERT INTO PROFESOR
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (ALU0101364544.SYS_C00410389) violated - parent 
+key not found 
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 9
+\chapter{Añadir la siguiente t-upla a la tabla PROFESOR: (5050, ‘CARINA’, 8, CEU).}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 9
+SQL> INSERT INTO PROFESOR
+  2  VALUES(5050,'CARINA',8,'CEU');
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+1 row created.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 10
+\chapter{Listar todas las t-uplas de la tabla PROFESOR.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 10
+SQL> SELECT * FROM PROFESOR;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+DNI P                                                                          CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      1111 JUAN                                                                  6 CU                                                                                                                   
+      2222 CARLOS                                                                7 TU                                                                                                                   
+      3333 PEDRO                                                                 4 TEU                                                                                                                  
+      4444 MARIA                                                                 7 TU                                                                                                                   
+      5555 IVAN                                                                  1 CEU                                                                                                                  
+      6666 CARMEN                                                                3 CD                                                                                                                   
+      7777 MARIO                                                                 2 TU                                                                                                                   
+      8888 FRANCISCO                                                             5 TU                                                                                                                   
+      9999 ANGELA                                                                8 TEU                                                                                                                  
+      1010 DAVID                                                                 4 TU                                                                                                                   
+      2020 SOLEDAD                                                               7 CU                                                                                                                   
+
+       DNI P                                                                  CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      3030 JOSE MANUEL                                                           6 TEU                                                                                                                  
+      4040 CARMELO                                                               7 TU                                                                                                                   
+      5050 CARINA                                                                8 CEU                                                                                                                  
+
+14 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 11
+\chapter{Abrir una nueva sesión Unix (sesión 2) ¡sin cerrar la original (sesión 1)! Ejecutar de nuevo el SQL*Plus para conectarte a tu base de datos. (¡No olvides hacer un nuevo spool!)}
+Realizado
+
+% Pregunta 12
+\chapter{(Sesión 2) Listar todas las t-uplas de la tabla PROFESOR. Explica qué ocurre.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 12
+SQL> SELECT * FROM PROFESOR;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      1111 JUAN                                                                  6 CU                                                                                                                   
+      2222 CARLOS                                                                7 TU                                                                                                                   
+      3333 PEDRO                                                                 4 TEU                                                                                                                  
+      4444 MARIA                                                                 7 TU                                                                                                                   
+      5555 IVAN                                                                  1 CEU                                                                                                                  
+      6666 CARMEN                                                                3 CD                                                                                                                   
+      7777 MARIO                                                                 2 TU                                                                                                                   
+      8888 FRANCISCO                                                             5 TU                                                                                                                   
+      9999 ANGELA                                                                8 TEU                                                                                                                  
+      1010 DAVID                                                                 4 TU                                                                                                                   
+      2020 SOLEDAD                                                               7 CU                                                                                                                   
+
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      3030 JOSE MANUEL                                                           6 TEU                                                                                                                  
+      4040 CARMELO                                                               7 TU                                                                                                                   
+
+13 rows selected.
+  \end{verbatim}
+
+  \item{Explicación:} Al no haber hecho los cambios permanentes, no  se ha guardado aun la última  fila añadida, y es por ello que no aparece.
+\end{itemize}
+
+% Pregunta 13
+\chapter{(Sesión 2) Añadir la siguiente t-upla a la tabla PROFESOR: (5050, ‘CARINA’, 8, CEU). Explica qué ocurre.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 13
+SQL> INSERT INTO PROFESOR
+  2  VALUES(5050,'CARINA',8,'CEU');
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+INSERT INTO PROFESOR
+*
+ERROR at line 1:
+ORA-00001: unique constraint (ALU0101364544.SYS_C00410388) violated 
+  \end{verbatim}
+  \item Explicación: En la sesion 2 se queda en espera porque la sesion 1 ha modificado una linea pero no ha confirmado
+\end{itemize}
+
+% Pregunta 14
+\chapter{(Sesión 1) Hacer permanentes los cambios.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 14
+SQL> COMMIT WORK;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Commit complete.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 15
+\chapter{(Sesión 2) Listar todas las t-uplas de la tabla PROFESOR. Explica qué ocurre.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 15
+SQL> SELECT * FROM PROFESOR;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      1111 JUAN                                                                  6 CU                                                                                                                   
+      2222 CARLOS                                                                7 TU                                                                                                                   
+      3333 PEDRO                                                                 4 TEU                                                                                                                  
+      4444 MARIA                                                                 7 TU                                                                                                                   
+      5555 IVAN                                                                  1 CEU                                                                                                                  
+      6666 CARMEN                                                                3 CD                                                                                                                   
+      7777 MARIO                                                                 2 TU                                                                                                                   
+      8888 FRANCISCO                                                             5 TU                                                                                                                   
+      9999 ANGELA                                                                8 TEU                                                                                                                  
+      1010 DAVID                                                                 4 TU                                                                                                                   
+      2020 SOLEDAD                                                               7 CU                                                                                                                   
+
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      3030 JOSE MANUEL                                                           6 TEU                                                                                                                  
+      4040 CARMELO                                                               7 TU                                                                                                                   
+      5050 CARINA                                                                8 CEU                                                                                                                  
+
+14 rows selected.
+  \end{verbatim}
+  \item Explicación: Al hacer los cambios permanentes, se ha añadido la tupla
+\end{itemize}
+
+% Pregunta 16
+\chapter{(Sesión 2) Cerrar esta sesión de trabajo y volver a la sesión 1.}
+Realizado
+
+% Pregunta 17
+\chapter{Eliminar de la tabla ‘PLAN\_DOCENTE’ todas las t-uplas correspondientes al profesor con DNI 4444.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 17
+SQL> DELETE FROM PLAN_DOCENTE
+  2  WHERE DNI=4444;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+3 rows deleted.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 18
+\chapter{Listar las t-uplas de la tabla ‘PLAN\_DOCENTE’ correspondientes al profesor con DNI 4444.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 18
+SQL> SELECT *
+  2  FROM PLAN_DOCENTE
+  3  WHERE DNI=4444;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+no rows selected
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 19
+\chapter{Establecer un punto de control con el nombre ‘P1’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 19
+SQL> SAVEPOINT P1;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Savepoint created.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 20
+\chapter{Eliminar de la tabla ‘PLAN\_DOCENTE’ todas las t-uplas correspondientes al profesor con DNI 1010.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 20
+SQL> DELETE FROM PLAN_DOCENTE
+  2  WHERE DNI=1010;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+3 rows deleted.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 21
+\chapter{Establecer un punto de control con el nombre ‘P2’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 21
+SQL> SAVEPOINT P2;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Savepoint created.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 22
+\chapter{Eliminar de la tabla ‘PLAN\_DOCENTE’ todas las t-uplas correspondientes al profesor con DNI 2222.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 22
+SQL> DELETE FROM PLAN_DOCENTE
+  2  WHERE DNI=2222;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+2 rows deleted.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 23
+\chapter{Listar las t-uplas de la tabla ‘PLAN\_DOCENTE’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 23
+SQL> SELECT * FROM PLAN_DOCENTE;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+DNI        CAS        CTA        CPA        CLA FI        FF                                                                                                                                     
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                                                                              
+      1111          8          3        1.5        1.5 01-SEP-07 31-AUG-09                                                                                                                              
+      1111          8          3          0          0 01-SEP-09                                                                                                                                        
+      3030          8          0        1.5        1.5 01-SEP-09                                                                                                                                        
+      3333          2        1.5        1.5          3 01-SEP-08                                                                                                                                        
+      9999          7          3          3          0 01-SEP-10                                                                                                                                        
+      5555          6          3          3          0 31-MAR-10                                                                                                                                        
+      6666         10          3        1.5        1.5 01-SEP-08 31-AUG-11                                                                                                                              
+      8888         11          6          0          0 01-SEP-09                                                                                                                                        
+      2020          3        1.5          0        1.5 01-SEP-08                                                                                                                                        
+      7777         12        4.5          3          0 01-SEP-10                                                                                                                                        
+      3333          9        1.5          0        1.5 01-SEP-09                                                                                                                                        
+
+11 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 24
+\chapter{Añadir a la tabla ‘PLAN\_DOCENTE’ la t-upla (1010, 9, 1.5, 0, 1.5, ‘01-SEP-09’, NULL). Explica qué ocurre.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 24
+SQL> INSERT INTO PLAN_DOCENTE
+  2  VALUES(1010,9,1.5,0,1.5,'01-SEP-09',NULL);
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+1 row created.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 25
+\chapter{Listar las t-uplas de la tabla ‘PLAN\_DOCENTE’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 25
+SQL> SELECT * FROM PLAN_DOCENTE;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+       DNI        CAS        CTA        CPA        CLA FI        FF                                                                                                                                     
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                                                                              
+      1111          8          3        1.5        1.5 01-SEP-07 31-AUG-09                                                                                                                              
+      1111          8          3          0          0 01-SEP-09                                                                                                                                        
+      3030          8          0        1.5        1.5 01-SEP-09                                                                                                                                        
+      3333          2        1.5        1.5          3 01-SEP-08                                                                                                                                        
+      9999          7          3          3          0 01-SEP-10                                                                                                                                        
+      5555          6          3          3          0 31-MAR-10                                                                                                                                        
+      6666         10          3        1.5        1.5 01-SEP-08 31-AUG-11                                                                                                                              
+      8888         11          6          0          0 01-SEP-09                                                                                                                                        
+      2020          3        1.5          0        1.5 01-SEP-08                                                                                                                                        
+      7777         12        4.5          3          0 01-SEP-10                                                                                                                                        
+      3333          9        1.5          0        1.5 01-SEP-09                                                                                                                                        
+
+       DNI        CAS        CTA        CPA        CLA FI        FF                                                                                                                                     
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                                                                              
+      1010          9        1.5          0        1.5 01-SEP-09                                                                                                                                        
+
+12 rows selected. 
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 26
+\chapter{Deshacer los cambios hasta el punto de control P2.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 26
+SQL> ROLLBACK TO P2;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Rollback complete.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 27
+\chapter{Listar las t-uplas de la tabla ‘PLAN\_DOCENTE’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 27
+SQL> SELECT * FROM PLAN_DOCENTE;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+       DNI        CAS        CTA        CPA        CLA FI        FF                                                                                                                                     
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                                                                              
+      1111          8          3        1.5        1.5 01-SEP-07 31-AUG-09                                                                                                                              
+      1111          8          3          0          0 01-SEP-09                                                                                                                                        
+      3030          8          0        1.5        1.5 01-SEP-09                                                                                                                                        
+      2222          4        1.5          0        1.5 01-SEP-09                                                                                                                                        
+      2222          3        1.5          0        1.5 01-SEP-06 31-AUG-07                                                                                                                              
+      3333          2        1.5        1.5          3 01-SEP-08                                                                                                                                        
+      9999          7          3          3          0 01-SEP-10                                                                                                                                        
+      5555          6          3          3          0 31-MAR-10                                                                                                                                        
+      6666         10          3        1.5        1.5 01-SEP-08 31-AUG-11                                                                                                                              
+      8888         11          6          0          0 01-SEP-09                                                                                                                                        
+      2020          3        1.5          0        1.5 01-SEP-08                                                                                                                                        
+
+       DNI        CAS        CTA        CPA        CLA FI        FF                                                                                                                                     
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                                                                              
+      7777         12        4.5          3          0 01-SEP-10                                                                                                                                        
+      3333          9        1.5          0        1.5 01-SEP-09                                                                                                                                        
+
+13 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 28
+\chapter{Deshacer los cambios hasta el punto de control P1.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 28
+SQL> ROLLBACK TO P1;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Rollback complete.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 29
+\chapter{Listar las t-uplas de la tabla ‘PLAN\_DOCENTE’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 29
+SQL> SELECT * FROM PLAN_DOCENTE;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+       DNI        CAS        CTA        CPA        CLA FI        FF                                                                                                                                     
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                                                                              
+      1111          8          3        1.5        1.5 01-SEP-07 31-AUG-09                                                                                                                              
+      1111          8          3          0          0 01-SEP-09                                                                                                                                        
+      3030          8          0        1.5        1.5 01-SEP-09                                                                                                                                        
+      2222          4        1.5          0        1.5 01-SEP-09                                                                                                                                        
+      2222          3        1.5          0        1.5 01-SEP-06 31-AUG-07                                                                                                                              
+      1010          2        1.5        1.5          3 01-SEP-05 31-AUG-08                                                                                                                              
+      3333          2        1.5        1.5          3 01-SEP-08                                                                                                                                        
+      1010          9          3          0          3 01-SEP-08 31-AUG-09                                                                                                                              
+      1010          9        1.5          0        1.5 01-SEP-09                                                                                                                                        
+      9999          7          3          3          0 01-SEP-10                                                                                                                                        
+      5555          6          3          3          0 31-MAR-10                                                                                                                                        
+
+       DNI        CAS        CTA        CPA        CLA FI        FF                                                                                                                                     
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                                                                              
+      6666         10          3        1.5        1.5 01-SEP-08 31-AUG-11                                                                                                                              
+      8888         11          6          0          0 01-SEP-09                                                                                                                                        
+      2020          3        1.5          0        1.5 01-SEP-08                                                                                                                                        
+      7777         12        4.5          3          0 01-SEP-10                                                                                                                                        
+      3333          9        1.5          0        1.5 01-SEP-09                                                                                                                                        
+
+16 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 30
+\chapter{Deshacer los cambios hasta el inicio de la transacción.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 30
+SQL> ROLLBACK
+  2  ;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Rollback complete.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 31
+\chapter{Listar las t-uplas de la tabla ‘PLAN\_DOCENTE’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 31
+SQL> SELECT * FROM PLAN_DOCENTE;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+       DNI        CAS        CTA        CPA        CLA FI        FF                                                                                                                                     
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                                                                              
+      4444          1          3        1.5        1.5 01-SEP-11                                                                                                                                        
+      4444          4        1.5          0        1.5 01-SEP-08 31-AUG-10                                                                                                                              
+      4444          5          3          0          0 01-SEP-10                                                                                                                                        
+      1111          8          3        1.5        1.5 01-SEP-07 31-AUG-09                                                                                                                              
+      1111          8          3          0          0 01-SEP-09                                                                                                                                        
+      3030          8          0        1.5        1.5 01-SEP-09                                                                                                                                        
+      2222          4        1.5          0        1.5 01-SEP-09                                                                                                                                        
+      2222          3        1.5          0        1.5 01-SEP-06 31-AUG-07                                                                                                                              
+      1010          2        1.5        1.5          3 01-SEP-05 31-AUG-08                                                                                                                              
+      3333          2        1.5        1.5          3 01-SEP-08                                                                                                                                        
+      1010          9          3          0          3 01-SEP-08 31-AUG-09                                                                                                                              
+
+       DNI        CAS        CTA        CPA        CLA FI        FF                                                                                                                                     
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                                                                              
+      1010          9        1.5          0        1.5 01-SEP-09                                                                                                                                        
+      9999          7          3          3          0 01-SEP-10                                                                                                                                        
+      5555          6          3          3          0 31-MAR-10                                                                                                                                        
+      6666         10          3        1.5        1.5 01-SEP-08 31-AUG-11                                                                                                                              
+      8888         11          6          0          0 01-SEP-09                                                                                                                                        
+      2020          3        1.5          0        1.5 01-SEP-08                                                                                                                                        
+      7777         12        4.5          3          0 01-SEP-10                                                                                                                                        
+      3333          9        1.5          0        1.5 01-SEP-09                                                                                                                                        
+
+19 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+
+\end{document}
