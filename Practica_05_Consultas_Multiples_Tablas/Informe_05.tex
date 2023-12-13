@@ -1,0 +1,725 @@
+\documentclass[11pt]{report}
+
+% Paquetes y configuraciones adicionales
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titling}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{wasysym}
+\usepackage{tikzsymbols}
+\usepackage{fancyvrb}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage{subcaption}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage[spanish]{babel}
+
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}
+}
+
+% Configura los márgenes
+\geometry{
+  left=2cm,   % Ajusta este valor al margen izquierdo deseado
+  right=2cm,  % Ajusta este valor al margen derecho deseado
+  top=3cm,
+  bottom=3cm,
+}
+
+% Configuración de los títulos de las secciones
+\titlespacing{\section}{0pt}{\parskip}{\parskip}
+\titlespacing{\subsection}{0pt}{\parskip}{\parskip}
+\titlespacing{\subsubsection}{0pt}{\parskip}{\parskip}
+
+% Redefinir el formato de los capítulos y añadir un punto después del número
+\makeatletter
+\renewcommand{\@makechapterhead}[1]{%
+  \vspace*{0\p@} % Ajusta este valor para el espaciado deseado antes del título del capítulo
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+        \huge\bfseries \thechapter.\ % Añade un punto después del número
+    \fi
+    \interlinepenalty\@M
+    #1\par\nobreak
+    \vspace{10pt} % Ajusta este valor para el espacio deseado después del título del capítulo
+  }}
+\makeatother
+
+% Configura para que cada \chapter no comience en una pagina nueva
+\makeatletter
+\renewcommand\chapter{\@startsection{chapter}{0}{\z@}%
+    {-3.5ex \@plus -1ex \@minus -.2ex}%
+    {2.3ex \@plus.2ex}%
+    {\normalfont\Large\bfseries}}
+\makeatother
+
+% Configurar los colores para el código
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Configurar el estilo para el código
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},   
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+\begin{document}
+
+% Portada del informe
+\title{Practica 05. Consultas con múltiples tablas}
+\subtitle{Bases de Datos}
+\author{Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)}
+\date{\today}
+
+\maketitle
+
+\pagestyle{empty} % Desactiva la numeración de página para el índice
+
+% Índice
+\tableofcontents
+
+% Nueva página
+\cleardoublepage
+
+\pagestyle{plain} % Vuelve a activar la numeración de página
+\setcounter{page}{1} % Reinicia el contador de página a 1
+
+% Secciones del informe
+% Capitulo 1
+% \chapter{Introducción}
+% \begin{verbatim}
+% SQL> SELECT SYSDATE FROM DUAL;
+
+% SYSDATE                                                                         
+% ---------                                                                       
+% 28-NOV-23  
+% \end{verbatim}
+
+\chapter{Listar los nombres de asignaturas adscritas a áreas cuyo nombre empiece por ‘A’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 1
+SQL> SELECT A
+  2  FROM ASIGNATURA WHERE
+  3  CAR IN (SELECT CAR FROM AREA WHERE AR LIKE 'A%');
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+A                                                                               
+--------------------------------------------------                              
+ALGEBRA                                                                         
+ANALISIS COMPLEJO                                                               
+ASTRONOMIA    
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar los nombres de asignaturas adscritas a áreas cuyo nombre termine en ‘A’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 2
+SQL> SELECT A
+  2  FROM ASIGNATURA WHERE
+  3  CAR IN (SELECT CAR FROM AREA WHERE AR LIKE '%A');
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+A                                                                               
+--------------------------------------------------                              
+ALGEBRA                                                                         
+ASTRONOMIA                                                                      
+DIDACTICA DE LA MATEMATICA                                                      
+OPTIMIZACION                                                                    
+CALCULO   
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar los nombres de asignaturas que lleven la palabra ‘DATOS’.}% \begin{itemize}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 3
+SQL> SELECT A
+  2  FROM ASIGNATURA
+  3  WHERE A LIKE '%DATOS%';
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+A                                                                               
+--------------------------------------------------                              
+BASES DE DATOS                                                                  
+ALMACENES DE DATOS                                                              
+MINERIA DE DATOS  
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar los DNI de los profesores en cuyo nombre el tercer carácter sea ‘R’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 4
+SQL> SELECT DNI
+  2  FROM PROFESOR
+  3  WHERE P LIKE '__R%';
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+       DNI                                                                      
+----------                                                                      
+      2222                                                                      
+      4444                                                                      
+      6666                                                                      
+      7777  
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar, sin contar duplicados, los DNI de los profesores con nombres de, a lo sumo, 5 caracteres de longitud.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 5
+SQL> SELECT UNIQUE P
+  2  FROM PROFESOR
+  3  WHERE LENGTH(P) <= 5;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+P                                                                               
+------------------------------------------------------------                    
+MARIO                                                                           
+JUAN                                                                            
+PEDRO                                                                           
+IVAN                                                                            
+DAVID                                                                           
+MARIA
+
+6 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar, sin contar duplicados, los DNI de los profesores con nombres de, al menos, 5 caracteres de longitud.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> SELECT UNIQUE P
+  2  FROM PROFESOR
+  3  WHERE LENGTH(P) >= 5;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+P                                                                               
+------------------------------------------------------------                    
+MARIO                                                                           
+PEDRO                                                                           
+FRANCISCO                                                                       
+SOLEDAD                                                                         
+CARLOS                                                                          
+CARMEN                                                                          
+DAVID                                                                           
+MARIA                                                                           
+JOSE MANUEL                                                                     
+ANGELA                                                                          
+
+10 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar los nombres de los profesores que actualmente imparten alguna asignatura.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 7
+SQL> SELECT UNIQUE P
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  3  WHERE FF IS NULL AND FI < SYSDATE;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+P                                                                               
+------------------------------------------------------------                    
+MARIO                                                                           
+JUAN                                                                            
+PEDRO                                                                           
+FRANCISCO                                                                       
+SOLEDAD                                                                         
+DAVID                                                                           
+CARLOS                                                                          
+IVAN                                                                            
+MARIA                                                                           
+JOSE MANUEL                                                                     
+ANGELA                                                                          
+
+11 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Nombres de los profesores que han impartido la asignatura con código 8.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 8
+SQL> SELECT P
+  2  FROM PROFESOR NATURAL JOIN ASIGNATURA
+  3  WHERE CAS = 8;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+P                                                                               
+------------------------------------------------------------                    
+JUAN                                                                            
+JOSE MANUEL  
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar las t uplas de la tabla PLAN\_DOCENTE ordenadas de forma ascendente, según el campo FF.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 9
+SQL> SELECT * FROM PLAN_DOCENTE
+  2  ORDER BY FF ASC;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+DNI        CAS        CTA        CPA        CLA FI        FF             
+---------- ---------- ---------- ---------- ---------- --------- ---------      
+      2222          3        1.5          0        1.5 01-SEP-06 31-AUG-07      
+      1010          2        1.5        1.5          3 01-SEP-05 31-AUG-08      
+      1010          9          3          0          3 01-SEP-08 31-AUG-09      
+      1111          8          3        1.5        1.5 01-SEP-07 31-AUG-09      
+      4444          4        1.5          0        1.5 01-SEP-08 31-AUG-10      
+      6666         10          3        1.5        1.5 01-SEP-08 31-AUG-11      
+      1010          9        1.5          0        1.5 01-SEP-09                
+      9999          7          3          3          0 01-SEP-10                
+      5555          6          3          3          0 31-MAR-10                
+      8888         11          6          0          0 01-SEP-09                
+      2020          3        1.5          0        1.5 01-SEP-08                
+
+        DNI        CAS        CTA        CPA        CLA FI        FF             
+---------- ---------- ---------- ---------- ---------- --------- ---------      
+      7777         12        4.5          3          0 01-SEP-10                
+      3333          9        1.5          0        1.5 01-SEP-09                
+      2222          4        1.5          0        1.5 01-SEP-09                
+      3030          8          0        1.5        1.5 01-SEP-09                
+      1111          8          3          0          0 01-SEP-09                
+      4444          5          3          0          0 01-SEP-10                
+      4444          1          3        1.5        1.5 01-SEP-11                
+      3333          2        1.5        1.5          3 01-SEP-08                
+
+19 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar las t uplas de la tabla PLAN\_DOCENTE ordenadas de forma descendente, según el campo FF.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 10
+SQL> SELECT * FROM PLAN_DOCENTE
+  2  ORDER BY FF DESC;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+DNI        CAS        CTA        CPA        CLA FI        FF             
+---------- ---------- ---------- ---------- ---------- --------- ---------      
+      4444          1          3        1.5        1.5 01-SEP-11                
+      3333          2        1.5        1.5          3 01-SEP-08                
+      7777         12        4.5          3          0 01-SEP-10                
+      2020          3        1.5          0        1.5 01-SEP-08                
+      8888         11          6          0          0 01-SEP-09                
+      5555          6          3          3          0 31-MAR-10                
+      9999          7          3          3          0 01-SEP-10                
+      4444          5          3          0          0 01-SEP-10                
+      1111          8          3          0          0 01-SEP-09                
+      3030          8          0        1.5        1.5 01-SEP-09                
+      2222          4        1.5          0        1.5 01-SEP-09                
+
+        DNI        CAS        CTA        CPA        CLA FI        FF             
+---------- ---------- ---------- ---------- ---------- --------- ---------      
+      3333          9        1.5          0        1.5 01-SEP-09                
+      1010          9        1.5          0        1.5 01-SEP-09                
+      6666         10          3        1.5        1.5 01-SEP-08 31-AUG-11      
+      4444          4        1.5          0        1.5 01-SEP-08 31-AUG-10      
+      1010          9          3          0          3 01-SEP-08 31-AUG-09      
+      1111          8          3        1.5        1.5 01-SEP-07 31-AUG-09      
+      1010          2        1.5        1.5          3 01-SEP-05 31-AUG-08      
+      2222          3        1.5          0        1.5 01-SEP-06 31-AUG-07      
+
+19 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Nombres de los profesores que han impartido la asignatura ‘OPTIMIZACIÓN’ en la titulación GII. Ordena los nombres ascendentemente.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 11
+SQL> SELECT P
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  WHERE A = 'OPTIMIZACION' AND T='GII'
+  4  ORDER BY P ASC;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+P                                                                               
+------------------------------------------------------------                    
+JOSE MANUEL                                                                     
+JUAN                                                                            
+JUAN  
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar los nombres de los profesores del departamento ‘MATEMÁTICA FUNDAMENTAL’. Ordena los nombres descendentemente.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 12
+SQL> SELECT UNIQUE P
+  2  FROM PROFESOR NATURAL JOIN AREA NATURAL JOIN DEPARTAMENTO
+  3  WHERE D = 'MATEMATICA FUNDAMENTAL'
+  4  ORDER BY P ASC;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+P                                                                               
+------------------------------------------------------------                    
+IVAN  
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar los nombres de las asignaturas impartidas por el profesor con DNI 1010.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 13
+SQL> SELECT UNIQUE A
+  2  FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE
+  3  WHERE DNI = 1010;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+A                                                                               
+--------------------------------------------------                              
+GESTION DE RIESGOS                                                              
+INTELIGENCIA ARTIFICIAL  
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar los nombres de las asignaturas impartidas por el profesor con nombre ‘DAVID’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> SELECT UNIQUE A
+  2  FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE
+  3  NATURAL JOIN PROFESOR
+  4  WHERE P = 'DAVID';
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+A                                                                               
+--------------------------------------------------                              
+GESTION DE RIESGOS                                                              
+INTELIGENCIA ARTIFICIAL  
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar los nombres de las áreas adscritas al departamento ‘ESTADISTICA, INVESTIGACIÓN OPERATIVA Y COMPUTACIÓN’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 15
+SQL> SELECT AR
+  2  FROM AREA NATURAL JOIN DEPARTAMENTO
+  3  WHERE D = 'ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION';
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+AR                                                                              
+------------------------------------------------------------                    
+CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                            
+ESTADISTICA E INVESTIGACION OPERATIVA                                           
+LENGUAJES Y SISTEMAS INFORMATICOS  
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar los nombres de las asignaturas impartidas actualmente por catedráticos de universidad (categoría CU).}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 16
+SQL> SELECT A FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE NATURAL JOIN PROFESOR
+  2  WHERE CAT = 'CU';
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+A                                                                               
+--------------------------------------------------                              
+OPTIMIZACION                                                                    
+OPTIMIZACION                                                                    
+ALMACENES DE DATOS 
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar los nombres de las asignaturas que siempre han sido impartidas por catedráticos de universidad (categoría CU).}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> SELECT UNIQUE A
+  2  FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE NATURAL JOIN PROFESOR
+  3  WHERE DNI=ALL(SELECT DNI FROM PROFESOR WHERE CAT='CU');
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+no rows selected
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar los nombres de asignaturas adscritas a ‘LENGUAJES Y SISTEMAS INFORMÁTICOS’ o a ‘CIENCIAS DE LA COMPUTACIÓN E INTELIGENCIA ARTIFICIAL’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 18
+SQL> SELECT A
+  2  FROM ASIGNATURA NATURAL JOIN AREA
+  3  WHERE AR = 'LENGUAJES Y SISTEMAS INFORMATICOS' 
+  4  OR AR = 'CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL';
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+A                                                                               
+--------------------------------------------------                              
+GESTION DE RIESGOS                                                              
+INTELIGENCIA ARTIFICIAL                                                         
+INFORMATICA BASICA                                                              
+MINERIA DE DATOS                                                                
+ALMACENES DE DATOS                                                              
+BASES DE DATOS                                                                  
+
+6 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar los nombres de profesores que actualmente dan clases en las titulaciones ‘GII’ o en ‘MII’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> rem 19
+SQL> SELECT DISTINCT P
+  2  FROM PROFESOR NATURAL JOIN ASIGNATURA NATURAL JOIN PLAN_DOCENTE
+  3  WHERE (T='GII' OR T='MII') AND FI < SYSDATE AND FF IS NULL;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+  P                                                                               
+  ------------------------------------------------------------                    
+  JUAN                                                                            
+  PEDRO                                                                           
+  SOLEDAD                                                                         
+  CARLOS                                                                          
+  IVAN                                                                            
+  DAVID                                                                           
+  MARIA                                                                           
+  JOSE MANUEL                                                                     
+  ANGELA                                                                          
+  
+  9 rows selected.                                                                   
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar los nombres de profesores que actualmente dan clases en las titulaciones ‘GII’ y en ‘MII’ simultáneamente.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 20
+SQL> SELECT DISTINCT P
+  2  FROM PROFESOR NATURAL JOIN ASIGNATURA NATURAL JOIN PLAN_DOCENTE
+  3  WHERE T = 'GII' AND T = 'MII' AND FI < SYSDATE AND FF IS NULL;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+no rows selected
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar los nombres de profesores que actualmente no imparten ninguna asignatura.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 21
+SQL> SELECT P
+  2  FROM PROFESOR
+  3  WHERE DNI NOT IN
+  4  (SELECT DNI FROM PLAN_DOCENTE WHERE FF IN NULL);
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+P                                                                               
+------------------------------------------------------------                    
+DAVID                                                                           
+JUAN                                                                            
+SOLEDAD                                                                         
+CARLOS                                                                          
+JOSE MANUEL                                                                     
+PEDRO                                                                           
+MARIA                                                                           
+IVAN                                                                            
+CARMEN                                                                          
+MARIO                                                                           
+FRANCISCO                                                                       
+
+P                                                                               
+------------------------------------------------------------                    
+ANGELA                                                                          
+
+12 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar los nombres de asignaturas impartidas en la titulación GII.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 22
+SQL> SELECT A
+  2  FROM ASIGNATURA
+  3  WHERE T = 'GII';
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+A                                                                               
+--------------------------------------------------                              
+BASES DE DATOS                                                                  
+INTELIGENCIA ARTIFICIAL                                                         
+INFORMATICA BASICA                                                              
+ALGEBRA                                                                         
+CALCULO                                                                         
+OPTIMIZACION                                                                    
+GESTION DE RIESGOS                                                              
+
+7 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar los nombres de las áreas de conocimiento y los nombres de las asignaturas que pertenecen a ellos.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 23
+SQL> SET LINESIZE 180
+SQL> SELECT AR, A
+  2  FROM AREA
+  3  NATURAL JOIN ASIGNATURA;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+AR                                                           A                                                                                                                      
+------------------------------------------------------------ --------------------------------------------------                                                                     
+ALGEBRA                                                      ALGEBRA                                                                                                                
+ANALISIS MATEMATICO                                          ANALISIS COMPLEJO                                                                                                      
+ASTRONOMIA Y ASTROFISICA                                     ASTRONOMIA                                                                                                             
+CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL         GESTION DE RIESGOS                                                                                                     
+CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL         INTELIGENCIA ARTIFICIAL                                                                                                
+DIDACTICA DE LA MATEMATICA                                   DIDACTICA DE LA MATEMATICA                                                                                             
+ESTADISTICA E INVESTIGACION OPERATIVA                        OPTIMIZACION                                                                                                           
+LENGUAJES Y SISTEMAS INFORMATICOS                            INFORMATICA BASICA                                                                                                     
+LENGUAJES Y SISTEMAS INFORMATICOS                            MINERIA DE DATOS                                                                                                       
+LENGUAJES Y SISTEMAS INFORMATICOS                            ALMACENES DE DATOS                                                                                                     
+LENGUAJES Y SISTEMAS INFORMATICOS                            BASES DE DATOS                                                                                                         
+
+AR                                                           A                                                                                                                      
+------------------------------------------------------------ --------------------------------------------------                                                                     
+MATEMATICA APLICADA                                          CALCULO                                                                                                                
+
+12 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar los nombres de departamentos y los nombres de las áreas adscritas a ellos. Ambos campos deben estar ordenados de forma alfabética.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 24
+SQL> SELECT D, AR
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA
+  3  ORDER BY D, AR;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+D                                                            AR                                                                                                                     
+------------------------------------------------------------ ------------------------------------------------------------                                                           
+ANALISIS MATEMATICO                                          ANALISIS MATEMATICO                                                                                                    
+ANALISIS MATEMATICO                                          DIDACTICA DE LA MATEMATICA                                                                                             
+ANALISIS MATEMATICO                                          MATEMATICA APLICADA                                                                                                    
+ASTROFISICA                                                  ASTRONOMIA Y ASTROFISICA                                                                                               
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION           CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                                                                   
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION           ESTADISTICA E INVESTIGACION OPERATIVA                                                                                  
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION           LENGUAJES Y SISTEMAS INFORMATICOS                                                                                      
+MATEMATICA FUNDAMENTAL                                       ALGEBRA                                                                                                                
+
+8 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar los nombres de departamentos y los profesores de cada uno de ellos. Ambos campos deben estar ordenados de forma alfabética.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REM 25
+SQL> SELECT D, P
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  ORDER BY D, P;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+D                                                            P                                                                                                                      
+------------------------------------------------------------ ------------------------------------------------------------                                                           
+ANALISIS MATEMATICO                                          ANGELA                                                                                                                 
+ANALISIS MATEMATICO                                          FRANCISCO                                                                                                              
+ANALISIS MATEMATICO                                          MARIO                                                                                                                  
+ASTROFISICA                                                  CARMEN                                                                                                                 
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION           CARLOS                                                                                                                 
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION           DAVID                                                                                                                  
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION           JOSE MANUEL                                                                                                            
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION           JUAN                                                                                                                   
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION           MARIA                                                                                                                  
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION           PEDRO                                                                                                                  
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION           SOLEDAD                                                                                                                
+
+D                                                            P                                                                                                                      
+------------------------------------------------------------ ------------------------------------------------------------                                                           
+MATEMATICA FUNDAMENTAL                                       IVAN                                                                                                                   
+
+12 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+\end{document}
