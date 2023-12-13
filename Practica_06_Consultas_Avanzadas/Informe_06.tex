@@ -1,0 +1,144 @@
+\documentclass[11pt]{report}
+
+% Paquetes y configuraciones adicionales
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titling}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{wasysym}
+\usepackage{tikzsymbols}
+\usepackage{fancyvrb}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage{subcaption}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage[spanish]{babel}
+
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}
+}
+
+% Configura los márgenes
+\geometry{
+  left=2cm,   % Ajusta este valor al margen izquierdo deseado
+  right=2cm,  % Ajusta este valor al margen derecho deseado
+  top=3cm,
+  bottom=3cm,
+}
+
+% Configuración de los títulos de las secciones
+\titlespacing{\section}{0pt}{\parskip}{\parskip}
+\titlespacing{\subsection}{0pt}{\parskip}{\parskip}
+\titlespacing{\subsubsection}{0pt}{\parskip}{\parskip}
+
+% Redefinir el formato de los capítulos y añadir un punto después del número
+\makeatletter
+\renewcommand{\@makechapterhead}[1]{%
+  \vspace*{0\p@} % Ajusta este valor para el espaciado deseado antes del título del capítulo
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+        \huge\bfseries \thechapter.\ % Añade un punto después del número
+    \fi
+    \interlinepenalty\@M
+    #1\par\nobreak
+    \vspace{10pt} % Ajusta este valor para el espacio deseado después del título del capítulo
+  }}
+\makeatother
+
+% Configura para que cada \chapter no comience en una pagina nueva
+\makeatletter
+\renewcommand\chapter{\@startsection{chapter}{0}{\z@}%
+    {-3.5ex \@plus -1ex \@minus -.2ex}%
+    {2.3ex \@plus.2ex}%
+    {\normalfont\Large\bfseries}}
+\makeatother
+
+% Configurar los colores para el código
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Configurar el estilo para el código
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},   
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+\begin{document}
+
+% Portada del informe
+\title{Practica 06. Consultas avanzadas}
+\subtitle{Bases de Datos}
+\author{Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)}
+\date{\today}
+
+\maketitle
+
+\pagestyle{empty} % Desactiva la numeración de página para el índice
+
+% Índice
+\tableofcontents
+
+% Nueva página
+\cleardoublepage
+
+\pagestyle{plain} % Vuelve a activar la numeración de página
+\setcounter{page}{1} % Reinicia el contador de página a 1
+
+% Secciones del informe
+% Capitulo 1
+\chapter{Obtener la fecha del sistema.}
+\chapter{Obtener la hora del sistema.}
+\chapter{Dar la fecha del sistema con el formato día de la semana, día del mes, mes y año.}
+\chapter{Dar la hora del sistema en formato de reloj de 24 horas.}
+\chapter{Obtener el número de días que lleva impartiendo la asignatura con código 11 el profesor con DNI 8888.}
+\chapter{Listar los nombres de profesores que han impartido una asignatura más de 365 días.}
+\chapter{Hallar el número de profesores del departamento ‘ASTROFÍSICA’.}
+\chapter{Hallar para cada departamento el número de profesores que tiene. Ordena la salida alfabéticamente.}
+\chapter{Hallar en cuantas titulaciones imparte el departamento de ‘ESTADÍSTICA, INVESTIGACIÓN OPERATIVA Y COMPUTACIÓN’.}
+\chapter{Hallar el número de profesores adscritos a áreas cuyo nombre (el de las áreas) empiece por ‘A’.}
+\chapter{Hallar para cada titulación el número de asignaturas que tiene. Ordena la salida alfabéticamente.}
+\chapter{Listar el nombre de la asignatura con más créditos teóricos.}
+\chapter{Listar el nombre de la asignatura con menos créditos teóricos.}
+\chapter{Listar para cada asignatura el número total de créditos que tiene.}
+\chapter{Listar el nombre de la asignatura con más créditos.}
+\chapter{Listar el nombre de la asignatura con menos créditos.}
+\chapter{Listar el nombre del área a la que está adscrita la asignatura con más créditos.}
+\chapter{Hallar el número de asignaturas impartidas por el profesor con DNI 1111.}
+\chapter{Hallar el número de créditos impartidos por el profesor con DNI 1111.}
+\chapter{Hallar el nombre del profesor que más créditos imparte actualmente.}
+\chapter{Hallar el número medio de asignaturas adscritas a cada área.}
+\chapter{Hallar el número medio de profesores de cada departamento.}
+\chapter{Hallar los nombres de las áreas que tengan más de 3 asignaturas.}
+\chapter{Hallar los nombres de las áreas que tengan más de 6 asignaturas.}
+\chapter{Hallar el nombre del departamento con menos profesores.}
+
+
+\end{document}
