@@ -13,13 +13,13 @@ SYSDATE
 ---------                                                                       
 16-NOV-23                                                                       
 
-SQL> REMARK 2. Obtener la hora
-SQL> SELECT TO_CHAR(SYSDATE, 'HH-MI-SS')
+SQL> REMARK 2
+SQL> SELECT TO_CHAR(SYSDATE,'HH24:MI:SS')
   2  FROM DUAL;
 
-TO_CHAR(                                                                        
---------                                                                        
-01-10-45                                                                        
+TO_CHAR(
+--------
+13:11:34                                                                      
 
 SQL> REMARK 3. Dar la fecha del sistema con el formato día de la semana, día del mes, mes y año.
 SQL> SELECT TO_CHAR(SYSDATE, 'DAY DD-MM-YYYY')
