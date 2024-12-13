@@ -1,0 +1,634 @@
+SQL> SELECT CD, D
+  2  FROM DEPARTAMENTO;
+
+        CD D                                                                    
+---------- ------------------------------------------------------------         
+         1 ANALISIS MATEMATICO                                                  
+         2 ASTROFISICA                                                          
+         3 ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                   
+         4 MATEMATICA FUNDAMENTAL                                               
+
+SQL> SELECT * FROM AREA;
+
+       CAR AR                                                                   
+---------- ------------------------------------------------------------         
+        CD                                                                      
+----------                                                                      
+         1 ALGEBRA                                                              
+         4                                                                      
+                                                                                
+         2 ANALISIS MATEMATICO                                                  
+         1                                                                      
+                                                                                
+         3 ASTRONOMIA Y ASTROFISICA                                             
+         2                                                                      
+                                                                                
+
+       CAR AR                                                                   
+---------- ------------------------------------------------------------         
+        CD                                                                      
+----------                                                                      
+         4 CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                 
+         3                                                                      
+                                                                                
+         5 DIDACTICA DE LA MATEMATICA                                           
+         1                                                                      
+                                                                                
+         6 ESTADISTICA E INVESTIGACION OPERATIVA                                
+         3                                                                      
+                                                                                
+
+       CAR AR                                                                   
+---------- ------------------------------------------------------------         
+        CD                                                                      
+----------                                                                      
+         7 LENGUAJES Y SISTEMAS INFORMATICOS                                    
+         3                                                                      
+                                                                                
+         8 MATEMATICA APLICADA                                                  
+         1                                                                      
+                                                                                
+
+8 rows selected.
+
+SQL> SETPAGESIZE 20
+SP2-0734: unknown command beginning "SETPAGESIZ..." - rest of line ignored.
+SQL> SET PAGESIZE 20
+SQL> SET LÃINESIZE 200
+SP2-0158: unknown SET option "LÃINESIZE"
+SQL> SET LINESIZE 200
+SQL> SELECT * FROM AREA;
+
+       CAR AR                                                                   CD                                                                                                                      
+---------- ------------------------------------------------------------ ----------                                                                                                                      
+         1 ALGEBRA                                                               4                                                                                                                      
+         2 ANALISIS MATEMATICO                                                   1                                                                                                                      
+         3 ASTRONOMIA Y ASTROFISICA                                              2                                                                                                                      
+         4 CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                  3                                                                                                                      
+         5 DIDACTICA DE LA MATEMATICA                                            1                                                                                                                      
+         6 ESTADISTICA E INVESTIGACION OPERATIVA                                 3                                                                                                                      
+         7 LENGUAJES Y SISTEMAS INFORMATICOS                                     3                                                                                                                      
+         8 MATEMATICA APLICADA                                                   1                                                                                                                      
+
+8 rows selected.
+
+SQL> 
+SQL> SELECT * FROM AREA;
+
+       CAR AR                                                                   CD                                                                                                                      
+---------- ------------------------------------------------------------ ----------                                                                                                                      
+         1 ALGEBRA                                                               4                                                                                                                      
+         2 ANALISIS MATEMATICO                                                   1                                                                                                                      
+         3 ASTRONOMIA Y ASTROFISICA                                              2                                                                                                                      
+         4 CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                  3                                                                                                                      
+         5 DIDACTICA DE LA MATEMATICA                                            1                                                                                                                      
+         6 ESTADISTICA E INVESTIGACION OPERATIVA                                 3                                                                                                                      
+         7 LENGUAJES Y SISTEMAS INFORMATICOS                                     3                                                                                                                      
+         8 MATEMATICA APLICADA                                                   1                                                                                                                      
+
+8 rows selected.
+
+SQL> SELECT DNI FROM PROFESORES;
+SELECT DNI FROM PROFESORES
+                *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT DNI FROM PROFESOR;
+
+       DNI                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      1010                                                                                                                                                                                              
+      1111                                                                                                                                                                                              
+      2020                                                                                                                                                                                              
+      2222                                                                                                                                                                                              
+      3030                                                                                                                                                                                              
+      3333                                                                                                                                                                                              
+      4444                                                                                                                                                                                              
+      5555                                                                                                                                                                                              
+      6666                                                                                                                                                                                              
+      7777                                                                                                                                                                                              
+      8888                                                                                                                                                                                              
+      9999                                                                                                                                                                                              
+
+12 rows selected.
+
+SQL> SELECT * FROM PROFESOR;
+
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      1111 JUAN                                                                  6 CU                                                                                                                   
+      2222 CARLOS                                                                7 TU                                                                                                                   
+      3333 PEDRO                                                                 4 TEU                                                                                                                  
+      4444 MARIA                                                                 7 TU                                                                                                                   
+      5555 IVAN                                                                  1 CEU                                                                                                                  
+      6666 CARMEN                                                                3 CD                                                                                                                   
+      7777 MARIO                                                                 2 TU                                                                                                                   
+      8888 FRANCISCO                                                             5 TU                                                                                                                   
+      9999 ANGELA                                                                8 TEU                                                                                                                  
+      1010 DAVID                                                                 4 TU                                                                                                                   
+      2020 SOLEDAD                                                               7 CU                                                                                                                   
+      3030 JOSE MANUEL                                                           6 TEU                                                                                                                  
+
+12 rows selected.
+
+SQL> SELECT P, DNI, CAT, CAR FROM PROFESOR
+  2  ;
+
+P                                                                   DNI CAT          CAR                                                                                                                
+------------------------------------------------------------ ---------- ----- ----------                                                                                                                
+JUAN                                                               1111 CU             6                                                                                                                
+CARLOS                                                             2222 TU             7                                                                                                                
+PEDRO                                                              3333 TEU            4                                                                                                                
+MARIA                                                              4444 TU             7                                                                                                                
+IVAN                                                               5555 CEU            1                                                                                                                
+CARMEN                                                             6666 CD             3                                                                                                                
+MARIO                                                              7777 TU             2                                                                                                                
+FRANCISCO                                                          8888 TU             5                                                                                                                
+ANGELA                                                             9999 TEU            8                                                                                                                
+DAVID                                                              1010 TU             4                                                                                                                
+SOLEDAD                                                            2020 CU             7                                                                                                                
+JOSE MANUEL                                                        3030 TEU            6                                                                                                                
+
+12 rows selected.
+
+SQL> SELECT P AS PROFESOR,
+  2  DNI,
+  3  CAT AS CATEGORIA,
+  4  CAR AS CODIGO_AREA_CONOCIMIENTO
+  5  FROM PROFESOR;
+
+PROFESOR                                                            DNI CATEG CODIGO_AREA_CONOCIMIENTO                                                                                                  
+------------------------------------------------------------ ---------- ----- ------------------------                                                                                                  
+JUAN                                                               1111 CU                           6                                                                                                  
+CARLOS                                                             2222 TU                           7                                                                                                  
+PEDRO                                                              3333 TEU                          4                                                                                                  
+MARIA                                                              4444 TU                           7                                                                                                  
+IVAN                                                               5555 CEU                          1                                                                                                  
+CARMEN                                                             6666 CD                           3                                                                                                  
+MARIO                                                              7777 TU                           2                                                                                                  
+FRANCISCO                                                          8888 TU                           5                                                                                                  
+ANGELA                                                             9999 TEU                          8                                                                                                  
+DAVID                                                              1010 TU                           4                                                                                                  
+SOLEDAD                                                            2020 CU                           7                                                                                                  
+JOSE MANUEL                                                        3030 TEU                          6                                                                                                  
+
+12 rows selected.
+
+SQL> SELECT * FROM ASIGNATURA;
+
+       CAS A                                                  T           CUR        CAR         CT         CP         CL                                                                               
+---------- -------------------------------------------------- ---- ---------- ---------- ---------- ---------- ----------                                                                               
+         1 BASES DE DATOS                                     GII           3          7          3        1.5        1.5                                                                               
+         2 INTELIGENCIA ARTIFICIAL                            GII           3          4        1.5        1.5          3                                                                               
+         3 ALMACENES DE DATOS                                 MII           1          7        1.5          0        1.5                                                                               
+         4 MINERIA DE DATOS                                   MII           1          7        1.5          0        1.5                                                                               
+         5 INFORMATICA BASICA                                 GII           1          7          3        1.5        1.5                                                                               
+         6 ALGEBRA                                            GII           1          1          3          3          0                                                                               
+         7 CALCULO                                            GII           1          8          3          3          0                                                                               
+         8 OPTIMIZACION                                       GII           1          6          3        1.5        1.5                                                                               
+         9 GESTION DE RIESGOS                                 GII           3          4          3          0          3                                                                               
+        10 ASTRONOMIA                                         GF            2          3          3        1.5        1.5                                                                               
+        11 DIDACTICA DE LA MATEMATICA                         GM            2          5          6          0          0                                                                               
+        12 ANALISIS COMPLEJO                                  GM            4          2        4.5          3          0                                                                               
+
+12 rows selected.
+
+SQL> SELECT * FROMA ASIGNATURA
+  2  WHERE T = "GII";
+SELECT * FROMA ASIGNATURA
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT * FROM ASIGNATURA
+  2  WHERE T = "GII";
+WHERE T = "GII"
+          *
+ERROR at line 2:
+ORA-00904: "GII": invalid identifier 
+
+
+SQL> SELECT * FROM ASIGNATURA
+  2  WHERE T = 'GII';
+
+       CAS A                                                  T           CUR        CAR         CT         CP         CL                                                                               
+---------- -------------------------------------------------- ---- ---------- ---------- ---------- ---------- ----------                                                                               
+         1 BASES DE DATOS                                     GII           3          7          3        1.5        1.5                                                                               
+         2 INTELIGENCIA ARTIFICIAL                            GII           3          4        1.5        1.5          3                                                                               
+         5 INFORMATICA BASICA                                 GII           1          7          3        1.5        1.5                                                                               
+         6 ALGEBRA                                            GII           1          1          3          3          0                                                                               
+         7 CALCULO                                            GII           1          8          3          3          0                                                                               
+         8 OPTIMIZACION                                       GII           1          6          3        1.5        1.5                                                                               
+         9 GESTION DE RIESGOS                                 GII           3          4          3          0          3                                                                               
+
+7 rows selected.
+
+SQL> SELECT DNI FROM PROFESOR
+  2  WHERE CAR = '7';
+
+       DNI                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      2222                                                                                                                                                                                              
+      4444                                                                                                                                                                                              
+      2020                                                                                                                                                                                              
+
+SQL> SELECT P FROM PROFESOR
+  2  WHERE CAR = '7';
+
+P                                                                                                                                                                                                       
+------------------------------------------------------------                                                                                                                                            
+CARLOS                                                                                                                                                                                                  
+MARIA                                                                                                                                                                                                   
+SOLEDAD                                                                                                                                                                                                 
+
+SQL> SELECT A FROM
+  2  WHERE CAR >= 7;
+WHERE CAR >= 7
+*
+ERROR at line 2:
+ORA-00903: invalid table name 
+
+
+SQL> SELECT A FROM ASIGNATURA
+  2  WHERE CAR >= 7;
+
+A                                                                                                                                                                                                       
+--------------------------------------------------                                                                                                                                                      
+BASES DE DATOS                                                                                                                                                                                          
+ALMACENES DE DATOS                                                                                                                                                                                      
+MINERIA DE DATOS                                                                                                                                                                                        
+INFORMATICA BASICA                                                                                                                                                                                      
+CALCULO                                                                                                                                                                                                 
+
+SQL> SELECT A FROM ASIGNATURA
+  2  WHERE CAR > 7;
+
+A                                                                                                                                                                                                       
+--------------------------------------------------                                                                                                                                                      
+CALCULO                                                                                                                                                                                                 
+
+SQL> SELECT CAS FROM ASIGNATURA
+  2  WHERE A = 'ALMACENES DE DATOS';
+
+       CAS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+
+SQL> SELECT A FROM ASIGNATURAS
+  2  WHERE CAS != 8;
+SELECT A FROM ASIGNATURAS
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT A FROM ASIGNATURA
+  2  WHERE CAS != 8;
+
+A                                                                                                                                                                                                       
+--------------------------------------------------                                                                                                                                                      
+BASES DE DATOS                                                                                                                                                                                          
+INTELIGENCIA ARTIFICIAL                                                                                                                                                                                 
+ALMACENES DE DATOS                                                                                                                                                                                      
+MINERIA DE DATOS                                                                                                                                                                                        
+INFORMATICA BASICA                                                                                                                                                                                      
+ALGEBRA                                                                                                                                                                                                 
+CALCULO                                                                                                                                                                                                 
+GESTION DE RIESGOS                                                                                                                                                                                      
+ASTRONOMIA                                                                                                                                                                                              
+DIDACTICA DE LA MATEMATICA                                                                                                                                                                              
+ANALISIS COMPLEJO                                                                                                                                                                                       
+
+11 rows selected.
+
+SQL> REM 11
+SQL> SELECT A FROM ASIGNATURA
+  2  WHERE CAS >= 7;
+
+A                                                                                                                                                                                                       
+--------------------------------------------------                                                                                                                                                      
+CALCULO                                                                                                                                                                                                 
+OPTIMIZACION                                                                                                                                                                                            
+GESTION DE RIESGOS                                                                                                                                                                                      
+ASTRONOMIA                                                                                                                                                                                              
+DIDACTICA DE LA MATEMATICA                                                                                                                                                                              
+ANALISIS COMPLEJO                                                                                                                                                                                       
+
+6 rows selected.
+
+SQL> SELECT A FROM ASIGNATURA
+  2  WHERE CAS >;
+WHERE CAS >
+          *
+ERROR at line 2:
+ORA-00936: missing expression 
+
+
+SQL> REM 12
+SQL> SELECT A FROM ASIGNATURA
+  2  WHERE CAS > 7;
+
+A                                                                                                                                                                                                       
+--------------------------------------------------                                                                                                                                                      
+OPTIMIZACION                                                                                                                                                                                            
+GESTION DE RIESGOS                                                                                                                                                                                      
+ASTRONOMIA                                                                                                                                                                                              
+DIDACTICA DE LA MATEMATICA                                                                                                                                                                              
+ANALISIS COMPLEJO                                                                                                                                                                                       
+
+SQL> REM 15
+SQL> SELECT A FROM ASIGNATURA
+  2  WHERE CAS != 8 AND CAS != 11;
+
+A                                                                                                                                                                                                       
+--------------------------------------------------                                                                                                                                                      
+BASES DE DATOS                                                                                                                                                                                          
+INTELIGENCIA ARTIFICIAL                                                                                                                                                                                 
+ALMACENES DE DATOS                                                                                                                                                                                      
+MINERIA DE DATOS                                                                                                                                                                                        
+INFORMATICA BASICA                                                                                                                                                                                      
+ALGEBRA                                                                                                                                                                                                 
+CALCULO                                                                                                                                                                                                 
+GESTION DE RIESGOS                                                                                                                                                                                      
+ASTRONOMIA                                                                                                                                                                                              
+ANALISIS COMPLEJO                                                                                                                                                                                       
+
+10 rows selected.
+
+SQL> SELECT CAS FROM ASIGNATURA
+  2  WHERE
+  3  ;
+
+*
+ERROR at line 3:
+ORA-00936: missing expression 
+
+
+SQL> REM 16
+SQL> SELECT CAS FROM PLAN_DOCENTE
+  2  WHERE DNI = 3333;
+
+       CAS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+         9                                                                                                                                                                                              
+
+SQL> SELECT CD FROM DEPARTAMENTO
+  2  WHERE D = 'ASTROFISICA';
+
+        CD                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+
+SQL> SELECT DNI FROM PLAN_DOCENTE
+  2  WHERE FI > '01-09-09';
+WHERE FI > '01-09-09'
+           *
+ERROR at line 2:
+ORA-01843: not a valid month 
+
+
+SQL> SELECT DNI FROM PLAN_DOCENTE
+  2  WHERE FI != '01-09-09';
+WHERE FI != '01-09-09'
+            *
+ERROR at line 2:
+ORA-01843: not a valid month 
+
+
+SQL> SELECT DNI FROM PLAN_DOCENTE
+  2  WHERE FI != '01-SEP-09';
+
+       DNI                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      1010                                                                                                                                                                                              
+      1010                                                                                                                                                                                              
+      1111                                                                                                                                                                                              
+      2020                                                                                                                                                                                              
+      2222                                                                                                                                                                                              
+      3333                                                                                                                                                                                              
+      4444                                                                                                                                                                                              
+      4444                                                                                                                                                                                              
+      4444                                                                                                                                                                                              
+      5555                                                                                                                                                                                              
+      6666                                                                                                                                                                                              
+      7777                                                                                                                                                                                              
+      9999                                                                                                                                                                                              
+
+13 rows selected.
+
+SQL> SELECT DNI FROM PLAN_DOCENTE
+  2  WHERE FI > '01-SEP-09';
+
+       DNI                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      4444                                                                                                                                                                                              
+      4444                                                                                                                                                                                              
+      5555                                                                                                                                                                                              
+      7777                                                                                                                                                                                              
+      9999                                                                                                                                                                                              
+
+SQL> SELECT DNI FROM PLAN_DOCENTE
+  2  WHERE FI < '01-SEP-09';
+
+       DNI                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      1010                                                                                                                                                                                              
+      1010                                                                                                                                                                                              
+      1111                                                                                                                                                                                              
+      2020                                                                                                                                                                                              
+      2222                                                                                                                                                                                              
+      3333                                                                                                                                                                                              
+      4444                                                                                                                                                                                              
+      6666                                                                                                                                                                                              
+
+8 rows selected.
+
+SQL> REM 19
+SQL> SELECT DNI FROM PLAN_DOCENTE
+  2  WHERE FI < '01-ENE-09';
+WHERE FI < '01-ENE-09'
+           *
+ERROR at line 2:
+ORA-01843: not a valid month 
+
+
+SQL> SELECT DNI FROM PLAN_DOCENTE
+  2  WHERE FI < '01-01-09';
+WHERE FI < '01-01-09'
+           *
+ERROR at line 2:
+ORA-01843: not a valid month 
+
+
+SQL> SELECT DNI FROM PLAN_DOCENTE
+  2  WHERE FI < TO_DATE('01-01-09', 'DD-MM-RR');
+
+       DNI                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      1010                                                                                                                                                                                              
+      1010                                                                                                                                                                                              
+      1111                                                                                                                                                                                              
+      2020                                                                                                                                                                                              
+      2222                                                                                                                                                                                              
+      3333                                                                                                                                                                                              
+      4444                                                                                                                                                                                              
+      6666                                                                                                                                                                                              
+
+8 rows selected.
+
+SQL> REM 20
+SQL> SELECT A FROM ASIGNATURA
+  2  WHERE CAR IN (3, 5, 8);
+
+A                                                                                                                                                                                                       
+--------------------------------------------------                                                                                                                                                      
+CALCULO                                                                                                                                                                                                 
+ASTRONOMIA                                                                                                                                                                                              
+DIDACTICA DE LA MATEMATICA                                                                                                                                                                              
+
+SQL> REM 21
+SQL> SELECT A FROM ASIGNATURA
+  2  WHERE CAR NOT IN (3, 5, 8);
+
+A                                                                                                                                                                                                       
+--------------------------------------------------                                                                                                                                                      
+BASES DE DATOS                                                                                                                                                                                          
+INTELIGENCIA ARTIFICIAL                                                                                                                                                                                 
+ALMACENES DE DATOS                                                                                                                                                                                      
+MINERIA DE DATOS                                                                                                                                                                                        
+INFORMATICA BASICA                                                                                                                                                                                      
+ALGEBRA                                                                                                                                                                                                 
+OPTIMIZACION                                                                                                                                                                                            
+GESTION DE RIESGOS                                                                                                                                                                                      
+ANALISIS COMPLEJO                                                                                                                                                                                       
+
+9 rows selected.
+
+SQL> REM 22
+SQL> SELECT P FROM PROFESOR
+  2  WHERE DNI > 3000 AND DNI < 7000;
+
+P                                                                                                                                                                                                       
+------------------------------------------------------------                                                                                                                                            
+JOSE MANUEL                                                                                                                                                                                             
+PEDRO                                                                                                                                                                                                   
+MARIA                                                                                                                                                                                                   
+IVAN                                                                                                                                                                                                    
+CARMEN                                                                                                                                                                                                  
+
+SQL> SELECT P FROM PROFESOR
+  2  WHERE DNI BETWEEN 3000 AND 7000;
+
+P                                                                                                                                                                                                       
+------------------------------------------------------------                                                                                                                                            
+JOSE MANUEL                                                                                                                                                                                             
+PEDRO                                                                                                                                                                                                   
+MARIA                                                                                                                                                                                                   
+IVAN                                                                                                                                                                                                    
+CARMEN                                                                                                                                                                                                  
+
+SQL> REM 23
+SQL> SELECT P FROM PROFESOR
+  2  WHERE DNI NOT BETWEEN 3000 AND 7000;
+
+P                                                                                                                                                                                                       
+------------------------------------------------------------                                                                                                                                            
+JUAN                                                                                                                                                                                                    
+CARLOS                                                                                                                                                                                                  
+MARIO                                                                                                                                                                                                   
+FRANCISCO                                                                                                                                                                                               
+ANGELA                                                                                                                                                                                                  
+DAVID                                                                                                                                                                                                   
+SOLEDAD                                                                                                                                                                                                 
+
+7 rows selected.
+
+SQL> REM 24
+SQL> SELECT CAS FROM ASIGNATURA
+  2  WHERE T
+  3  ;
+
+*
+ERROR at line 3:
+ORA-00920: invalid relational operator 
+
+
+SQL> SELECT CAS FROM PLAN_DOCENTE
+  2  WHERE DNI = 1111 AND FI IS NULL;
+
+no rows selected
+
+SQL> WHERE DNI = 1111 AND FF IS NULL;
+SP2-0734: unknown command beginning "WHERE DNI ..." - rest of line ignored.
+SQL> SELECT CAS FROM PLAN_DOCENTE
+  2  WHERE DNI = 1111 AND FF IS NULL;
+
+       CAS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         8                                                                                                                                                                                              
+
+SQL> SELECT CTA+CPA+CLA AS CREADITOS
+  2  FROM PLAN_DOCENTE;
+
+ CREADITOS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         6                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+         6                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+         6                                                                                                                                                                                              
+         6                                                                                                                                                                                              
+         6                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+         6                                                                                                                                                                                              
+         6                                                                                                                                                                                              
+         6                                                                                                                                                                                              
+         6                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+
+ CREADITOS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       7.5                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+
+19 rows selected.
+
+SQL> SELECT CTA+CPA+CLA AS CREDITOS
+  2  FROM PLAN_DOCENTE;
+
+  CREDITOS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         6                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+         6                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+         6                                                                                                                                                                                              
+         6                                                                                                                                                                                              
+         6                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+         6                                                                                                                                                                                              
+         6                                                                                                                                                                                              
+         6                                                                                                                                                                                              
+         6                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+
+  CREDITOS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       7.5                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+
+19 rows selected.
+
+SQL> SPOOL OFF
