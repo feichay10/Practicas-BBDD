@@ -1,0 +1,447 @@
+SQL> REM 1
+SQL> SELECT SYSDATE
+  2  FROM DUAL;
+
+SYSDATE                                                                         
+---------                                                                       
+14-DEC-24                                                                       
+
+SQL> REM 2
+SQL> SELECT TO_CHAR(SYSDATE, 'HH-MI-SS')
+  2  FROM DUAL;
+
+TO_CHAR(                                                                        
+--------                                                                        
+04-21-28                                                                        
+
+SQL> SELECT TO_CHAR(SYSDATE, 'HH-MI-SS') AS HORA
+  2  FROM DUAL;
+
+HORA                                                                            
+--------                                                                        
+04-21-45                                                                        
+
+SQL> REM 3
+SQL> SELECT TO_CHAR(SYSDATE, 'DAY DD-MM-YY') AS FECHA
+  2  FROM DUAL;
+
+FECHA                                                                           
+---------------------------------------------                                   
+SATURDAY  14-12-24                                                              
+
+SQL> SELECT TO_CHAR(SYSDATE, 'DAY DD-MM-YYYY') AS FECHA
+  2  FROM DUAL;
+
+FECHA                                                                           
+-----------------------------------------------                                 
+SATURDAY  14-12-2024                                                            
+
+SQL> REM 24
+SQL> REM 4
+SQL> SELECT TO_CHAR(SYSDATE, 'HH24:MM') AS HORA_24
+  2  FROM DUAL;
+
+HORA_                                                                           
+-----                                                                           
+16:12                                                                           
+
+SQL> SELECT TO_CHAR(SYSDATE, 'HH24:MM:SS') AS HORA_24
+  2  FROM DUAL;
+
+HORA_24                                                                         
+--------                                                                        
+16:12:03                                                                        
+
+SQL> REM 5
+SQL> SELECT SYSDATE - FI
+  2  FROM PLAN_DOCENTE
+  3  WHERE CAS = 11 AND DNI = 8888;
+
+SYSDATE-FI                                                                      
+----------                                                                      
+5583.68457                                                                      
+
+SQL> SELECT P
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  3  WHERE (FF - FI > 365) OR ((SYSDATE - FI > 365) AND (FF IS NULL));
+
+P                                                                               
+------------------------------------------------------------                    
+DAVID                                                                           
+DAVID                                                                           
+JUAN                                                                            
+JUAN                                                                            
+SOLEDAD                                                                         
+CARLOS                                                                          
+JOSE MANUEL                                                                     
+PEDRO                                                                           
+PEDRO                                                                           
+MARIA                                                                           
+MARIA                                                                           
+
+P                                                                               
+------------------------------------------------------------                    
+MARIA                                                                           
+IVAN                                                                            
+CARMEN                                                                          
+MARIO                                                                           
+FRANCISCO                                                                       
+ANGELA                                                                          
+
+17 rows selected.
+
+SQL> SELECT P
+  2  FROM PROFESOR
+  3  WHERE DNI IN
+  4  (SELECT DNI FROM PLAN_DOCENTE
+  5  WHERE FF - FI > 365);
+
+P                                                                               
+------------------------------------------------------------                    
+JUAN                                                                            
+MARIA                                                                           
+CARMEN                                                                          
+DAVID                                                                           
+
+SQL> SELECT COUNT(P)
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  WHERE D = 'ASTROFISICA';
+
+  COUNT(P)                                                                      
+----------                                                                      
+         1                                                                      
+
+SQL> REM 7
+SQL> SELECT COUNT(D)
+  2  FROM D
+  3  ;
+FROM D
+     *
+ERROR at line 2:
+ORA-00942: table or view does not exist 
+
+
+SQL> REM 7
+SQL> SELECT D, COUNT(P)
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  GROUP BY D
+  4  ORDER BY D;
+
+D                                                              COUNT(P)         
+------------------------------------------------------------ ----------         
+ANALISIS MATEMATICO                                                   3         
+ASTROFISICA                                                           1         
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                    7         
+MATEMATICA FUNDAMENTAL                                                1         
+
+SQL> REM 8
+SQL> SELECT COUNT(T)
+  2  FROIM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN ASIGNATURA
+  3  WHERE D = 'ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION';
+FROIM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN ASIGNATURA
+      *
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT COUNT(T)
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN ASIGNATURA
+  3  WHERE D = 'ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION';
+
+  COUNT(T)                                                                      
+----------                                                                      
+         7                                                                      
+
+SQL> SPOOL OFF
+SQL> REM 10
+SQL> SELECT COUNT(P)
+  2  FROM PROFESOR NATURAL JOIN AREA
+  3  WHERE AR = 'A%';
+
+  COUNT(P)                                                                      
+----------                                                                      
+         0                                                                      
+
+SQL> SELECT COUNT(P)
+  2  FROM PROFESOR NATURAL JOIN AREA
+  3  WHERE AR LIKE 'A%';
+
+  COUNT(P)                                                                      
+----------                                                                      
+         3                                                                      
+
+SQL> REM 11
+SQL> SELECT T, COUNT(A)
+  2  FROM ASIGNATURA
+  3  GROUP BY T
+  4  ORDER BY T;
+
+T      COUNT(A)                                                                 
+---- ----------                                                                 
+GF            1                                                                 
+GII           7                                                                 
+GM            2                                                                 
+MII           2                                                                 
+
+SQL> REM 12
+SQL> SELECT A
+  2  FROM ASIGNATURA
+  3  WHERE CT IN
+  4  (SELECT MAX(CT) FROM ASIGNATURA);
+
+A                                                                               
+--------------------------------------------------                              
+DIDACTICA DE LA MATEMATICA                                                      
+
+SQL> SELECT A
+  2  FROM ASIGNATURA
+  3  WHERE CT = (SELECT MAX(CT)
+  4  FROM ASIGNATURA);
+
+A                                                                               
+--------------------------------------------------                              
+DIDACTICA DE LA MATEMATICA                                                      
+
+SQL> REM 13
+SQL> SELECT A
+  2  FROM ASIGNATURA
+  3  WHERE CT IN
+  4  (SELECT MIN(CT)
+  5  FROM ASIGNATURA);
+
+A                                                                               
+--------------------------------------------------                              
+INTELIGENCIA ARTIFICIAL                                                         
+ALMACENES DE DATOS                                                              
+MINERIA DE DATOS                                                                
+
+SQL> REM 14
+SQL> SELECT A, CT+CP+CL AS 'CREDITOS TOTALES'
+  2  FROM ASIGNATURA;
+SELECT A, CT+CP+CL AS 'CREDITOS TOTALES'
+                      *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT A, CT+CP+CL AS "CREDITOS TOTALES"
+  2  FROM ASIGNATURA;
+
+A                                                  CREDITOS TOTALES             
+-------------------------------------------------- ----------------             
+BASES DE DATOS                                                    6             
+INTELIGENCIA ARTIFICIAL                                           6             
+ALMACENES DE DATOS                                                3             
+MINERIA DE DATOS                                                  3             
+INFORMATICA BASICA                                                6             
+ALGEBRA                                                           6             
+CALCULO                                                           6             
+OPTIMIZACION                                                      6             
+GESTION DE RIESGOS                                                6             
+ASTRONOMIA                                                        6             
+DIDACTICA DE LA MATEMATICA                                        6             
+
+A                                                  CREDITOS TOTALES             
+-------------------------------------------------- ----------------             
+ANALISIS COMPLEJO                                               7.5             
+
+12 rows selected.
+
+SQL> REM 15
+SQL> SELECT A
+  2  FROM ASIGNATURA
+  3  WHERE CT+CP+CL = (SELECT MAX(CT+CP+CL)
+  4  FROM ASIGNATURA);
+
+A                                                                               
+--------------------------------------------------                              
+ANALISIS COMPLEJO                                                               
+
+SQL> REM 16
+SQL> SELECT A
+  2  FROM ASIGNATURA
+  3  WHERE CT+CP+CL = (SELECT MIN(CT+CP+CL)
+  4  FROM ASIGNATURA);
+
+A                                                                               
+--------------------------------------------------                              
+ALMACENES DE DATOS                                                              
+MINERIA DE DATOS                                                                
+
+SQL> REM 17
+SQL> SELECT AR
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  WHERE CP+CT+CL = (SELECT MAX(CP+CT+CL)
+  4  FROM ASIGNATURA);
+
+AR                                                                              
+------------------------------------------------------------                    
+ANALISIS MATEMATICO                                                             
+
+SQL> SELECT COUNT(A)
+  2  FROM ASIGNATURA NATURAL JOIN PROFESOR
+  3  WHERE DNI = 1111;
+
+  COUNT(A)                                                                      
+----------                                                                      
+         1                                                                      
+
+SQL> SELECT COUNT(A)
+  2  FROM PLAN_DOCENTE
+  3  WHERE DNI = 1111;
+SELECT COUNT(A)
+             *
+ERROR at line 1:
+ORA-00904: "A": invalid identifier 
+
+
+SQL> SELECT COUNT(CAS)
+  2  FROM PLAN_DOCENTE
+  3  WHERE DNI = 1111;
+
+COUNT(CAS)                                                                      
+----------                                                                      
+         2                                                                      
+
+SQL> SELECT COUNT(UNIQUE CAS)
+  2  FROM PLAN_DOCENTE
+  3  WHERE DNI = 1111;
+
+COUNT(UNIQUECAS)                                                                
+----------------                                                                
+               1                                                                
+
+SQL> REM 19
+SQL> SELECT SUM(CTA+CPA+CLA) CREDITOS_1111
+  2  FROM PLAN_DOCENTE
+  3  WHERE DNI = 1111;
+
+CREDITOS_1111                                                                   
+-------------                                                                   
+            9                                                                   
+
+SQL> SELECT CTA+CPA+CLA AS Creditos_1111
+  2  FROM PLAN_DOCENTE
+  3  WHERE DNI = 1111;
+
+CREDITOS_1111                                                                   
+-------------                                                                   
+            6                                                                   
+            3                                                                   
+
+SQL> REM 20
+SQL> SELECT P
+  2  FROM PROFESOR NATURAL_JOIN PLAN_DOCENTE
+  3  WHERE CPA+CTA+CLA = (SELECT MAX(CPA+CTA+CLA)
+  4  FROM PLAN_DOCENTE
+  5  WHERE FF IS NULL);
+FROM PROFESOR NATURAL_JOIN PLAN_DOCENTE
+                           *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT P
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  3  WHERE CPA+CTA+CLA = (SELECT MAX(CPA+CTA+CLA)
+  4  FROM PLAN_DOCENTE
+  5  WHERE FF IS NULL);
+
+P                                                                               
+------------------------------------------------------------                    
+MARIO                                                                           
+
+SQL> REM 21
+SQL> SELECT AVG(A) AS MEDIA
+  2  FROM ASIGNATURA
+  3  GROUP BY CAR;
+SELECT AVG(A) AS MEDIA
+           *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT AVG(COUNT(P))
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  GROUP BY D;
+
+AVG(COUNT(P))                                                                   
+-------------                                                                   
+            3                                                                   
+
+SQL> SELECT AVG(COUNT(P)) AS MEDIA
+  2  FROM ASIGNATURA
+  3  GROUP BY CAR;
+SELECT AVG(COUNT(P)) AS MEDIA
+                 *
+ERROR at line 1:
+ORA-00904: "P": invalid identifier 
+
+
+SQL> SELECT AVG(COUNT(P)) AS MEDIA
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  GROUP BY CAR;
+
+     MEDIA                                                                      
+----------                                                                      
+       1.5                                                                      
+
+SQL> REM 22
+SQL> REM 21
+SQL> SELECT AVG(COUNT(A)) AS "MEDIA ASGINATURAS POR AREA"
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  GROUP BY AR;
+
+MEDIA ASGINATURAS POR AREA                                                      
+--------------------------                                                      
+                       1.5                                                      
+
+SQL> REM 22
+SQL> SELECT AVG(COUNT(P))
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  GROUP BY D;
+
+AVG(COUNT(P))                                                                   
+-------------                                                                   
+            3                                                                   
+
+SQL> SELECT AVG(COUNT(P)) AS "NUM MEDIO PROFE DEPARTAMENTO"
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  GROUP BY D;
+
+NUM MEDIO PROFE DEPARTAMENTO                                                    
+----------------------------                                                    
+                           3                                                    
+
+SQL> REM 23
+SQL> SELECT AR
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  GROUP BY AR
+  4  HAVING COUNT(A) > 3;
+
+AR                                                                              
+------------------------------------------------------------                    
+LENGUAJES Y SISTEMAS INFORMATICOS                                               
+
+SQL> REM 24
+SQL> SELECT AR
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  GROUP BY AR
+  4  HAVING COUNT(A) > 6;
+
+no rows selected
+
+SQL> REM 25
+SQL> SELECT D
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  HAVING COUNT(P) = (SELECT MIN(COUNT(P))
+  4  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  5  GROUP BY D)
+  6  GROUP BY D;
+
+D                                                                               
+------------------------------------------------------------                    
+ASTROFISICA                                                                     
+MATEMATICA FUNDAMENTAL                                                          
+
+SQL> SPOOL OFF
