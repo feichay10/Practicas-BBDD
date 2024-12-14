@@ -127,10 +127,10 @@
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 1
-SQL> SELECT A
-  2  FROM ASIGNATURA WHERE
-  3  CAR IN (SELECT CAR FROM AREA WHERE AR LIKE 'A%');
+SQL> SELECT A FROM ASIGNATURA
+2  WHERE CAR IN
+3  (SELECT CAR FROM AREA
+4  WHERE AR LIKE 'A%');
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -146,10 +146,10 @@ ASTRONOMIA
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 2
-SQL> SELECT A
-  2  FROM ASIGNATURA WHERE
-  3  CAR IN (SELECT CAR FROM AREA WHERE AR LIKE '%A');
+SQL> SELECT A FROM ASIGNATURA
+2  WHERE CAR IN
+3  (SELECT CAR FROM AREA
+4  WHERE AR LIKE '%A');
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -163,14 +163,15 @@ CALCULO
   \end{verbatim}
 \end{itemize}
 
-\chapter{Listar los nombres de asignaturas que lleven la palabra ‘DATOS’.}% \begin{itemize}
+\newpage
+
+% Capitulo 3
+\chapter{Listar los nombres de asignaturas que lleven la palabra ‘DATOS’.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 3
-SQL> SELECT A
-  2  FROM ASIGNATURA
-  3  WHERE A LIKE '%DATOS%';
+SQL> SELECT A FROM ASIGNATURA
+2  WHERE A LIKE '%DATOS%';
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -182,14 +183,13 @@ MINERIA DE DATOS
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 4
 \chapter{Listar los DNI de los profesores en cuyo nombre el tercer carácter sea ‘R’.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 4
-SQL> SELECT DNI
-  2  FROM PROFESOR
-  3  WHERE P LIKE '__R%';
+SQL> SELECT DNI FROM PROFESOR
+  2  WHERE P LIKE '__R%';
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -202,62 +202,60 @@ SQL> SELECT DNI
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 5
 \chapter{Listar, sin contar duplicados, los DNI de los profesores con nombres de, a lo sumo, 5 caracteres de longitud.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 5
-SQL> SELECT UNIQUE P
-  2  FROM PROFESOR
-  3  WHERE LENGTH(P) <= 5;
+SQL> SELECT UNIQUE DNI FROM PROFESOR
+2  WHERE LENGTH(P) = 5;
   \end{verbatim}
+
+  \newpage
+
   \item{Resultado:}
   \begin{verbatim}
-P                                                                               
-------------------------------------------------------------                    
-MARIO                                                                           
-JUAN                                                                            
-PEDRO                                                                           
-IVAN                                                                            
-DAVID                                                                           
-MARIA
-
-6 rows selected.
+DNI                                                                      
+----------                                                                      
+      3333                                                                      
+      4444                                                                      
+      7777                                                                      
+      1010  
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 6
 \chapter{Listar, sin contar duplicados, los DNI de los profesores con nombres de, al menos, 5 caracteres de longitud.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT UNIQUE P
-  2  FROM PROFESOR
-  3  WHERE LENGTH(P) >= 5;
+SQL> SELECT DISTINCT DNI FROM PROFESOR
+  2  WHERE LENGTH(P) >= 5;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-P                                                                               
-------------------------------------------------------------                    
-MARIO                                                                           
-PEDRO                                                                           
-FRANCISCO                                                                       
-SOLEDAD                                                                         
-CARLOS                                                                          
-CARMEN                                                                          
-DAVID                                                                           
-MARIA                                                                           
-JOSE MANUEL                                                                     
-ANGELA                                                                          
+DNI                                                                      
+----------                                                                      
+      2222                                                                      
+      3333                                                                      
+      4444                                                                      
+      6666                                                                      
+      7777                                                                      
+      8888                                                                      
+      9999                                                                      
+      1010                                                                      
+      2020                                                                      
+      3030                                                                      
 
 10 rows selected.
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 7
 \chapter{Listar los nombres de los profesores que actualmente imparten alguna asignatura.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 7
 SQL> SELECT UNIQUE P
   2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
   3  WHERE FF IS NULL AND FI < SYSDATE;
@@ -286,9 +284,8 @@ ANGELA
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 8
-SQL> SELECT P
-  2  FROM PROFESOR NATURAL JOIN ASIGNATURA
+SQL> SELECT UNIQUE P
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
   3  WHERE CAS = 8;
   \end{verbatim}
   \item{Resultado:}
@@ -300,13 +297,15 @@ JOSE MANUEL
   \end{verbatim}
 \end{itemize}
 
+\newpage
+
+% Capitulo 9
 \chapter{Listar las t uplas de la tabla PLAN\_DOCENTE ordenadas de forma ascendente, según el campo FF.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 9
 SQL> SELECT * FROM PLAN_DOCENTE
-  2  ORDER BY FF ASC;
+  2  ORDER BY FF;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -343,7 +342,6 @@ DNI        CAS        CTA        CPA        CLA FI        FF
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 10
 SQL> SELECT * FROM PLAN_DOCENTE
   2  ORDER BY FF DESC;
   \end{verbatim}
@@ -382,19 +380,20 @@ DNI        CAS        CTA        CPA        CLA FI        FF
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 11
 SQL> SELECT P
-  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
-  3  WHERE A = 'OPTIMIZACION' AND T='GII'
-  4  ORDER BY P ASC;
+  2  FROM PROFESOR NATURAL JOIN ASIGNATURA
+  3  WHERE A = 'OPTIMIZACION'
+  4  ORDER BY P;
   \end{verbatim}
+
+  \newpage
+
   \item{Resultado:}
   \begin{verbatim}
 P                                                                               
 ------------------------------------------------------------                    
 JOSE MANUEL                                                                     
-JUAN                                                                            
-JUAN  
+JUAN 
   \end{verbatim}
 \end{itemize}
 
@@ -402,11 +401,10 @@ JUAN
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 12
-SQL> SELECT UNIQUE P
+SQL> SELECT P
   2  FROM PROFESOR NATURAL JOIN AREA NATURAL JOIN DEPARTAMENTO
   3  WHERE D = 'MATEMATICA FUNDAMENTAL'
-  4  ORDER BY P ASC;
+  4  ORDER BY P DESC;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -416,6 +414,7 @@ IVAN
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 13
 \chapter{Listar los nombres de las asignaturas impartidas por el profesor con DNI 1010.}
 \begin{itemize}
   \item Consulta:
@@ -434,14 +433,14 @@ INTELIGENCIA ARTIFICIAL
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 14
 \chapter{Listar los nombres de las asignaturas impartidas por el profesor con nombre ‘DAVID’.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
 SQL> SELECT UNIQUE A
-  2  FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE
-  3  NATURAL JOIN PROFESOR
-  4  WHERE P = 'DAVID';
+  2  FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE NATURAL JOIN PROFESOR
+  3  WHERE P = 'DAVID';
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -452,11 +451,11 @@ INTELIGENCIA ARTIFICIAL
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 15
 \chapter{Listar los nombres de las áreas adscritas al departamento ‘ESTADISTICA, INVESTIGACIÓN OPERATIVA Y COMPUTACIÓN’.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 15
 SQL> SELECT AR
   2  FROM AREA NATURAL JOIN DEPARTAMENTO
   3  WHERE D = 'ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION';
@@ -471,31 +470,39 @@ LENGUAJES Y SISTEMAS INFORMATICOS
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 16
 \chapter{Listar los nombres de las asignaturas impartidas actualmente por catedráticos de universidad (categoría CU).}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 16
-SQL> SELECT A FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE NATURAL JOIN PROFESOR
-  2  WHERE CAT = 'CU';
+SQL> SELECT A
+  2  FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE NATURAL JOIN PROFESOR
+  3  WHERE FF IS NULL AND CAT = 'CU';
   \end{verbatim}
+
+\newpage
+
   \item{Resultado:}
   \begin{verbatim}
 A                                                                               
 --------------------------------------------------                              
 OPTIMIZACION                                                                    
-OPTIMIZACION                                                                    
-ALMACENES DE DATOS 
+ALMACENES DE DATOS   
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 17
 \chapter{Listar los nombres de las asignaturas que siempre han sido impartidas por catedráticos de universidad (categoría CU).}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT UNIQUE A
+SQL> SELECT A
   2  FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE NATURAL JOIN PROFESOR
-  3  WHERE DNI=ALL(SELECT DNI FROM PROFESOR WHERE CAT='CU');
+  3  WHERE CAT = 'CU'
+  4  MINUS
+  5  SELECT A
+  6  FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE NATURAL JOIN PROFESOR
+  7  WHERE CAT != 'CU';
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -503,15 +510,15 @@ no rows selected
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 18
 \chapter{Listar los nombres de asignaturas adscritas a ‘LENGUAJES Y SISTEMAS INFORMÁTICOS’ o a ‘CIENCIAS DE LA COMPUTACIÓN E INTELIGENCIA ARTIFICIAL’.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 18
 SQL> SELECT A
   2  FROM ASIGNATURA NATURAL JOIN AREA
-  3  WHERE AR = 'LENGUAJES Y SISTEMAS INFORMATICOS' 
-  4  OR AR = 'CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL';
+  3  WHERE AR IN ('LENGUAJES Y SISTEMAS INFORMATICOS', 
+                  'CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL');
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -528,41 +535,51 @@ BASES DE DATOS
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 19
 \chapter{Listar los nombres de profesores que actualmente dan clases en las titulaciones ‘GII’ o en ‘MII’.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> rem 19
-SQL> SELECT DISTINCT P
+SQL> SELECT P
   2  FROM PROFESOR NATURAL JOIN ASIGNATURA NATURAL JOIN PLAN_DOCENTE
-  3  WHERE (T='GII' OR T='MII') AND FI < SYSDATE AND FF IS NULL;
+  3  WHERE T = 'GII' AND FF IS NULL
+  4  UNION
+  5  SELECT P
+  6  FROM PROFESOR NATURAL JOIN ASIGNATURA NATURAL JOIN PLAN_DOCENTE
+  7  WHERE T = 'MII' AND FF IS NULL;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-  P                                                                               
-  ------------------------------------------------------------                    
-  JUAN                                                                            
-  PEDRO                                                                           
-  SOLEDAD                                                                         
-  CARLOS                                                                          
-  IVAN                                                                            
-  DAVID                                                                           
-  MARIA                                                                           
-  JOSE MANUEL                                                                     
-  ANGELA                                                                          
-  
-  9 rows selected.                                                                   
+P                                                                               
+------------------------------------------------------------                    
+ANGELA                                                                          
+CARLOS                                                                          
+DAVID                                                                           
+IVAN                                                                            
+JOSE MANUEL                                                                     
+JUAN                                                                            
+MARIA                                                                           
+PEDRO                                                                           
+SOLEDAD                                                                         
+
+9 rows selected.                                                                   
   \end{verbatim}
 \end{itemize}
 
+\newpage
+
+% Capitulo 20
 \chapter{Listar los nombres de profesores que actualmente dan clases en las titulaciones ‘GII’ y en ‘MII’ simultáneamente.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 20
-SQL> SELECT DISTINCT P
+SQL> SELECT P
   2  FROM PROFESOR NATURAL JOIN ASIGNATURA NATURAL JOIN PLAN_DOCENTE
-  3  WHERE T = 'GII' AND T = 'MII' AND FI < SYSDATE AND FF IS NULL;
+  3  WHERE T = 'GII' AND FF IS NULL
+  4  INTERSECT
+  5  SELECT P
+  6  FROM PROFESOR NATURAL JOIN ASIGNATURA NATURAL JOIN PLAN_DOCENTE
+  7  WHERE T = 'MII' AND FF IS NULL;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -570,40 +587,27 @@ no rows selected
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 21
 \chapter{Listar los nombres de profesores que actualmente no imparten ninguna asignatura.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 21
 SQL> SELECT P
   2  FROM PROFESOR
-  3  WHERE DNI NOT IN
-  4  (SELECT DNI FROM PLAN_DOCENTE WHERE FF IN NULL);
+  3  MINUS
+  4  SELECT P
+  5  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  6  WHERE FF IS NULL;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-P                                                                               
-------------------------------------------------------------                    
-DAVID                                                                           
-JUAN                                                                            
-SOLEDAD                                                                         
-CARLOS                                                                          
-JOSE MANUEL                                                                     
-PEDRO                                                                           
-MARIA                                                                           
-IVAN                                                                            
-CARMEN                                                                          
-MARIO                                                                           
-FRANCISCO                                                                       
-
-P                                                                               
-------------------------------------------------------------                    
-ANGELA                                                                          
-
-12 rows selected.
+P                                                                                                                                                                                   
+------------------------------------------------------------                                                                                                                        
+CARMEN  
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 22
 \chapter{Listar los nombres de asignaturas impartidas en la titulación GII.}
 \begin{itemize}
   \item Consulta:
@@ -688,6 +692,8 @@ MATEMATICA FUNDAMENTAL                                       ALGEBRA
 8 rows selected.
   \end{verbatim}
 \end{itemize}
+
+\newpage
 
 \chapter{Listar los nombres de departamentos y los profesores de cada uno de ellos. Ambos campos deben estar ordenados de forma alfabética.}
 \begin{itemize}
