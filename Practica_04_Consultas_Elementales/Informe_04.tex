@@ -107,7 +107,7 @@
 \tableofcontents
 
 % Nueva página
-\cleardoublepage
+\clearpage
 
 \pagestyle{plain} % Vuelve a activar la numeración de página
 \setcounter{page}{1} % Reinicia el contador de página a 1
@@ -134,7 +134,7 @@ SQL> SELECT CD, D
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-CD D                                                                    
+        CD D                                                                    
 ---------- ------------------------------------------------------------         
           1 ANALISIS MATEMATICO                                                  
           2 ASTROFISICA                                                          
@@ -152,50 +152,22 @@ SQL> SELECT * FROM AREA;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-    SQL> SELECT * FROM AREA;
-
-    CAR AR                                                                   
----------- ------------------------------------------------------------         
-     CD                                                                      
-----------                                                                      
-      1 ALGEBRA                                                              
-      4                                                                      
-                                                                             
-      2 ANALISIS MATEMATICO                                                  
-      1                                                                      
-                                                                             
-      3 ASTRONOMIA Y ASTROFISICA                                             
-      2                                                                      
-                                                                             
-
-    CAR AR                                                                   
----------- ------------------------------------------------------------         
-     CD                                                                      
-----------                                                                      
-      4 CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                 
-      3                                                                      
-                                                                             
-      5 DIDACTICA DE LA MATEMATICA                                           
-      1                                                                      
-                                                                             
-      6 ESTADISTICA E INVESTIGACION OPERATIVA                                
-      3                                                                      
-                                                                             
-
-    CAR AR                                                                   
----------- ------------------------------------------------------------         
-     CD                                                                      
-----------                                                                      
-      7 LENGUAJES Y SISTEMAS INFORMATICOS                                    
-      3                                                                      
-                                                                             
-      8 MATEMATICA APLICADA                                                  
-      1                                                                      
-                                                                             
+        CAR AR                                                                  CD                                                                                                                      
+---------- ------------------------------------------------------------ ----------                                                                                                                      
+         1 ALGEBRA                                                               4                                                                                                                      
+         2 ANALISIS MATEMATICO                                                   1                                                                                                                      
+         3 ASTRONOMIA Y ASTROFISICA                                              2                                                                                                                      
+         4 CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                  3                                                                                                                      
+         5 DIDACTICA DE LA MATEMATICA                                            1                                                                                                                      
+         6 ESTADISTICA E INVESTIGACION OPERATIVA                                 3                                                                                                                      
+         7 LENGUAJES Y SISTEMAS INFORMATICOS                                     3                                                                                                                      
+         8 MATEMATICA APLICADA                                                   1                                                                                                                      
 
 8 rows selected.
   \end{verbatim}
 \end{itemize}
+
+\newpage
 
 % Capitulo 3
 \chapter{Listar todos los DNI de los profesores.}
@@ -238,63 +210,22 @@ SQL> SELECT P, DNI, CAT, CAR FROM PROFESOR;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-P                                                                   DNI CAT     
------------------------------------------------------------- ---------- -----   
-        CAR                                                                      
-----------                                                                      
-JUAN                                                               1111 CU      
-          6                                                                      
-                                                                                
-CARLOS                                                             2222 TU      
-          7                                                                      
-                                                                                
-PEDRO                                                              3333 TEU     
-          4                                                                      
-                                                                                
+  P                                                             DNI CAT          CAR                                                                                                                
+  -------------------------------------------------------- -------- ----- ----------                                                                                                                
+  JUAN                                                         1111 CU             6                                                                                                                
+  CARLOS                                                       2222 TU             7                                                                                                                
+  PEDRO                                                        3333 TEU            4                                                                                                                
+  MARIA                                                        4444 TU             7                                                                                                                
+  IVAN                                                         5555 CEU            1                                                                                                                
+  CARMEN                                                       6666 CD             3                                                                                                                
+  MARIO                                                        7777 TU             2                                                                                                                
+  FRANCISCO                                                    8888 TU             5                                                                                                                
+  ANGELA                                                       9999 TEU            8                                                                                                                
+  DAVID                                                        1010 TU             4                                                                                                                
+  SOLEDAD                                                      2020 CU             7                                                                                                                
+  JOSE MANUEL                                                  3030 TEU            6                                                                                                                
 
-P                                                                   DNI CAT     
------------------------------------------------------------- ---------- -----   
-        CAR                                                                      
-----------                                                                      
-MARIA                                                              4444 TU      
-          7                                                                      
-                                                                                
-IVAN                                                               5555 CEU     
-          1                                                                      
-                                                                                
-CARMEN                                                             6666 CD      
-          3                                                                      
-                                                                                
-
-P                                                                   DNI CAT     
------------------------------------------------------------- ---------- -----   
-        CAR                                                                      
-----------                                                                      
-MARIO                                                              7777 TU      
-          2                                                                      
-                                                                                
-FRANCISCO                                                          8888 TU      
-          5                                                                      
-                                                                                
-ANGELA                                                             9999 TEU     
-          8                                                                      
-                                                                                
-
-P                                                                   DNI CAT     
------------------------------------------------------------- ---------- -----   
-        CAR                                                                      
-----------                                                                      
-DAVID                                                              1010 TU      
-          4                                                                      
-                                                                                
-SOLEDAD                                                            2020 CU      
-          7                                                                      
-                                                                                
-JOSE MANUEL                                                        3030 TEU     
-          6                                                                      
-                                                                                
-
-12 rows selected.
+  12 rows selected.
   \end{verbatim}
 \end{itemize}
 
@@ -303,70 +234,24 @@ JOSE MANUEL                                                        3030 TEU
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT
-2  P AS PROFESOR,
-3  DNI,
-4  CAT AS CATEGORIA,
-5  CAR AS CODIGO_DE_AREA_DE_CONOCIMIENTO
-6  FROM PROFESOR;
+    SQL> SELECT P, DNI, CAT, CAR FROM PROFESOR;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-PROFESOR                                                            DNI CATEG   
------------------------------------------------------------- ---------- -----   
-CODIGO_DE_AREA_DE_CONOCIMIENTO                                                  
-------------------------------                                                  
-JUAN                                                               1111 CU      
-                              6                                                  
-                                                                                
-CARLOS                                                             2222 TU      
-                              7                                                  
-                                                                                
-PEDRO                                                              3333 TEU     
-                              4                                                  
-                                                                                
-
-PROFESOR                                                            DNI CATEG   
------------------------------------------------------------- ---------- -----   
-CODIGO_DE_AREA_DE_CONOCIMIENTO                                                  
-------------------------------                                                  
-MARIA                                                              4444 TU      
-                              7                                                  
-                                                                                
-IVAN                                                               5555 CEU     
-                              1                                                  
-                                                                                
-CARMEN                                                             6666 CD      
-                              3                                                  
-                                                                                
-
-PROFESOR                                                            DNI CATEG   
------------------------------------------------------------- ---------- -----   
-CODIGO_DE_AREA_DE_CONOCIMIENTO                                                  
-------------------------------                                                  
-MARIO                                                              7777 TU      
-                              2                                                  
-                                                                                
-FRANCISCO                                                          8888 TU      
-                              5                                                  
-                                                                                
-ANGELA                                                             9999 TEU     
-                              8                                                  
-                                                                                
-
-PROFESOR                                                            DNI CATEG   
------------------------------------------------------------- ---------- -----   
-CODIGO_DE_AREA_DE_CONOCIMIENTO                                                  
-------------------------------                                                  
-DAVID                                                              1010 TU      
-                              4                                                  
-                                                                                
-SOLEDAD                                                            2020 CU      
-                              7                                                  
-                                                                                
-JOSE MANUEL                                                        3030 TEU     
-                              6                                                  
-                                                                                
+P                                                                   DNI CAT          CAR                                                                                                                
+------------------------------------------------------------ ---------- ----- ----------                                                                                                                
+JUAN                                                               1111 CU             6                                                                                                                
+CARLOS                                                             2222 TU             7                                                                                                                
+PEDRO                                                              3333 TEU            4                                                                                                                
+MARIA                                                              4444 TU             7                                                                                                                
+IVAN                                                               5555 CEU            1                                                                                                                
+CARMEN                                                             6666 CD             3                                                                                                                
+MARIO                                                              7777 TU             2                                                                                                                
+FRANCISCO                                                          8888 TU             5                                                                                                                
+ANGELA                                                             9999 TEU            8                                                                                                                
+DAVID                                                              1010 TU             4                                                                                                                
+SOLEDAD                                                            2020 CU             7                                                                                                                
+JOSE MANUEL                                                        3030 TEU            6                                                                                                                
 
 12 rows selected.
   \end{verbatim}
@@ -377,77 +262,35 @@ JOSE MANUEL                                                        3030 TEU
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT
-2  P AS PROFESOR,
-3  DNI,
-4  CAT AS CATEGORIA,
-5  CAR AS CODIGO_DE_AREA_DE_CONOCIMIENTO
-6  FROM PROFESOR;
+SQL> SELECT P AS PROFESOR,
+2  DNI,
+3  CAT AS CATEGORIA,
+4  CAR AS CODIGO_AREA_CONOCIMIENTO
+5  FROM PROFESOR;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-PROFESOR                                                            DNI CATEG   
------------------------------------------------------------- ---------- -----   
-CODIGO_DE_AREA_DE_CONOCIMIENTO                                                  
-------------------------------                                                  
-JUAN                                                               1111 CU      
-                              6                                                  
-                                                                                
-CARLOS                                                             2222 TU      
-                              7                                                  
-                                                                                
-PEDRO                                                              3333 TEU     
-                              4                                                  
-                                                                                
-
-PROFESOR                                                            DNI CATEG   
------------------------------------------------------------- ---------- -----   
-CODIGO_DE_AREA_DE_CONOCIMIENTO                                                  
-------------------------------                                                  
-MARIA                                                              4444 TU      
-                              7                                                  
-                                                                                
-IVAN                                                               5555 CEU     
-                              1                                                  
-                                                                                
-CARMEN                                                             6666 CD      
-                              3                                                  
-                                                                                
-
-PROFESOR                                                            DNI CATEG   
------------------------------------------------------------- ---------- -----   
-CODIGO_DE_AREA_DE_CONOCIMIENTO                                                  
-------------------------------                                                  
-MARIO                                                              7777 TU      
-                              2                                                  
-                                                                                
-FRANCISCO                                                          8888 TU      
-                              5                                                  
-                                                                                
-ANGELA                                                             9999 TEU     
-                              8                                                  
-                                                                                
-
-PROFESOR                                                            DNI CATEG   
------------------------------------------------------------- ---------- -----   
-CODIGO_DE_AREA_DE_CONOCIMIENTO                                                  
-------------------------------                                                  
-DAVID                                                              1010 TU      
-                              4                                                  
-                                                                                
-SOLEDAD                                                            2020 CU      
-                              7                                                  
-                                                                                
-JOSE MANUEL                                                        3030 TEU     
-                              6                                                  
-                                                                                
+PROFESOR                  DNI CATEG CODIGO_AREA_CONOCIMIENTO                                                                                                  
+------------------ ---------- ----- ------------------------                                                                                                  
+JUAN                     1111 CU                           6                                                                                                  
+CARLOS                   2222 TU                           7                                                                                                  
+PEDRO                    3333 TEU                          4                                                                                                  
+MARIA                    4444 TU                           7                                                                                                  
+IVAN                     5555 CEU                          1                                                                                                  
+CARMEN                   6666 CD                           3                                                                                                  
+MARIO                    7777 TU                           2                                                                                                  
+FRANCISCO                8888 TU                           5                                                                                                  
+ANGELA                   9999 TEU                          8                                                                                                  
+DAVID                    1010 TU                           4                                                                                                  
+SOLEDAD                  2020 CU                           7                                                                                                  
+JOSE MANUEL              3030 TEU                          6                                                                                                  
 
 12 rows selected.
   \end{verbatim}
 \end{itemize}
 
 % Capitulo 7
-\chapter{Listar todas las t-uplas de la tabla ASIGNATURA. }
+\chapter{Listar todas las t-uplas de la tabla ASIGNATURA}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
@@ -455,61 +298,20 @@ SQL> SELECT * FROM ASIGNATURA;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-CAS A                                                  T           CUR   
----------- -------------------------------------------------- ---- ----------   
-        CAR         CT         CP         CL                                     
----------- ---------- ---------- ----------                                     
-          1 BASES DE DATOS                                     GII           3   
-          7          3        1.5        1.5                                     
-                                                                                
-          2 INTELIGENCIA ARTIFICIAL                            GII           3   
-          4        1.5        1.5          3                                     
-                                                                                
-          3 ALMACENES DE DATOS                                 MII           1   
-          7        1.5          0        1.5                                     
-                                                                                
-
-        CAS A                                                  T           CUR   
----------- -------------------------------------------------- ---- ----------   
-        CAR         CT         CP         CL                                     
----------- ---------- ---------- ----------                                     
-          4 MINERIA DE DATOS                                   MII           1   
-          7        1.5          0        1.5                                     
-                                                                                
-          5 INFORMATICA BASICA                                 GII           1   
-          7          3        1.5        1.5                                     
-                                                                                
-          6 ALGEBRA                                            GII           1   
-          1          3          3          0                                     
-                                                                                
-
-        CAS A                                                  T           CUR   
----------- -------------------------------------------------- ---- ----------   
-        CAR         CT         CP         CL                                     
----------- ---------- ---------- ----------                                     
-          7 CALCULO                                            GII           1   
-          8          3          3          0                                     
-                                                                                
-          8 OPTIMIZACION                                       GII           1   
-          6          3        1.5        1.5                                     
-                                                                                
-          9 GESTION DE RIESGOS                                 GII           3   
-          4          3          0          3                                     
-                                                                                
-
-        CAS A                                                  T           CUR   
----------- -------------------------------------------------- ---- ----------   
-        CAR         CT         CP         CL                                     
----------- ---------- ---------- ----------                                     
-        10 ASTRONOMIA                                         GF            2   
-          3          3        1.5        1.5                                     
-                                                                                
-        11 DIDACTICA DE LA MATEMATICA                         GM            2   
-          5          6          0          0                                     
-                                                                                
-        12 ANALISIS COMPLEJO                                  GM            4   
-          2        4.5          3          0                                     
-                                                                                
+CAS A                           T           CUR        CAR         CT         CP         CL                                                                               
+--- --------------------------- ---- ---------- ---------- ---------- ---------- ----------                                                                               
+1   BASES DE DATOS              GII           3          7          3        1.5        1.5                                                                               
+2   INTELIGENCIA ARTIFICIAL     GII           3          4        1.5        1.5          3                                                                               
+3   ALMACENES DE DATOS          MII           1          7        1.5          0        1.5                                                                               
+4   MINERIA DE DATOS            MII           1          7        1.5          0        1.5                                                                               
+5   INFORMATICA BASICA          GII           1          7          3        1.5        1.5                                                                               
+6   ALGEBRA                     GII           1          1          3          3          0                                                                               
+7   CALCULO                     GII           1          8          3          3          0                                                                               
+8   OPTIMIZACION                GII           1          6          3        1.5        1.5                                                                               
+9   GESTION DE RIESGOS          GII           3          4          3          0          3                                                                               
+10  ASTRONOMIA                  GF            2          3          3        1.5        1.5                                                                               
+11  DIDACTICA DE LA MATEMATICA  GM            2          5          6          0          0                                                                               
+12  ANALISIS COMPLEJO           GM            4          2        4.5          3          0                                                                               
 
 12 rows selected.
   \end{verbatim}
@@ -520,45 +322,20 @@ CAS A                                                  T           CUR
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT CAS,A,T,CUR,CAR,CT,CP,CL FROM ASIGNATURA WHERE T = 'GII';
+SQL> SELECT * FROM ASIGNATURA
+2  WHERE T = 'GII';
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-CAS A                                                  T           CUR   
----------- -------------------------------------------------- ---- ----------   
-        CAR         CT         CP         CL                                     
----------- ---------- ---------- ----------                                     
-          1 BASES DE DATOS                                     GII           3   
-          7          3        1.5        1.5                                     
-                                                                                
-          2 INTELIGENCIA ARTIFICIAL                            GII           3   
-          4        1.5        1.5          3                                     
-                                                                                
-          5 INFORMATICA BASICA                                 GII           1   
-          7          3        1.5        1.5                                     
-                                                                                
-
-        CAS A                                                  T           CUR   
----------- -------------------------------------------------- ---- ----------   
-        CAR         CT         CP         CL                                     
----------- ---------- ---------- ----------                                     
-          6 ALGEBRA                                            GII           1   
-          1          3          3          0                                     
-                                                                                
-          7 CALCULO                                            GII           1   
-          8          3          3          0                                     
-                                                                                
-          8 OPTIMIZACION                                       GII           1   
-          6          3        1.5        1.5                                     
-                                                                                
-
-        CAS A                                                  T           CUR   
----------- -------------------------------------------------- ---- ----------   
-        CAR         CT         CP         CL                                     
----------- ---------- ---------- ----------                                     
-          9 GESTION DE RIESGOS                                 GII           3   
-          4          3          0          3                                     
-                                                                                
+CAS A                           T           CUR        CAR         CT         CP         CL                                                                               
+--- --------------------------- ---- ---------- ---------- ---------- ---------- ----------                                                                               
+1   BASES DE DATOS              GII           3          7          3        1.5        1.5                                                                               
+2   INTELIGENCIA ARTIFICIAL     GII           3          4        1.5        1.5          3                                                                               
+5   INFORMATICA BASICA          GII           1          7          3        1.5        1.5                                                                               
+6   ALGEBRA                     GII           1          1          3          3          0                                                                               
+7   CALCULO                     GII           1          8          3          3          0                                                                               
+8   OPTIMIZACION                GII           1          6          3        1.5        1.5                                                                               
+9   GESTION DE RIESGOS          GII           3          4          3          0          3                                                                                 
 
 7 rows selected.
   \end{verbatim}
@@ -569,7 +346,8 @@ CAS A                                                  T           CUR
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT DNI FROM PROFESOR WHERE CAR='7';
+SQL> SELECT DNI FROM PROFESOR
+2  WHERE CAR = '7';
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -581,13 +359,15 @@ DNI
   \end{verbatim}
 \end{itemize}
 
+\newpage
+
 % Capitulo 10
 \chapter{Listar, eliminando duplicados, los nombres de los profesores del área con código 7.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT p FROM PROFESOR WHERE CAR=7
-2  ;
+SQL> SELECT P FROM PROFESOR
+2  WHERE CAR = '7';
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -599,44 +379,54 @@ SOLEDAD
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 11
 \chapter{Listar los nombres de las asignaturas que tengan un código mayor o igual que 7.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT A FROM 
-2  ASIGNATURA WHERE CAR>=7;
+SQL> SELECT A FROM ASIGNATURA
+2  WHERE CAS >= 7;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
---------------------------------------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-BASES DE DATOS                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-ALMACENES DE DATOS                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-MINERIA DE DATOS                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-INFORMATICA BASICA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-CALCULO    
+A                                                                                                                                                                                                       
+--------------------------------------------------                                                                                                                                                      
+CALCULO                                                                                                                                                                                                 
+OPTIMIZACION                                                                                                                                                                                            
+GESTION DE RIESGOS                                                                                                                                                                                      
+ASTRONOMIA                                                                                                                                                                                              
+DIDACTICA DE LA MATEMATICA                                                                                                                                                                              
+ANALISIS COMPLEJO    
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 12
 \chapter{Listar los nombres de las asignaturas que tengan un código mayor que 7.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT A FROM ASIGNATURA WHERE CAR>7;
+SQL> SELECT A FROM ASIGNATURA
+2  WHERE CAS > 7;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
---------------------------------------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-CALCULO    
+A                                                                                                                                                                                                       
+--------------------------------------------------                                                                                                                                                      
+OPTIMIZACION                                                                                                                                                                                            
+GESTION DE RIESGOS                                                                                                                                                                                      
+ASTRONOMIA                                                                                                                                                                                              
+DIDACTICA DE LA MATEMATICA                                                                                                                                                                              
+ANALISIS COMPLEJO  
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 13
 \chapter{Listar el código de la asignatura con nombre ‘ALMACENES DE DATOS’.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT CAS FROM ASIGNATURA WHERE A='ALMACENES DE DATOS';
+SQL> SELECT CAS FROM ASIGNATURA
+2  WHERE A = 'ALMACENES DE DATOS';
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -646,11 +436,13 @@ SQL> SELECT CAS FROM ASIGNATURA WHERE A='ALMACENES DE DATOS';
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 14
 \chapter{Listar los nombres de las asignaturas que tengan un código distinto de 8.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT A FROM ASIGNATURA WHERE CAS!='8';
+SQL> SELECT A FROM ASIGNATURA
+2  WHERE CAS != 8;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -672,12 +464,13 @@ ANALISIS COMPLEJO
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 15
 \chapter{Listar los nombres de las asignaturas que tengan un código distinto de 8 y 11.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT A FROM ASIGNATURA WHERE CAS!='8' AND CAS!='11'
-2  ;
+SQL> SELECT A FROM ASIGNATURA
+2  WHERE CAS != 8 AND CAS != 11;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -698,11 +491,15 @@ ANALISIS COMPLEJO
   \end{verbatim}
 \end{itemize}
 
+\newpage
+
+% Capitulo 16
 \chapter{Listar los códigos de las asignaturas impartidas por el profesor con DNI 3333.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT CAS FROM PLAN_DOCENTE WHERE DNI='3333';
+SQL> SELECT CAS FROM PLAN_DOCENTE
+2  WHERE DNI = 3333;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -713,11 +510,13 @@ SQL> SELECT CAS FROM PLAN_DOCENTE WHERE DNI='3333';
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 17
 \chapter{Listar el código del departamento de ‘ASTROFÍSICA’.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT CD FROM DEPARTAMENTO WHERE D='ASTROFISICA';
+SQL> SELECT CD FROM DEPARTAMENTO
+2  WHERE D = 'ASTROFISICA';
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -727,11 +526,12 @@ SQL> SELECT CD FROM DEPARTAMENTO WHERE D='ASTROFISICA';
   \end{verbatim}
 \end{itemize}
 
-\chapter{Listar los DNI de los profesores que han sido asignados a asignaturas el día ‘01-09-09’.}
+\chapter{Listar los DNI de los profesores que han sido asignados a asignaturas el día ‘01-09-09’}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT DNI FROM PLAN_DOCENTE WHERE FI!='01-SEP-09';
+  SQL> SELECT DNI FROM PLAN_DOCENTE
+  2  WHERE FI != '01-SEP-09';
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -755,34 +555,39 @@ DNI
   \end{verbatim}
 \end{itemize}
 
-\chapter{Listar los DNI de los profesores que han sido asignados a asignaturas con anterioridad al ’01-01-09’.}
+\chapter{Listar los DNI de los profesores que han sido asignados a asignaturas con anterioridad al ’01-01-09’}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT DNI FROM PLAN_DOCENTE WHERE FI<'01-SEP-09';
+SQL> SELECT DNI FROM PLAN_DOCENTE
+2  WHERE FI < TO_DATE('01-01-09', 'DD-MM-RR');
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-       DNI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-      1010                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-      1010                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-      1111                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-      2020                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-      2222                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-      3333                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-      4444                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-      6666                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+       DNI                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      1010                                                                                                                                                                                              
+      1010                                                                                                                                                                                              
+      1111                                                                                                                                                                                              
+      2020                                                                                                                                                                                              
+      2222                                                                                                                                                                                              
+      3333                                                                                                                                                                                              
+      4444                                                                                                                                                                                              
+      6666                                                                                                                                                                                              
 
 8 rows selected.
   \end{verbatim}
 \end{itemize}
 
+\newpage
+
+% Capitulo 20
 \chapter{Listar los nombres de las asignaturas adscritas a las áreas 3, 5 y 8.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT A FROM ASIGNATURA WHERE CAR=3 OR CAR=5 OR CAR=8;
+SQL> SELECT A FROM ASIGNATURA
+2  WHERE CAR IN (3, 5, 8);
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -798,7 +603,8 @@ DIDACTICA DE LA MATEMATICA
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT A FROM ASIGNATURA WHERE CAR!=3 AND CAR!=5 AND CAR!=8;
+SQL> SELECT A FROM ASIGNATURA
+2  WHERE CAR NOT IN (3, 5, 8);
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -818,21 +624,24 @@ ANALISIS COMPLEJO
   \end{verbatim}
 \end{itemize}
 
+\newpage
+
 \chapter{Listar los nombres de los profesores cuyo DNI está comprendido entre 3000 y 7000.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT P FROM PROFESOR WHERE DNI>3000 AND DNI<7000;
+SQL> SELECT P FROM PROFESOR
+2  WHERE DNI BETWEEN 3000 AND 7000;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-P                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-------------------------------------------------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-JOSE MANUEL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-PEDRO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-MARIA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-IVAN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-CARMEN   
+P                                                                                                                                                                                                       
+------------------------------------------------------------                                                                                                                                            
+JOSE MANUEL                                                                                                                                                                                             
+PEDRO                                                                                                                                                                                                   
+MARIA                                                                                                                                                                                                   
+IVAN                                                                                                                                                                                                    
+CARMEN     
   \end{verbatim}
 \end{itemize}
 
@@ -840,7 +649,8 @@ CARMEN
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT P FROM PROFESOR WHERE DNI<=3000 OR DNI>=7000;
+SQL> SELECT P FROM PROFESOR
+2  WHERE DNI NOT BETWEEN 3000 AND 7000;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -862,7 +672,8 @@ SOLEDAD
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT CAS FROM PLAN_DOCENTE WHERE DNI=1111 AND FF IS NULL;
+SQL> SELECT CAS FROM PLAN_DOCENTE
+  2  WHERE DNI = 1111 AND FI IS NULL;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -876,31 +687,35 @@ SQL> SELECT CAS FROM PLAN_DOCENTE WHERE DNI=1111 AND FF IS NULL;
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT CTA+CPA+CLA AS CREDITOS FROM PLAN_DOCENTE;
+SQL> SELECT CTA+CPA+CLA AS CREDITOS
+2  FROM PLAN_DOCENTE;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-CREDITOS                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-          6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-          3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-          3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-          6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-          3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-          3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-          3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-          3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-          6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-          6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-          6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-          3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-          6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-          6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-          6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-          6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-          3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-        7.5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-          3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+ CREDITOS                                                                                                                                                                                              
+ ----------                                                                                                                                                                                              
+          6                                                                                                                                                                                              
+          3                                                                                                                                                                                              
+          3                                                                                                                                                                                              
+          6                                                                                                                                                                                              
+          3                                                                                                                                                                                              
+          3                                                                                                                                                                                              
+          3                                                                                                                                                                                              
+          3                                                                                                                                                                                              
+          6                                                                                                                                                                                              
+          6                                                                                                                                                                                              
+          6                                                                                                                                                                                              
+          3                                                                                                                                                                                              
+          6                                                                                                                                                                                              
+          6                                                                                                                                                                                              
+          6                                                                                                                                                                                              
+          6                                                                                                                                                                                              
+          3                                                                                                                                                                                              
+
+   CREDITOS                                                                                                                                                                                              
+ ----------                                                                                                                                                                                              
+        7.5                                                                                                                                                                                              
+          3                                                                                                                                                                                              
 
 19 rows selected.
   \end{verbatim}
