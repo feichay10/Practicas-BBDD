@@ -1,0 +1,240 @@
+SQL> REM 1
+SQL> GRANT SELECT
+  2  ON DEPARTAMENTO
+  3  TO ALUMNO;
+
+Grant succeeded.
+
+SQL> GRANT SELECT
+  2  ON AREA
+  3  TO ALUMNO;
+
+Grant succeeded.
+
+SQL> GRANT SELECT
+  2  ON ASIGNATURA
+  3  TO ALUMNO;
+
+Grant succeeded.
+
+SQL> GRANT SELECT
+  2  ON TITULACION
+  3  TO ALUMNO;
+
+Grant succeeded.
+
+SQL> REM 2
+SQL> GRANT INSERT, UPDATE, DELETE
+  2  ON DEPARTAMENTO
+  3  TO ALUMNO;
+
+Grant succeeded.
+
+SQL> GRANT INSERT, UPDATE, DELETE
+  2  ON AREA
+  3  TO ALUMNO;
+
+Grant succeeded.
+
+SQL> GRANT UPDATE
+  2  ON ASIGNATURA
+  3  TO ALUMNO;
+
+Grant succeeded.
+
+SQL> GRANT UPDATE
+  2  ON TITULACION
+  3  TO ALUMNO;
+
+Grant succeeded.
+
+SQL> ALTER TABLE TITULACION
+  2  MODIFY T CHAR(6);
+ALTER TABLE TITULACION
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (ALU0101364544.SYS_C00487529) violated - child 
+record found 
+
+
+SQL> ALTER TABLE TITULACION
+  2  MODIFY T CHAR(6);
+ALTER TABLE TITULACION
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (ALU0101364544.SYS_C00487529) violated - child 
+record found 
+
+
+SQL> DESCRIBE TITULACION;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ T                                         NOT NULL CHAR(4)
+ FAC                                                VARCHAR2(60)
+
+SQL> ALTER TABLE TITULACION
+  2  MODIFY T CHAR(6);
+ALTER TABLE TITULACION
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (ALU0101364544.SYS_C00487529) violated - child 
+record found 
+
+
+SQL> REM 21
+SQL> SELECT * FROM DEPARTAMENTO;
+
+        CD D                                                                    
+---------- ------------------------------------------------------------         
+         1 ANALISIS MATEMATICO                                                  
+         2 ASTROFISICA                                                          
+         3 ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                   
+         4 MATEMATICA FUNDAMENTAL                                               
+         5 ECONOMIA APLICADA                                                    
+
+SQL> DELETE FROM DEPARTAMENTO
+  2  WHERE CD = 2;
+
+1 row deleted.
+
+SQL> SELECT * FROM DEPARTAMENTO;
+
+        CD D                                                                    
+---------- ------------------------------------------------------------         
+         1 ANALISIS MATEMATICO                                                  
+         3 ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                   
+         4 MATEMATICA FUNDAMENTAL                                               
+         5 ECONOMIA APLICADA                                                    
+
+SQL> REM 23
+SQL> SELECT * FROM AREA;
+
+       CAR AR                                                                   
+---------- ------------------------------------------------------------         
+        CD                                                                      
+----------                                                                      
+         1 ALGEBRA                                                              
+         4                                                                      
+                                                                                
+         2 ANALISIS MATEMATICO                                                  
+         1                                                                      
+                                                                                
+         5 DIDACTICA DE LA MATEMATICA                                           
+         1                                                                      
+                                                                                
+
+       CAR AR                                                                   
+---------- ------------------------------------------------------------         
+        CD                                                                      
+----------                                                                      
+         8 MATEMATICA APLICADA                                                  
+         1                                                                      
+                                                                                
+
+SQL> SET LINESIZE 200
+SQL> SELECT * FROM AREA;
+
+       CAR AR                                                                   CD                                                                                                                      
+---------- ------------------------------------------------------------ ----------                                                                                                                      
+         1 ALGEBRA                                                               4                                                                                                                      
+         2 ANALISIS MATEMATICO                                                   1                                                                                                                      
+         5 DIDACTICA DE LA MATEMATICA                                            1                                                                                                                      
+         8 MATEMATICA APLICADA                                                   1                                                                                                                      
+
+SQL> SELECT * FROM PROFESOR;
+
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      4040 CARMELO                                                                 TU                                                                                                                   
+      5050 CARINA                                                                8 CEU                                                                                                                  
+      1111 JUAN                                                                    CU                                                                                                                   
+      2222 CARLOS                                                                  TU                                                                                                                   
+      3333 PEDRO                                                                   TEU                                                                                                                  
+      4444 MARIA                                                                   TU                                                                                                                   
+      5555 IVAN                                                                  1 CEU                                                                                                                  
+      6666 CARMEN                                                                  CD                                                                                                                   
+      7777 MARIO                                                                 2 TU                                                                                                                   
+      8888 FRANCISCO                                                             5 TU                                                                                                                   
+      9999 ANGELA                                                                8 TEU                                                                                                                  
+
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      1010 DAVID                                                                   TU                                                                                                                   
+      2020 SOLEDAD                                                                 CU                                                                                                                   
+      3030 JOSE MANUEL                                                             TEU                                                                                                                  
+
+14 rows selected.
+
+SQL> SET PAGESIZE 20
+SQL> SELECT * FROM PROFESOR;
+
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      4040 CARMELO                                                                 TU                                                                                                                   
+      5050 CARINA                                                                8 CEU                                                                                                                  
+      1111 JUAN                                                                    CU                                                                                                                   
+      2222 CARLOS                                                                  TU                                                                                                                   
+      3333 PEDRO                                                                   TEU                                                                                                                  
+      4444 MARIA                                                                   TU                                                                                                                   
+      5555 IVAN                                                                  1 CEU                                                                                                                  
+      6666 CARMEN                                                                  CD                                                                                                                   
+      7777 MARIO                                                                 2 TU                                                                                                                   
+      8888 FRANCISCO                                                             5 TU                                                                                                                   
+      9999 ANGELA                                                                8 TEU                                                                                                                  
+      1010 DAVID                                                                   TU                                                                                                                   
+      2020 SOLEDAD                                                                 CU                                                                                                                   
+      3030 JOSE MANUEL                                                             TEU                                                                                                                  
+
+14 rows selected.
+
+SQL> REM 25
+SQL> SELECT * FROM TITULACION;
+
+T    FAC                                                                                                                                                                                                
+---- ------------------------------------------------------------                                                                                                                                       
+GF   MATEMATICAS Y FISICA                                                                                                                                                                               
+GM   MATEMATICAS Y FISICA                                                                                                                                                                               
+GII  ESIT                                                                                                                                                                                               
+MII  ESIT                                                                                                                                                                                               
+
+SQL> REVOKE ALL ON DEPARTAMENTO FROM ALUMNO;
+
+Revoke succeeded.
+
+SQL> REM 27
+SQL> REVOKE SELECT, INSERT, UPDATE, DELETE
+  2  ON DEPARTAMENTO
+  3  FROM ALUMNO;
+REVOKE SELECT, INSERT, UPDATE, DELETE
+*
+ERROR at line 1:
+ORA-01927: cannot REVOKE privileges you did not grant 
+
+
+SQL> REVOKE ALL PRIVILEGES FROM ALUMNO;
+REVOKE ALL PRIVILEGES FROM ALUMNO
+*
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+
+
+SQL> REVOKE ALL PRIVILEGES ON ALL TABLES FROM ALUMNO;
+REVOKE ALL PRIVILEGES ON ALL TABLES FROM ALUMNO
+                         *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> REVOKE ALL ON PRIVILEGES FROM ALUMNO;
+REVOKE ALL ON PRIVILEGES FROM ALUMNO
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> REM 28
+SQL> COMMIT WORK;
+
+Commit complete.
+
+SQL> SPOOL OFF

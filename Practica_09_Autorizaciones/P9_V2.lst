@@ -1,0 +1,429 @@
+SQL> REM 4
+SQL> SELECT * FROM DEPARTAMENTO;
+SELECT * FROM DEPARTAMENTO
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT * FROM ALU0101364544.DEPARTAMENTO;
+
+        CD D                                                                    
+---------- ------------------------------------------------------------         
+         1 ANALISIS MATEMATICO                                                  
+         2 ASTROFISICA                                                          
+         3 ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                   
+         4 MATEMATICA FUNDAMENTAL                                               
+
+SQL> SELECT * FROM ALU0101364544.PROFESOR;
+SELECT * FROM ALU0101364544.PROFESOR
+                            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT * FROM PROFESOR;
+SELECT * FROM PROFESOR
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT * FROM ALU0101364544.PROFESOR;
+SELECT * FROM ALU0101364544.PROFESOR
+                            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> REM 5
+SQL> SELECT * FROM ALU0101364544.PROFESOR;
+SELECT * FROM ALU0101364544.PROFESOR
+                            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT * FROM PROFESOR;
+SELECT * FROM PROFESOR
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> REM 6
+SQL> INSERT INTO DEPARTAMENTO
+  2  VALUES(5, 'ECONOMIA');
+INSERT INTO DEPARTAMENTO
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> INSERT INTO ALU0101364544.DEPARTAMENTO
+  2  VALUES(5, 'ECONOMIA');
+
+1 row created.
+
+SQL> SELECT * FROM ALU0101364544.DEPARTAMENTO;
+
+        CD D                                                                    
+---------- ------------------------------------------------------------         
+         1 ANALISIS MATEMATICO                                                  
+         2 ASTROFISICA                                                          
+         3 ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                   
+         4 MATEMATICA FUNDAMENTAL                                               
+         5 ECONOMIA                                                             
+
+SQL> REM 7
+SQL> UPDATE ALU0101364544.DEPARTAMENTO
+  2  SET D = 'ECONOMIA APLICADA'
+  3  WHERE CD = 5;
+
+1 row updated.
+
+SQL> SELECT * FROM ALU0101364544.DEPARTAMENTO;
+
+        CD D                                                                    
+---------- ------------------------------------------------------------         
+         1 ANALISIS MATEMATICO                                                  
+         2 ASTROFISICA                                                          
+         3 ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                   
+         4 MATEMATICA FUNDAMENTAL                                               
+         5 ECONOMIA APLICADA                                                    
+
+SQL> REM 8
+SQL> SELECT * FROM ALU0101364544.TITULACION;
+
+T    FAC                                                                        
+---- ------------------------------------------------------------               
+GF   MATEMATICAS Y FISICA                                                       
+GM   MATEMATICAS Y FISICA                                                       
+GII  ESIT                                                                       
+MII  ESIT                                                                       
+
+SQL> UPDATE ALU0101364544.TITULACION
+  2  SET T = 'ESIT1'
+  3  WHERE T = 'GII';
+SET T = 'ESIT1'
+        *
+ERROR at line 2:
+ORA-12899: value too large for column "ALU0101364544"."TITULACION"."T" (actual: 
+5, maximum: 4) 
+
+
+SQL> UPDATE ALU0101364544.TITULACION
+  2  SET T = 'ESIT'
+  3  WHERE T = 'GII';
+UPDATE ALU0101364544.TITULACION
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (ALU0101364544.SYS_C00487529) violated - child 
+record found 
+
+
+SQL> REM 9
+SQL> DELETE FROM TITULACION
+  2  WHERE T = 'GII';
+DELETE FROM TITULACION
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> DELETE FROM ALU0101364544.TITULACION
+  2  WHERE T = 'GII';
+DELETE FROM ALU0101364544.TITULACION
+                          *
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+
+
+SQL> ROLLBACK
+  2  ;
+
+Rollback complete.
+
+SQL> REM 11
+SQL> CREATE VIEW VISTA3 AS (
+  2  SELECT A, CAR
+  3  FROM ASIGNATURA);
+FROM ASIGNATURA)
+     *
+ERROR at line 3:
+ORA-00942: table or view does not exist 
+
+
+SQL> CREATE VIEW VISTA3 AS (
+  2  SELECT A, CAR
+  3  FROM ALU0101364544.ASIGNATURA);
+CREATE VIEW VISTA3 AS (
+            *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> SELECT * VISTA3;
+SELECT * VISTA3
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT * FROM VISTA3;
+
+A                                                         CAR                   
+-------------------------------------------------- ----------                   
+MATEMATICAS                                                                     
+BASES DE DATOS                                                                  
+INTELIGENCIA ARTIFICIAL                                                         
+ALMACENES DE DATOS                                                              
+MINERIA DE DATOS                                                                
+INFORMATICA BASICA                                                              
+CALCULO                                                     8                   
+OPTIMIZACION                                                                    
+GESTION DE RIESGOS                                                              
+ASTRONOMIA                                                                      
+DIDACTICA DE LA MATEMATICA                                  5                   
+
+A                                                         CAR                   
+-------------------------------------------------- ----------                   
+ANALISIS COMPLEJO                                           2                   
+
+12 rows selected.
+
+SQL> DROP VISTA3;
+DROP VISTA3
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option 
+
+
+SQL> DROP VIEW VISTA3;
+
+View dropped.
+
+SQL> CREATE VIEW VISTA3 AS (
+  2  SELECT A, CAR
+  3  FROM ALU0101364544.ASIGNATURA);
+
+View created.
+
+SQL> SELECT * FROM VISTA3
+  2  ;
+
+A                                                         CAR                   
+-------------------------------------------------- ----------                   
+BASES DE DATOS                                              7                   
+INTELIGENCIA ARTIFICIAL                                     4                   
+ALMACENES DE DATOS                                          7                   
+MINERIA DE DATOS                                            7                   
+INFORMATICA BASICA                                          7                   
+ALGEBRA                                                     1                   
+CALCULO                                                     8                   
+OPTIMIZACION                                                6                   
+GESTION DE RIESGOS                                          4                   
+ASTRONOMIA                                                  3                   
+DIDACTICA DE LA MATEMATICA                                  5                   
+
+A                                                         CAR                   
+-------------------------------------------------- ----------                   
+ANALISIS COMPLEJO                                           2                   
+ESTADISTICA                                                 6                   
+
+13 rows selected.
+
+SQL> SET PAGESIZE 20
+SQL> SELECT * FROM VISTA3
+  2  ;
+
+A                                                         CAR                   
+-------------------------------------------------- ----------                   
+BASES DE DATOS                                              7                   
+INTELIGENCIA ARTIFICIAL                                     4                   
+ALMACENES DE DATOS                                          7                   
+MINERIA DE DATOS                                            7                   
+INFORMATICA BASICA                                          7                   
+ALGEBRA                                                     1                   
+CALCULO                                                     8                   
+OPTIMIZACION                                                6                   
+GESTION DE RIESGOS                                          4                   
+ASTRONOMIA                                                  3                   
+DIDACTICA DE LA MATEMATICA                                  5                   
+ANALISIS COMPLEJO                                           2                   
+ESTADISTICA                                                 6                   
+
+13 rows selected.
+
+SQL> DROP TABLE ASIGNATURA;
+DROP TABLE ASIGNATURA
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> DROP TABLE ALU0101364544.ASIGNATURA;
+DROP TABLE ALU0101364544.ASIGNATURA
+                         *
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+
+
+SQL> REM 12
+SQL> DROP TABLE ALU0101364544.ASIGNATURA;
+DROP TABLE ALU0101364544.ASIGNATURA
+                         *
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+
+
+SQL> DROP TABLE ASIGNATURA;
+DROP TABLE ASIGNATURA
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> REM 13
+SQL> SELECT * FROM AREA;
+SELECT * FROM AREA
+              *
+ERROR at line 1:
+ORA-04044: procedure, function, package, or type is not allowed here 
+
+
+SQL> SELECT * FROM ALU0101364544.AREA;
+
+       CAR AR                                                                   
+---------- ------------------------------------------------------------         
+        CD                                                                      
+----------                                                                      
+         1 ALGEBRA                                                              
+         4                                                                      
+                                                                                
+         2 ANALISIS MATEMATICO                                                  
+         1                                                                      
+                                                                                
+         3 ASTRONOMIA Y ASTROFISICA                                             
+         2                                                                      
+                                                                                
+         4 CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                 
+         3                                                                      
+                                                                                
+         5 DIDACTICA DE LA MATEMATICA                                           
+         1                                                                      
+                                                                                
+
+       CAR AR                                                                   
+---------- ------------------------------------------------------------         
+        CD                                                                      
+----------                                                                      
+         6 ESTADISTICA E INVESTIGACION OPERATIVA                                
+         3                                                                      
+                                                                                
+         7 LENGUAJES Y SISTEMAS INFORMATICOS                                    
+         3                                                                      
+                                                                                
+         8 MATEMATICA APLICADA                                                  
+         1                                                                      
+                                                                                
+
+8 rows selected.
+
+SQL> SET LINESIZE 200
+SQL> SELECT * FROM ALU0101364544.AREA;
+
+       CAR AR                                                                   CD                                                                                                                      
+---------- ------------------------------------------------------------ ----------                                                                                                                      
+         1 ALGEBRA                                                               4                                                                                                                      
+         2 ANALISIS MATEMATICO                                                   1                                                                                                                      
+         3 ASTRONOMIA Y ASTROFISICA                                              2                                                                                                                      
+         4 CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                  3                                                                                                                      
+         5 DIDACTICA DE LA MATEMATICA                                            1                                                                                                                      
+         6 ESTADISTICA E INVESTIGACION OPERATIVA                                 3                                                                                                                      
+         7 LENGUAJES Y SISTEMAS INFORMATICOS                                     3                                                                                                                      
+         8 MATEMATICA APLICADA                                                   1                                                                                                                      
+
+8 rows selected.
+
+SQL> REM 14
+SQL> DELETE FROM ALU0101364544.AREA
+  2  WHERE CD = 2;
+
+1 row deleted.
+
+SQL> DELETE FROM ALU0101364544.AREA
+  2  WHERE CD = 3;
+
+3 rows deleted.
+
+SQL> REM 15: ARRIBA
+SQL> SELECT * FROM ALU0101364544.AREA;
+
+       CAR AR                                                                   CD                                                                                                                      
+---------- ------------------------------------------------------------ ----------                                                                                                                      
+         1 ALGEBRA                                                               4                                                                                                                      
+         2 ANALISIS MATEMATICO                                                   1                                                                                                                      
+         5 DIDACTICA DE LA MATEMATICA                                            1                                                                                                                      
+         8 MATEMATICA APLICADA                                                   1                                                                                                                      
+
+SQL> REM 16
+SQL> INSERT INTO ALU0101364544.DEPARTAMENTO
+  2  VALUES(5, 'ECONOMIA APLICADA');
+
+1 row created.
+
+SQL> SELECT * FROM ALU0101364544.DEPARTAMENTO;
+
+        CD D                                                                                                                                                                                            
+---------- ------------------------------------------------------------                                                                                                                                 
+         1 ANALISIS MATEMATICO                                                                                                                                                                          
+         2 ASTROFISICA                                                                                                                                                                                  
+         3 ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                                                                                                                                           
+         4 MATEMATICA FUNDAMENTAL                                                                                                                                                                       
+         5 ECONOMIA APLICADA                                                                                                                                                                            
+
+SQL> REM 17
+SQL> SELECT * FROM ALU0101364544.ASIGNATURA;
+
+       CAS A                                                  T           CUR        CAR         CT         CP         CL                                                                               
+---------- -------------------------------------------------- ---- ---------- ---------- ---------- ---------- ----------                                                                               
+         1 BASES DE DATOS                                     GII           3                     3        1.5        1.5                                                                               
+         2 INTELIGENCIA ARTIFICIAL                            GII           3                   1.5        1.5          3                                                                               
+         3 ALMACENES DE DATOS                                 MII           1                   1.5          0        1.5                                                                               
+         4 MINERIA DE DATOS                                   MII           1                   1.5          0        1.5                                                                               
+         5 INFORMATICA BASICA                                 GII           1                     3        1.5        1.5                                                                               
+         6 ALGEBRA                                            GII           1          1          3          3          0                                                                               
+         7 CALCULO                                            GII           1          8          3          3          0                                                                               
+         8 OPTIMIZACION                                       GII           1                     3        1.5        1.5                                                                               
+         9 GESTION DE RIESGOS                                 GII           3                     3          0          3                                                                               
+        10 ASTRONOMIA                                         GF            2                     3        1.5        1.5                                                                               
+        11 DIDACTICA DE LA MATEMATICA                         GM            2          5          6          0          0                                                                               
+        12 ANALISIS COMPLEJO                                  GM            4          2        4.5          3          0                                                                               
+        13 ESTADISTICA                                        GII           3                     0          0          0                                                                               
+
+13 rows selected.
+
+SQL> DELETE FROM ALU0101364544.ASIGNATURA
+  2  WHERE CAR = 1;
+DELETE FROM ALU0101364544.ASIGNATURA
+                          *
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+
+
+SQL> REM 18
+SQL> DELETE FROM ALU0101364544.TITULACION
+  2  WHERE T = 'MII';
+DELETE FROM ALU0101364544.TITULACION
+                          *
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+
+
+SQL> REM 19
+SQL> COMMIT WORK;
+
+Commit complete.
+
+SQL> SPOOL OFF
