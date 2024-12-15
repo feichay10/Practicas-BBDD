@@ -1,0 +1,136 @@
+SQL> REM 12
+SQL> REM NUEVA SESION
+SQL> REM 12
+SQL> SELECT * FROM PROFESOR;
+
+       DNI P                                                                    
+---------- ------------------------------------------------------------         
+       CAR CAT                                                                  
+---------- -----                                                                
+      4040 CARMELO                                                              
+         7 TU                                                                   
+                                                                                
+      1111 JUAN                                                                 
+         6 CU                                                                   
+                                                                                
+      2222 CARLOS                                                               
+         7 TU                                                                   
+                                                                                
+
+       DNI P                                                                    
+---------- ------------------------------------------------------------         
+       CAR CAT                                                                  
+---------- -----                                                                
+      3333 PEDRO                                                                
+         4 TEU                                                                  
+                                                                                
+      4444 MARIA                                                                
+         7 TU                                                                   
+                                                                                
+      5555 IVAN                                                                 
+         1 CEU                                                                  
+                                                                                
+
+       DNI P                                                                    
+---------- ------------------------------------------------------------         
+       CAR CAT                                                                  
+---------- -----                                                                
+      6666 CARMEN                                                               
+         3 CD                                                                   
+                                                                                
+      7777 MARIO                                                                
+         2 TU                                                                   
+                                                                                
+      8888 FRANCISCO                                                            
+         5 TU                                                                   
+                                                                                
+
+       DNI P                                                                    
+---------- ------------------------------------------------------------         
+       CAR CAT                                                                  
+---------- -----                                                                
+      9999 ANGELA                                                               
+         8 TEU                                                                  
+                                                                                
+      1010 DAVID                                                                
+         4 TU                                                                   
+                                                                                
+      2020 SOLEDAD                                                              
+         7 CU                                                                   
+                                                                                
+
+       DNI P                                                                    
+---------- ------------------------------------------------------------         
+       CAR CAT                                                                  
+---------- -----                                                                
+      3030 JOSE MANUEL                                                          
+         6 TEU                                                                  
+                                                                                
+
+13 rows selected.
+
+SQL> SET PAGESIZE 20
+SQL> SET LINESIZE 200
+SQL> SELECT * FROM PROFESOR;
+
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      4040 CARMELO                                                               7 TU                                                                                                                   
+      1111 JUAN                                                                  6 CU                                                                                                                   
+      2222 CARLOS                                                                7 TU                                                                                                                   
+      3333 PEDRO                                                                 4 TEU                                                                                                                  
+      4444 MARIA                                                                 7 TU                                                                                                                   
+      5555 IVAN                                                                  1 CEU                                                                                                                  
+      6666 CARMEN                                                                3 CD                                                                                                                   
+      7777 MARIO                                                                 2 TU                                                                                                                   
+      8888 FRANCISCO                                                             5 TU                                                                                                                   
+      9999 ANGELA                                                                8 TEU                                                                                                                  
+      1010 DAVID                                                                 4 TU                                                                                                                   
+      2020 SOLEDAD                                                               7 CU                                                                                                                   
+      3030 JOSE MANUEL                                                           6 TEU                                                                                                                  
+
+13 rows selected.
+
+SQL> REM 12: como no se han hecho los cambios permanentes, no se ha guardado aun la ultima fila aniadida, y espor eso que no aparece
+SQL> REM 13
+SQL> INSERT INTO PROFESOR
+  2  VALUES(5050, 'CARINA', 8 'CEU');
+VALUES(5050, 'CARINA', 8 'CEU')
+                         *
+ERROR at line 2:
+ORA-00917: missing comma 
+
+
+SQL> INSERT INTO PROFESOR
+  2  VALUES(5050, 'CARINA', 8, 'CEU');
+INSERT INTO PROFESOR
+*
+ERROR at line 1:
+ORA-00001: unique constraint (ALU0101364544.SYS_C00475445) violated 
+
+
+SQL> REM 15
+SQL> SELECT * FROM PROFESOR;
+
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      4040 CARMELO                                                               7 TU                                                                                                                   
+      5050 CARINA                                                                8 CEU                                                                                                                  
+      1111 JUAN                                                                  6 CU                                                                                                                   
+      2222 CARLOS                                                                7 TU                                                                                                                   
+      3333 PEDRO                                                                 4 TEU                                                                                                                  
+      4444 MARIA                                                                 7 TU                                                                                                                   
+      5555 IVAN                                                                  1 CEU                                                                                                                  
+      6666 CARMEN                                                                3 CD                                                                                                                   
+      7777 MARIO                                                                 2 TU                                                                                                                   
+      8888 FRANCISCO                                                             5 TU                                                                                                                   
+      9999 ANGELA                                                                8 TEU                                                                                                                  
+      1010 DAVID                                                                 4 TU                                                                                                                   
+      2020 SOLEDAD                                                               7 CU                                                                                                                   
+      3030 JOSE MANUEL                                                           6 TEU                                                                                                                  
+
+14 rows selected.
+
+SQL> REM 15: AL HACER LOS CAMBIOS PERMANENTES, SE HA ANIADIDO LA TUPLA
+SQL> REM 16: CERRANDO SESION
+SQL> SPOOL OFF
