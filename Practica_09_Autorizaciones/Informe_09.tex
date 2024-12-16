@@ -1,0 +1,585 @@
+\documentclass[11pt]{report}
+
+% Paquetes y configuraciones adicionales
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titling}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{wasysym}
+\usepackage{tikzsymbols}
+\usepackage{fancyvrb}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage{subcaption}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage[spanish]{babel}
+
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}
+}
+
+% Configura los márgenes
+\geometry{
+  left=2cm,   % Ajusta este valor al margen izquierdo deseado
+  right=2cm,  % Ajusta este valor al margen derecho deseado
+  top=3cm,
+  bottom=3cm,
+}
+
+% Configuración de los títulos de las secciones
+\titlespacing{\section}{0pt}{\parskip}{\parskip}
+\titlespacing{\subsection}{0pt}{\parskip}{\parskip}
+\titlespacing{\subsubsection}{0pt}{\parskip}{\parskip}
+
+% Redefinir el formato de los capítulos y añadir un punto después del número
+\makeatletter
+\renewcommand{\@makechapterhead}[1]{%
+  \vspace*{0\p@} % Ajusta este valor para el espaciado deseado antes del título del capítulo
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+        \huge\bfseries \thechapter.\ % Añade un punto después del número
+    \fi
+    \interlinepenalty\@M
+    #1\par\nobreak
+    \vspace{10pt} % Ajusta este valor para el espacio deseado después del título del capítulo
+  }}
+\makeatother
+
+% Configura para que cada \chapter no comience en una pagina nueva
+\makeatletter
+\renewcommand\chapter{\@startsection{chapter}{0}{\z@}%
+    {-3.5ex \@plus -1ex \@minus -.2ex}%
+    {2.3ex \@plus.2ex}%
+    {\normalfont\Large\bfseries}}
+\makeatother
+
+% Configurar los colores para el código
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Configurar el estilo para el código
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},   
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+\begin{document}
+
+% Portada del informe
+\title{Practica 09. Autorizaciones}
+\subtitle{Bases de Datos}
+\author{Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)}
+\date{\today}
+
+\maketitle
+
+\pagestyle{empty} % Desactiva la numeración de página para el índice
+
+% Índice
+\tableofcontents
+
+% Nueva página
+\cleardoublepage
+
+\pagestyle{plain} % Vuelve a activar la numeración de página
+\setcounter{page}{1} % Reinicia el contador de página a 1
+
+% Secciones del informe
+%Pregunta 1:
+\chapter{Permitir al usuario alumno el poder consultas las tablas DEPARTAMENTO, AREA, ASIGNATURA, y TITULACION}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> GRANT SELECT
+  2  ON DEPARTAMENTO
+  3  TO ALUMNO;
+  
+SQL> GRANT SELECT
+  2  ON AREA
+  3  TO ALUMNO;
+  
+SQL> GRANT SELECT
+  2  ON ASIGNATURA
+  3  TO ALUMNO;
+  
+SQL> GRANT SELECT
+  2  ON TITULACION
+  3  TO ALUMNO;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Grant succeeded.
+
+Grant succeeded.
+
+Grant succeeded.
+
+Grant succeeded.
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 2:
+\chapter{Permitir al usuario alumno el poder insertar, modificar y borrar en las tablas DEPARTAMENTO y AREA y modificar en las tablas ASIGNATURA y TITULACION.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> GRANT INSERT, UPDATE, DELETE
+  2  ON DEPARTAMENTO
+  3  TO ALUMNO;
+
+
+SQL> GRANT INSERT, UPDATE, DELETE
+  2  ON AREA
+  3  TO ALUMNO;
+
+SQL> GRANT UPDATE
+  2  ON ASIGNATURA
+  3  TO ALUMNO;
+
+SQL> GRANT UPDATE
+  2  ON TITULACION
+  3  TO ALUMNO;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Grant succeeded.
+
+Grant succeeded.
+
+Grant succeeded.
+
+Grant succeeded.
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 3:
+\chapter{Abrir una nueva sesión unix (sesión2) ¡sin cerrar la original (sesión1)!. Ejecutar de nuevo el
+SQL*Pllus para conectarte a tu base de datos como el usuario alumno con pasword xxxxx.
+(¡No olvides hacer un nuevo spool!)}
+Realizado.
+
+\newpage
+
+%Pregunta 4:
+\chapter{Listar todas las t-uplas de la tabla DEPARTAMENTO}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> SELECT * FROM ALU0101364544.DEPARTAMENTO;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+        CD D                                                                    
+---------- ------------------------------------------------------------         
+         1 ANALISIS MATEMATICO                                                  
+         2 ASTROFISICA                                                          
+         3 ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                   
+         4 MATEMATICA FUNDAMENTAL       
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 5:
+\chapter{Listar todas las t-uplas de la tabla PROFESOR}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> SELECT * FROM ALU0101364544.PROFESOR;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+SELECT * FROM ALU0101364544.PROFESOR
+                            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 6:
+\chapter{Insertar la t-upla (5, ‘ECONOMÍA’) en la tabla DEPARTAMENTO}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> INSERT INTO ALU0101364544.DEPARTAMENTO
+  2  VALUES(5, 'ECONOMIA');
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+1 row created.
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 7:
+\chapter{Modificar el nombre del departamento con código 5 al valor ‘ECONOMÍA APLICADA’.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> UPDATE ALU0101364544.DEPARTAMENTO
+  2  SET D = 'ECONOMIA APLICADA'
+  3  WHERE CD = 5;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+1 row updated.
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 8:
+\chapter{Modificar en la tabla TITULACION la t-upla correspondiente a la titulación ‘GII’, poniendo como valor de facultad ‘ESIT1’}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> UPDATE ALU0101364544.TITULACION
+  2  SET T = 'ESIT'
+  3  WHERE T = 'GII';
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+UPDATE ALU0101364544.TITULACION
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (ALU0101364544.SYS_C00487529) violated - child 
+record found 
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 9:
+\chapter{Eliminar en la tabla TITULACION la t-upla correspondiente a la titulación ‘GII’}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> DELETE FROM ALU0101364544.TITULACION
+  2  WHERE T = 'GII';
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+DELETE FROM ALU0101364544.TITULACION
+                          *
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 10:
+\chapter{Deshacer los cambios}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> ROLLBACK;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Rollback complete.
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 11:
+\chapter{Crear una vista, llamada ‘VISTA3’, sobre la tabla ‘ASIGNATURA’, con los atributos A y CAR}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> CREATE VIEW VISTA3 AS (
+  2  SELECT A, CAR
+  3  FROM ALU0101364544.ASIGNATURA);
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+View created.
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 12:
+\chapter{Eliminar la tabla ASIGNATURA}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> DROP TABLE ALU0101364544.ASIGNATURA;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+DROP TABLE ALU0101364544.ASIGNATURA
+                         *
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 13:
+\chapter{Listar las t-uplas de la tabla AREA}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> SELECT * FROM ALU0101364544.AREA;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+       CAR AR                                                                   CD                                                                                                                      
+---------- ------------------------------------------------------------ ----------                                                                                                                      
+         1 ALGEBRA                                                               4                                                                                                                      
+         2 ANALISIS MATEMATICO                                                   1                                                                                                                      
+         3 ASTRONOMIA Y ASTROFISICA                                              2                                                                                                                      
+         4 CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                  3                                                                                                                      
+         5 DIDACTICA DE LA MATEMATICA                                            1                                                                                                                      
+         6 ESTADISTICA E INVESTIGACION OPERATIVA                                 3                                                                                                                      
+         7 LENGUAJES Y SISTEMAS INFORMATICOS                                     3                                                                                                                      
+         8 MATEMATICA APLICADA                                                   1                                                                                                                      
+
+8 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 14:
+\chapter{Borrar en la tabla AREA la t-upla asociada al departamento con código 2}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> DELETE FROM ALU0101364544.AREA
+  2  WHERE CD = 2;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+1 row deleted.
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 15:
+\chapter{Borrar en la tabla AREA la t-upla asociada al departamento con código 3}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> DELETE FROM ALU0101364544.AREA
+  2  WHERE CD = 3;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+3 row deleted.
+  \end{verbatim}
+\end{itemize}
+
+\newpage
+
+%Pregunta 16:
+\chapter{Insertar la t-upla (5, ‘ECONOMÍA APLICADA’) en la tabla DEPARTAMENTO}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> INSERT INTO ALU0101364544.DEPARTAMENTO
+  2  VALUES(5, 'ECONOMIA APLICADA');
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+1 row created.
+  \end{verbatim}
+\end{itemize}
+
+%Pregunta 17:
+\chapter{Borrar las asignaturas adscritas al área con código 1}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> DELETE FROM ALU0101364544.ASIGNATURA
+  2  WHERE CAR = 1;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+DELETE FROM ALU0101364544.ASIGNATURA
+                          *
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Eliminar en la tabla TITULACION la tupla correspondiente a la titulación ‘MII’}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> DELETE FROM ALU0101364544.TITULACION
+  2  WHERE T = 'MII';
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+DELETE FROM ALU0101364544.TITULACION
+                          *
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Hacer permanentes los cambios. Cerrar la sesión2}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> COMMIT WORK;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Commit complete.
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Cambiar a la sesión1}
+Realizado.
+
+\chapter{Listar las t-uplas de la tabla DEPARTAMENTO}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> SELECT * FROM DEPARTAMENTO;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+        CD D                                                                    
+---------- ------------------------------------------------------------         
+         1 ANALISIS MATEMATICO                                                  
+         2 ASTROFISICA                                                          
+         3 ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                   
+         4 MATEMATICA FUNDAMENTAL                                               
+         5 ECONOMIA APLICADA  
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Borrar en la tabla DEPARTAMENTO la t-upla asociada al departamento con código 2}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> DELETE FROM DEPARTAMENTO
+  2  WHERE CD = 2;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+1 row deleted.
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar las t-uplas de la tabla AREA}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> SELECT * FROM AREA;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+       CAR AR                                                                   CD                                                                                                                      
+---------- ------------------------------------------------------------ ----------                                                                                                                      
+         1 ALGEBRA                                                               4                                                                                                                      
+         2 ANALISIS MATEMATICO                                                   1                                                                                                                      
+         5 DIDACTICA DE LA MATEMATICA                                            1                                                                                                                      
+         8 MATEMATICA APLICADA                                                   1   
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar las t-uplas de la tabla PROFESOR}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> SELECT * FROM PROFESOR;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+       DNI P                                                                   CAR CAT                                                                                                                  
+---------- ------------------------------------------------------------ ---------- -----                                                                                                                
+      4040 CARMELO                                                                 TU                                                                                                                   
+      5050 CARINA                                                                8 CEU                                                                                                                  
+      1111 JUAN                                                                    CU                                                                                                                   
+      2222 CARLOS                                                                  TU                                                                                                                   
+      3333 PEDRO                                                                   TEU                                                                                                                  
+      4444 MARIA                                                                   TU                                                                                                                   
+      5555 IVAN                                                                  1 CEU                                                                                                                  
+      6666 CARMEN                                                                  CD                                                                                                                   
+      7777 MARIO                                                                 2 TU                                                                                                                   
+      8888 FRANCISCO                                                             5 TU                                                                                                                   
+      9999 ANGELA                                                                8 TEU                                                                                                                  
+      1010 DAVID                                                                   TU                                                                                                                   
+      2020 SOLEDAD                                                                 CU                                                                                                                   
+      3030 JOSE MANUEL                                                             TEU                                                                                                                  
+
+14 rows selected.
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Listar las t-uplas de la tabla TITULACION}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> SELECT * FROM TITULACION;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+T    FAC                                                                                                                                                                                                
+---- ------------------------------------------------------------                                                                                                                                       
+GF   MATEMATICAS Y FISICA                                                                                                                                                                               
+GM   MATEMATICAS Y FISICA                                                                                                                                                                               
+GII  ESIT                                                                                                                                                                                               
+MII  ESIT         
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 26:
+\chapter{Quitar todos los privilegios concedidos al usuario alumno sobre la tabla DEPARTAMENTO.}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REVOKE ALL
+  2  ON DEPARTAMENTO
+  3  FROM ALUMNO;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Revoke succeeded.
+  \end{verbatim}
+\end{itemize}
+
+% Pregunta 27:
+\chapter{Quitar todos los privilegios concedidos al usuario alumno}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> REVOKE ALL
+  2  FROM ALUMNO;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Revoke succeeded.
+  \end{verbatim}
+\end{itemize}
+
+\chapter{Hacer permanentes los cambios}
+\begin{itemize}
+  \item Consulta:
+  \begin{verbatim}
+SQL> COMMIT WORK;
+  \end{verbatim}
+  \item{Resultado:}
+  \begin{verbatim}
+Commit complete.
+  \end{verbatim}
+\end{itemize}
+
+\end{document}
