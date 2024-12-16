@@ -118,7 +118,6 @@
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 1
 SQL> CREATE TABLE TITULACION
   2  (T CHAR(4) NOT NULL,
   3  FAC VARCHAR(60),
@@ -136,7 +135,6 @@ Table created.
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 2
 SQL> INSERT INTO TITULACION(T)
   2  SELECT DISTINCT T
   3  FROM ASIGNATURA;
@@ -152,9 +150,11 @@ SQL> INSERT INTO TITULACION(T)
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 3
-SQL> SQL> SELECT * FROM TITULACION;
+SQL> SELECT * FROM TITULACION;
   \end{verbatim}
+
+  \newpage
+
   \item{Resultado:}
   \begin{verbatim}
 T    FAC                                                                        
@@ -171,42 +171,41 @@ MII
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 4
 SQL> UPDATE TITULACION
-  2  SET FAC='MASTER EN INFORMATICA'
-  3  WHERE T='MII';
-
+  2  SET FAC = 'MATEMATICAS Y FISICA'
+  3  WHERE T = 'GF';
+  
 SQL> UPDATE TITULACION
-  2  SET FAC='GRADO EN INFORMATICA'
-  3  WHERE T='MII';
-
+  2  SET FAC = 'MATEMATICAS Y FISICA'
+  3  WHERE T = 'GM';
+  
 SQL> UPDATE TITULACION
-  2  SET FAC='GRADO EN MATEMATICAS'
-  3  WHERE T='GM';
-
+  2  SET FAC = 'ESIT'
+  3  WHERE T = 'GII';
+  
 SQL> UPDATE TITULACION
-  2  SET FAC='GRADO EN FISICA'
-  3  WHERE T='GF';
-
-SQL> SELECT * FROM TITULACION;
+  2  SET FAC = 'ESIT'
+  3  WHERE T = 'MII';
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-T    FAC                                                                        
----- ------------------------------------------------------------               
-GF   GRADO EN FISICA                                                            
-GM   GRADO EN MATEMATICAS                                                       
-GII  GRADO EN INFORMATICA                                                       
-MII  MASTER EN INFORMATICA 
+1 row updated.
+
+1 row updated.
+
+1 row updated.
+
+1 row updated.
   \end{verbatim}
 \end{itemize}
+
+\newpage
 
 %Pregunta 5:
 \chapter{Crear un sinónimo denominado TIT para la tabla TITULACION.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 5
 SQL> CREATE SYNONYM TIT
   2  FOR TITULACION;
   \end{verbatim}
@@ -221,17 +220,16 @@ Synonym created.
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 6
 SQL> SELECT * FROM TIT;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
 T    FAC                                                                        
 ---- ------------------------------------------------------------               
-GF   GRADO EN FISICA                                                            
-GM   GRADO EN MATEMATICAS                                                       
-GII  GRADO EN INFORMATICA                                                       
-MII  MASTER EN INFORMATICA  
+GF   MATEMATICAS Y FISICA                                                       
+GM   MATEMATICAS Y FISICA                                                       
+GII  ESIT                                                                       
+MII  ESIT   
   \end{verbatim}
 \end{itemize}
 
@@ -240,7 +238,6 @@ MII  MASTER EN INFORMATICA
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 7
 SQL> ALTER TABLE ASIGNATURA
   2  ADD FOREIGN KEY(T) REFERENCES TITULACION (T) ON DELETE CASCADE;
   \end{verbatim}
@@ -250,21 +247,22 @@ Table altered.
   \end{verbatim}
 \end{itemize}
 
+\newpage
+
 %Pregunta 8:
 \chapter{Incrementar en dos caracteres la longitud del campo T en la tabla TITULACION.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 8
 SQL> ALTER TABLE TITULACION
-  2  MODIFY(T CHAR(6));
+  2  MODIFY T CHAR(6);
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
 ALTER TABLE TITULACION
 *
 ERROR at line 1:
-ORA-02292: integrity constraint (ALU0101364544.SYS_C00416035) violated - child 
+ORA-02292: integrity constraint (ALU0101364544.SYS_C00487529) violated - child 
 record found 
   \end{verbatim}
 \end{itemize}
@@ -284,34 +282,32 @@ View created.
   \end{verbatim}
 \end{itemize}
 
+\newpage
+
 %Pregunta 10:
 \chapter{Listar todas las t-uplas de la vista ‘VISTA1’.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 10
 SQL> SELECT * FROM VISTA1;
   \end{verbatim}
   \item{Resultado:}
 \end{itemize}
   \begin{verbatim}
-       CAS A                                                  T           CUR        CAR                                                                                            
----------- -------------------------------------------------- ---- ---------- ----------                                                                                            
-          1 BASES DE DATOS                                    GII           3          7                                                                                            
-          2 INTELIGENCIA ARTIFICIAL                           GII           3          4                                                                                            
-          3 ALMACENES DE DATOS                                MII           1          7                                                                                            
-          4 MINERIA DE DATOS                                  MII           1          7                                                                                            
-          5 INFORMATICA BASICA                                GII           1          7                                                                                            
-          6 ALGEBRA                                           GII           1          1                                                                                            
-          7 CALCULO                                           GII           1          8                                                                                            
-          8 OPTIMIZACION                                      GII           1          6                                                                                            
-          9 GESTION DE RIESGOS                                GII           3          4                                                                                            
-        10 ASTRONOMIA                                         GF            2          3                                                                                            
-        11 DIDACTICA DE LA MATEMATICA                         GM            2          5                                                                                            
-
-        CAS A                                                 T           CUR        CAR                                                                                            
----------- -------------------------------------------------- ---- ---------- ----------                                                                                            
-        12 ANALISIS COMPLEJO                                  GM            4          2                                                                                            
+       CAS A                                                  T           CUR        CAR                                                                                                                
+---------- -------------------------------------------------- ---- ---------- ----------                                                                                                                
+         1 BASES DE DATOS                                     GII           3          7                                                                                                                
+         2 INTELIGENCIA ARTIFICIAL                            GII           3          4                                                                                                                
+         3 ALMACENES DE DATOS                                 MII           1          7                                                                                                                
+         4 MINERIA DE DATOS                                   MII           1          7                                                                                                                
+         5 INFORMATICA BASICA                                 GII           1          7                                                                                                                
+         6 ALGEBRA                                            GII           1          1                                                                                                                
+         7 CALCULO                                            GII           1          8                                                                                                                
+         8 OPTIMIZACION                                       GII           1          6                                                                                                                
+         9 GESTION DE RIESGOS                                 GII           3          4                                                                                                                
+        10 ASTRONOMIA                                         GF            2          3                                                                                                                
+        11 DIDACTICA DE LA MATEMATICA                         GM            2          5                                                                                                                
+        12 ANALISIS COMPLEJO                                  GM            4          2                                                                                                                
 
 12 rows selected.
   \end{verbatim}
@@ -321,7 +317,6 @@ SQL> SELECT * FROM VISTA1;
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 11
 SQL> INSERT INTO VISTA1
   2  VALUES(13, 'ESTADISTICA', 'GII', 3, 7);
   \end{verbatim}
@@ -336,30 +331,29 @@ SQL> INSERT INTO VISTA1
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 12
 SQL> SELECT * FROM VISTA1;
   \end{verbatim}
+
+  \newpage
+
   \item{Resultado:}
 \end{itemize}
   \begin{verbatim}
-       CAS A                                                  T           CUR        CAR                                                                                            
----------- -------------------------------------------------- ---- ---------- ----------                                                                                            
-         1 BASES DE DATOS                                     GII           3          7                                                                                            
-         2 INTELIGENCIA ARTIFICIAL                            GII           3          4                                                                                            
-         3 ALMACENES DE DATOS                                 MII           1          7                                                                                            
-         4 MINERIA DE DATOS                                   MII           1          7                                                                                            
-         5 INFORMATICA BASICA                                 GII           1          7                                                                                            
-         6 ALGEBRA                                            GII           1          1                                                                                            
-         7 CALCULO                                            GII           1          8                                                                                            
-         8 OPTIMIZACION                                       GII           1          6                                                                                            
-         9 GESTION DE RIESGOS                                 GII           3          4                                                                                            
-       10 ASTRONOMIA                                          GF            2          3                                                                                            
-       11 DIDACTICA DE LA MATEMATICA                          GM            2          5                                                                                            
-
-       CAS A                                                  T           CUR        CAR                                                                                            
----------- -------------------------------------------------- ---- ---------- ----------                                                                                            
-        12 ANALISIS COMPLEJO                                  GM            4          2                                                                                            
-        13 ESTADISTICA                                        GII           3          7                                                                                            
+       CAS A                                                  T           CUR        CAR                                                                                                                
+---------- -------------------------------------------------- ---- ---------- ----------                                                                                                                
+         1 BASES DE DATOS                                     GII           3          7                                                                                                                
+         2 INTELIGENCIA ARTIFICIAL                            GII           3          4                                                                                                                
+         3 ALMACENES DE DATOS                                 MII           1          7                                                                                                                
+         4 MINERIA DE DATOS                                   MII           1          7                                                                                                                
+         5 INFORMATICA BASICA                                 GII           1          7                                                                                                                
+         6 ALGEBRA                                            GII           1          1                                                                                                                
+         7 CALCULO                                            GII           1          8                                                                                                                
+         8 OPTIMIZACION                                       GII           1          6                                                                                                                
+         9 GESTION DE RIESGOS                                 GII           3          4                                                                                                                
+        10 ASTRONOMIA                                         GF            2          3                                                                                                                
+        11 DIDACTICA DE LA MATEMATICA                         GM            2          5                                                                                                                
+        12 ANALISIS COMPLEJO                                  GM            4          2                                                                                                                
+        13 ESTADISTICA                                        GII           3          7                                                                                                                
 
 13 rows selected.
   \end{verbatim}
@@ -369,7 +363,6 @@ SQL> SELECT * FROM VISTA1;
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 13
 SQL> SELECT * FROM ASIGNATURA;
   \end{verbatim}
   \item{Resultado:}
@@ -387,10 +380,7 @@ SQL> SELECT * FROM ASIGNATURA;
          8 OPTIMIZACION                 GII      1       6          3        1.5       1.5                                                           
          9 GESTION DE RIESGOS           GII      3       4          3          0         3                                                           
         10 ASTRONOMIA                    GF      2       3          3        1.5       1.5                                                           
-        11 DIDACTICA DE LA MATEMATICA    GM      2       5          6          0         0                                                           
-
- CAS A                                    T    CUR     CAR         CT         CP        CL                                                           
----- --------------------------------- ---- ------ ------- ---------- ---------- ---------                                                            
+        11 DIDACTICA DE LA MATEMATICA    GM      2       5          6          0         0                                                                                                                      
         12 ANALISIS COMPLEJO             GM      4       2        4.5          3         0                                                           
         13 ESTADISTICA                  GII      3       7          0          0         0                                                           
 
@@ -403,7 +393,6 @@ SQL> SELECT * FROM ASIGNATURA;
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 14
 SQL> UPDATE VISTA1
   2  SET CAR = 6
   3  WHERE CAS = 13;
@@ -419,48 +408,43 @@ SQL> UPDATE VISTA1
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 15
 SQL> SELECT * FROM VISTA1;
   \end{verbatim}
   \item{Resultado:}
 \end{itemize}
   \begin{verbatim}
-       CAS A                                                  T           CUR        CAR                                                                                                                                                                                                                    
----------- -------------------------------------------------- ---- ---------- ----------                                                                                                                                                                                                                    
-         1 BASES DE DATOS                                     GII           3          7                                                                                                                                                                                                                    
-         2 INTELIGENCIA ARTIFICIAL                            GII           3          4                                                                                                                                                                                                                    
-         3 ALMACENES DE DATOS                                 MII           1          7                                                                                                                                                                                                                    
-         4 MINERIA DE DATOS                                   MII           1          7                                                                                                                                                                                                                    
-         5 INFORMATICA BASICA                                 GII           1          7                                                                                                                                                                                                                    
-         6 ALGEBRA                                            GII           1          1                                                                                                                                                                                                                    
-         7 CALCULO                                            GII           1          8                                                                                                                                                                                                                    
-         8 OPTIMIZACION                                       GII           1          6                                                                                                                                                                                                                    
-         9 GESTION DE RIESGOS                                 GII           3          4                                                                                                                                                                                                                    
-        10 ASTRONOMIA                                         GF            2          3                                                                                                                                                                                                                    
-        11 DIDACTICA DE LA MATEMATICA                         GM            2          5                                                                                                                                                                                                                    
-
-        CAS A                                                  T           CUR        CAR                                                                                                                                                                                                                    
----------- -------------------------------------------------- ---- ---------- ----------                                                                                                                                                                                                                    
-        12 ANALISIS COMPLEJO                                  GM            4          2                                                                                                                                                                                                                    
-        13 ESTADISTICA                                        GII           3          6                                                                                                                                                                                                                    
+       CAS A                                                  T           CUR        CAR                                                                                                                
+---------- -------------------------------------------------- ---- ---------- ----------                                                                                                                
+         1 BASES DE DATOS                                     GII           3          7                                                                                                                
+         2 INTELIGENCIA ARTIFICIAL                            GII           3          4                                                                                                                
+         3 ALMACENES DE DATOS                                 MII           1          7                                                                                                                
+         4 MINERIA DE DATOS                                   MII           1          7                                                                                                                
+         5 INFORMATICA BASICA                                 GII           1          7                                                                                                                
+         6 ALGEBRA                                            GII           1          1                                                                                                                
+         7 CALCULO                                            GII           1          8                                                                                                                
+         8 OPTIMIZACION                                       GII           1          6                                                                                                                
+         9 GESTION DE RIESGOS                                 GII           3          4                                                                                                                
+        10 ASTRONOMIA                                         GF            2          3                                                                                                                
+        11 DIDACTICA DE LA MATEMATICA                         GM            2          5                                                                                                                
+        12 ANALISIS COMPLEJO                                  GM            4          2                                                                                                                
+        13 ESTADISTICA                                        GII           3          6                                                                                                                
 
 13 rows selected.
   \end{verbatim}
 
 %Pregunta 16:
 \chapter{¿Qué conclusiones sacas sobre las actualizaciones de ‘VISTA1’?}
-
+Se pueden hacer actualizaciones en la vista, pero no se pueden hacer en la tabla original.
 
 %Pregunta 17:
 \chapter{Crear una vista, llamada ‘VISTA2’, sobre la tabla ’PLAN\_DOCENTE’ y la vista ‘VISTA1’ que contenga los datos (DNI, A, T, CUR, CAR) relativos a las asignaturas impartidas por un profesor especificado por su DNI.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 17
 SQL> CREATE VIEW VISTA2
   2  AS SELECT DNI, A, T, CUR, CAR
   3  FROM VISTA1 NATURAL JOIN PLAN_DOCENTE
-  4  WHERE DNI=1111;
+  4  WHERE DNI = 1111;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -473,7 +457,6 @@ View created.
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 18
 SQL> SELECT * FROM VISTA2;
   \end{verbatim}
   \item{Resultado:}
@@ -490,14 +473,16 @@ SQL> SELECT * FROM VISTA2;
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 19
 SQL> UPDATE VISTA2
-  2  SET A = 'MATEMATICAS'
-  3  WHERE A = 'ASTRONOMIA';
+  2  SET A = 'OPTIMIZACION Y GRAFOS'
+  3  WHERE A = 'OPTIMIZACION';
   \end{verbatim}
+
+  \newpage
+
   \item{Resultado:}
   \begin{verbatim}
-SET A = 'MATEMATICAS'
+SET A = 'OPTIMIZACION Y GRAFOS'
     *
 ERROR at line 2:
 ORA-01779: cannot modify a column which maps to a non key-preserved table 
@@ -510,7 +495,6 @@ ORA-01779: cannot modify a column which maps to a non key-preserved table
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 20
 SQL> DESCRIBE VISTA2;
   \end{verbatim}
   \item{Resultado:}
@@ -530,9 +514,7 @@ CAR                                                NUMBER(3)
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 21
-SQL> DROP VIEW VISTA1
-  2  ;
+SQL> DROP VIEW VISTA1;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -540,12 +522,13 @@ View dropped.
   \end{verbatim}
 \end{itemize}
 
+\newpage
+
 %Pregunta 22:
 \chapter{Listar todas las t-uplas de la vista ‘VISTA2’.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 22
 SQL> SELECT * FROM VISTA2;
   \end{verbatim}
   \item{Resultado:}
@@ -562,7 +545,6 @@ ORA-04063: view "ALU0101364544.VISTA2" has errors
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 23
 SQL> ROLLBACK;
   \end{verbatim}
   \item{Resultado:}
@@ -577,7 +559,6 @@ Rollback complete.
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 24
 SQL> CREATE INDEX INDICE1
   2  ON PROFESOR(P);
 
@@ -598,7 +579,6 @@ SQL> SELECT DNI
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 25
 SQL> DROP INDEX INDICE1;
   \end{verbatim}
   \item{Resultado:}
@@ -612,7 +592,6 @@ Index dropped.
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 26
 SQL> CREATE INDEX INDICE2
   2  ON VISTA1(CAR);
   \end{verbatim}
@@ -620,8 +599,8 @@ SQL> CREATE INDEX INDICE2
   \begin{verbatim}
 ON VISTA1(CAR)
    *
- ERROR at line 2:
- ORA-00942: table or view does not exist
+ERROR at line 2:
+ORA-00942: table or view does not exist 
   \end{verbatim}
   \item{Explicación:} No se puede crear un índice sobre una vista.
 \end{itemize}

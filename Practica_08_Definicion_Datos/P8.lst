@@ -47,8 +47,8 @@ SQL> UPDATE TITULACION
 
 1 row updated.
 
-SQL> SELÃECT * FROM TITULACION;
-SP2-0734: unknown command beginning "SELÃECT * ..." - rest of line ignored.
+SQL> SELï¿½ECT * FROM TITULACION;
+SP2-0734: unknown command beginning "SELï¿½ECT * ..." - rest of line ignored.
 SQL> SELECT * FROM TITULACION;
 
 T    FAC                                                                        
@@ -439,12 +439,12 @@ SQL> SELECT * FROM VISTA2;
 
 SQL> REM 19
 SQL> UPDATE VISTA2
-  2  SET = 'OPTIMIZACION Y GRAFOS'
+  2  SET A = 'OPTIMIZACION Y GRAFOS'
   3  WHERE A = 'OPTIMIZACION';
-SET = 'OPTIMIZACION Y GRAFOS'
+SET A = 'OPTIMIZACION Y GRAFOS'
     *
 ERROR at line 2:
-ORA-01747: invalid user.table.column, table.column, or column specification 
+ORA-01779: cannot modify a column which maps to a non key-preserved table 
 
 
 SQL> REM 20
