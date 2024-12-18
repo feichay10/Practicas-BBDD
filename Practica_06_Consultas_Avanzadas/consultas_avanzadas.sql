@@ -93,3 +93,45 @@ SELECT COUNT(A)
 FROM ASIGNATURA NATURAL JOIN PROFESOR
 WHERE DNI = 1111
 GROUP BY A;
+
+-- Consulta 19: Hallar el número de créditos impartidos por el profesor con DNI 1111
+SELECT SUM(CTA+CPA+CLA) AS CREDITOS_1111
+FROM PLAN_DOCENTE
+WHERE DNI = 1111;
+
+-- Consulta 20: Hallar el nombre del profesor que más créditos imparte actualmente.
+SELECT P
+FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+WHERE CTA+CPA+CLA IN (SELECT MAX(CTA+CPA+CLA)
+                      FROM PLAN_DOCENTE
+                      WHERE FF IS NULL);
+
+-- Consulta 21: Hallar el número medio de asignaturas adscritas a cada área.
+SELECT AVG(COUNT(A)) AS MEDIA_AREA
+FROM AREA NATURAL JOIN ASIGNATURA
+GROUP BY AR;
+
+-- Consulta 22: Hallar el número medio de profesores de cada departamento.
+SELECT AVG(COUNT(P)) AS MEDIA_PROFE
+FROM PROFESOR NATURAL JOIN AREA NATURAL JOIN DEPARTAMENTO
+GROUP BY D;
+
+-- Consulta 23: Hallar los nombres de las áreas que tengan más de 3 asignaturas.
+SELECT AR
+FROM AREA NATURAL JOIN ASIGNATURA
+GROUP BY AR
+HAVING COUNT(A) > 3;
+
+-- Consulta 24: Hallar los nombres de las áreas que tengan más de 6 asignaturas.
+SELECT AR
+FROM AREA NATURAL JOIN ASIGNATURA
+GROUP BY AR
+HAVING COUNT(A) > 6;
+
+-- Consulta 25: Hallar el nombre del departamento con menos profesores.
+SELECT D
+FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+GROUP BY P
+HAVING COUNT(P) IN (SELECT MIN(COUNT(P))
+                   FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+                   GROUP BY D);

@@ -434,10 +434,10 @@ no rows selected
 SQL> REM 25
 SQL> SELECT D
   2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
-  3  HAVING COUNT(P) = (SELECT MIN(COUNT(P))
-  4  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
-  5  GROUP BY D)
-  6  GROUP BY D;
+  3  GROUP BY D
+  4  HAVING COUNT(P) IN (SELECT MIN(COUNT(P))
+  5  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  6  GROUP BY D);
 
 D                                                                               
 ------------------------------------------------------------                    
