@@ -74,4 +74,30 @@ SELECT UNIQUE A
 FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE
 WHERE DNI = 1010;
 
--- Consulta 14: 
+-- Consulta 14: Listar los nombres de las asignaturas impartidas por el profesor con nombre 'DAVID'
+SELECT UNIQUE A
+FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE NATURAL JOIN PROFESOR
+WHERE P = 'DAVID';
+
+-- Consulta 15: Listar los nombre de las áreas adscritas al departamento 'ESTADISTICA, INVESTIGACIÓN OPERATIVA Y COMPUTACIÓN'
+SELECT AR
+FROM AREA NATURAL JOIN DEPARTAMENTO
+WHERE D = 'ESTADISTICA, INVESTIGACIÓN OPERATIVA Y COMPUTACIÓN';
+
+-- Consulta 16: Listar los nombres de las asignaturas impartidas actualmente por catedráticas de universidad (categoría CU).
+SELECT A 
+FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE NATURAL JOIN PROFESOR
+WHERE (CAT = 'CU') AND FF IS NULL;
+
+-- Consulta 17: Listar los nombres de las asignaturas que siempre han sido impartidas por catedráticos de universidad (categoria CU).
+SELECT A
+FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE NATURAL JOIN PROFESOR
+WHERE CAT = 'CU'
+MINUS
+SELECT A
+FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE NATURAL JOIN PROFESOR
+WHERE CAT != 'CU';
+
+-- Consulta 18: Listar los nombres de asignaturas adscritas a 'LENGUAJE Y  SISTEMAS INFORMÁTICOS'
+-- o a ' CIENCIAS DE LA COMPUTACIÓN E INTELIGENCIA ARTIFICIAL'.
+
