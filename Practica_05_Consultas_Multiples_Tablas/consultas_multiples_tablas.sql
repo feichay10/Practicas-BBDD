@@ -100,4 +100,64 @@ WHERE CAT != 'CU';
 
 -- Consulta 18: Listar los nombres de asignaturas adscritas a 'LENGUAJE Y  SISTEMAS INFORMÁTICOS'
 -- o a ' CIENCIAS DE LA COMPUTACIÓN E INTELIGENCIA ARTIFICIAL'.
+SELECT A
+FROM ASIGNATURA NATURAL JOIN AREA
+WHERE AR = 'LENGUAJE Y SISTEMAS INFORMATICOS'
+UNION
+SELECT A
+FROM ASIGNATURA NATURAL JOIN AREA
+WHERE AR = 'CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL';
 
+-- Consulta 19: Listar los nombres de profesores que actualmente dan clases en las titulaciones 'GII' o en 'MII'
+SELECT P
+FROM PROFESOR NATURAL JOIN ASIGNATURA NATURAL JOIN PLAN_DOCENTE
+WHERE T = 'GII' AND FF IS NULL
+UNION
+SELECT P
+FROM PROFESOR NATURAL JOIN ASIGNATURA NATURAL JOIN PLAN_DOCENTE
+WHERE T = 'MII' AND FF IS NULL;
+
+-- Consulta 20: Listar los nombres de profesores que actualmente dan clases en las titulaciones 'GII' 
+-- y en 'MII' simultáneamente.
+SELECT P
+FROM PROFESOR NATURAL JOIN ASIGNATURA NATURAL JOIN PLAN_DOCENTE
+WHERE T = 'GII' AND FF IS NULL
+INTERSECT
+SELECT P
+FROM PROFESOR NATURAL JOIN ASIGNATURA NATURAL JOIN PLAN_DOCENTE
+WHERE T = 'MII' AND FF IS NULL;
+
+-- Consulta 21: Listar los nombres de profesores que actualmente no imparten ninguna asignatura
+SELECT P
+FROM PROFESOR
+MINUS
+SELECT P
+FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+WHERE FF IS NULL;
+
+SELECT P 
+FROM PROFESOR
+WHERE DNI NOT IN (SELECT DNI 
+                  FROM PLAN_DOCENTE
+                  WHERE FF IS NULL);
+
+-- Consulta 22: Listar los nombres de asignaturas impartidas en la titulacion GII.
+SELECT A
+FROM ASIGNATURA
+WHERE T = 'GII'
+
+-- Consulta 23: Listar los nombres de las áreas de conocimiento y los nombres de las asignaturas que pertenecen a ellos.
+SELECT AR, A
+FROM AREA NATURAL JOIN ASIGNATURA;
+
+-- Consulta 24: Listar los nombres de departamentos y los nombres de las áreas adscritas a ellos.
+-- Ambos campos deben estar ordenados de forma alfabética.
+SELECT D, AR
+FROM DEPARTAMENTO NATURAL JOIN AREA
+ORDER BY D, AR;
+
+-- Consulta 25: Listar los nombres de departamentos y los profesores de cada uno de ellos. Ambos campos deben estar 
+-- ordenados de forma alfabética.
+SELECT D, P
+FROM DEPARTAMENTO NATURAL JOIN PROFESOR NATURAL JOIN AREA
+ORDER BY D, P;

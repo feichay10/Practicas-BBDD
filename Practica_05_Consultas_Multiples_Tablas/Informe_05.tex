@@ -515,23 +515,22 @@ no rows selected
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT A
-  2  FROM ASIGNATURA NATURAL JOIN AREA
-  3  WHERE AR IN ('LENGUAJES Y SISTEMAS INFORMATICOS', 
-                  'CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL');
+SELECT A
+FROM ASIGNATURA NATURAL JOIN AREA
+WHERE AR = 'LENGUAJE Y SISTEMAS INFORMATICOS'
+UNION
+SELECT A
+FROM ASIGNATURA NATURAL JOIN AREA
+WHERE AR = 'CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL';
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-A                                                                               
---------------------------------------------------                              
-GESTION DE RIESGOS                                                              
-INTELIGENCIA ARTIFICIAL                                                         
-INFORMATICA BASICA                                                              
-MINERIA DE DATOS                                                                
-ALMACENES DE DATOS                                                              
-BASES DE DATOS                                                                  
+A
+--------------------------------------------------
+INTELIGENCIA ARTIFICIAL
+GESTION DE RIESGOS
 
-6 rows selected.
+2 rows selected.
   \end{verbatim}
 \end{itemize}
 
@@ -678,20 +677,26 @@ SQL> SELECT D, AR
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-D                                                            AR                                                                                                                     
------------------------------------------------------------- ------------------------------------------------------------                                                           
-ANALISIS MATEMATICO                                          ANALISIS MATEMATICO                                                                                                    
-ANALISIS MATEMATICO                                          DIDACTICA DE LA MATEMATICA                                                                                             
-ANALISIS MATEMATICO                                          MATEMATICA APLICADA                                                                                                    
-ASTROFISICA                                                  ASTRONOMIA Y ASTROFISICA                                                                                               
-ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION           CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                                                                   
-ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION           ESTADISTICA E INVESTIGACION OPERATIVA                                                                                  
-ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION           LENGUAJES Y SISTEMAS INFORMATICOS                                                                                      
-MATEMATICA FUNDAMENTAL                                       ALGEBRA                                                                                                                
+D                                                   AR                                                                                                                     
+--------------------------------------------------- -------------------------------------------------------                                                           
+ANALISIS MATEMATICO                                 ANALISIS MATEMATICO                                                                                                    
+ANALISIS MATEMATICO                                 DIDACTICA DE LA MATEMATICA                                                                                             
+ANALISIS MATEMATICO                                 MATEMATICA APLICADA                                                                                                    
+ASTROFISICA                                         ASTRONOMIA Y ASTROFISICA                                                                                               
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION  CIENCIAS DE LA COMPUTACION E 
+                                                    INTELIGENCIA ARTIFICIAL                                                                   
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION  ESTADISTICA E INVESTIGACION OPERATIVA                                                                                  
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION  LENGUAJES Y SISTEMAS INFORMATICOS                                                                                      
+MATEMATICA FUNDAMENTAL                              ALGEBRA                                                                                                                
 
 8 rows selected.
   \end{verbatim}
 \end{itemize}
+
+\fbox{\parbox{\textwidth}{
+  \textbf{Nota}: La tabla de resultados se ha dividido para que se pueda visualizar completamente.\hspace*{-7pt}
+}}
+
 
 \newpage
 
@@ -707,7 +712,7 @@ SQL> SELECT D, P
   \item{Resultado:}
   \begin{verbatim}
 D                                                            P                                                                                                                      
------------------------------------------------------------- ------------------------------------------------------------                                                           
+------------------------------------------------------------ ---------------                                                           
 ANALISIS MATEMATICO                                          ANGELA                                                                                                                 
 ANALISIS MATEMATICO                                          FRANCISCO                                                                                                              
 ANALISIS MATEMATICO                                          MARIO                                                                                                                  
@@ -721,7 +726,7 @@ ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION           PEDRO
 ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION           SOLEDAD                                                                                                                
 
 D                                                            P                                                                                                                      
------------------------------------------------------------- ------------------------------------------------------------                                                           
+------------------------------------------------------------ ---------------                                                          
 MATEMATICA FUNDAMENTAL                                       IVAN                                                                                                                   
 
 12 rows selected.

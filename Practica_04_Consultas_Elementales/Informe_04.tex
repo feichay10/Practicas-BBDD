@@ -366,8 +366,9 @@ DNI
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> SELECT P FROM PROFESOR
-2  WHERE CAR = '7';
+SQL> SELECT DISTINCT
+  2  P FROM PROFESOR
+  3  WHERE CAR = '7';
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -385,7 +386,7 @@ SOLEDAD
   \item Consulta:
   \begin{verbatim}
 SQL> SELECT A FROM ASIGNATURA
-2  WHERE CAS >= 7;
+  2  WHERE CAS >= 7;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -406,7 +407,7 @@ ANALISIS COMPLEJO
   \item Consulta:
   \begin{verbatim}
 SQL> SELECT A FROM ASIGNATURA
-2  WHERE CAS > 7;
+  2  WHERE CAS > 7;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}

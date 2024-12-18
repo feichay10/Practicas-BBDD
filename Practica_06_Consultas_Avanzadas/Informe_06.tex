@@ -118,7 +118,6 @@
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 1
 SQL> SELECT SYSDATE
 2  FROM DUAL;  
   \end{verbatim}
@@ -126,84 +125,91 @@ SQL> SELECT SYSDATE
   \begin{verbatim}
 SYSDATE                                                                         
 ---------                                                                       
-16-NOV-23                                                                     
+14-DEC-24                                                                                                                                         
   \end{verbatim}
 \end{itemize}
+
+% Capitulo 2
 \chapter{Obtener la hora del sistema.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 2
-SQL> SELECT TO_CHAR(SYSDATE, 'HH-MI-SS')
+SQL> SELECT TO_CHAR(SYSDATE, 'HH-MI-SS') AS HORA
   2  FROM DUAL;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-TO_CHAR(                                                                        
+HORA                                                                            
 --------                                                                        
-01-10-45                                                                                 
+04-21-45                                                                                
   \end{verbatim}
 \end{itemize}
+
+% Capitulo 3
 \chapter{Dar la fecha del sistema con el formato día de la semana, día del mes, mes y año.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 3
-SQL> SELECT TO_CHAR(SYSDATE, 'DAY DD-MM-YYYY')
+SQL> SELECT TO_CHAR(SYSDATE, 'DAY DD-MM-YY') AS FECHA
   2  FROM DUAL;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-TO_CHAR(SYSDATE,'DAYDD-MM-YYYY')                                                
------------------------------------------------                                 
-THURSDAY  16-11-2023                                                                                
+FECHA                                                                           
+---------------------------------------------                                   
+SATURDAY  14-12-24                                                                                                                                            
   \end{verbatim}
 \end{itemize}
 
+\newpage
+
+% Capitulo 4
 \chapter{Dar la hora del sistema en formato de reloj de 24 horas.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 4
-SQL> SELECT TO_CHAR(SYSDATE, 'HH24:MM')
+SQL> SELECT TO_CHAR(SYSDATE, 'HH24:MM') AS HORA_24
   2  FROM DUAL;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-TO_CH                                                                           
+HORA_                                                                           
 -----                                                                           
-13:11                                                                            
+16:12                                                                             
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 5
 \chapter{Obtener el número de días que lleva impartiendo la asignatura con código 11 el profesor con DNI 8888.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 5
-SQL> SELECT SYSDATE - (SELECT FI
+SQL> SELECT SYSDATE - FI
   2  FROM PLAN_DOCENTE
-  3  WHERE DNI=8888 and CAS=11)
-  4  FROM DUAL;
+  3  WHERE CAS = 11 AND DNI = 8888;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-SYSDATE-(SELECTFIFROMPLAN_DOCENTEWHEREDNI=8888ANDCAS=11)                        
---------------------------------------------------------                        
-                                              5189.55289                                                                       
+SYSDATE-FI                                                                      
+----------                                                                      
+5583.68457                                                                      
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 6
 \chapter{Listar los nombres de profesores que han impartido una asignatura más de 365 días.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 6
 SQL> SELECT P
   2  FROM PROFESOR
   3  WHERE DNI IN
-  4  (SELECT DNI FROM PLAN_DOCENTE WHERE FF-FI >= 365);
+  4  (SELECT DNI FROM PLAN_DOCENTE
+  5  WHERE FF - FI > 365);
   \end{verbatim}
+
+  \newpage
+
   \item{Resultado:}
   \begin{verbatim}
 P                                                                               
@@ -215,69 +221,66 @@ DAVID
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 7
 \chapter{Hallar el número de profesores del departamento ‘ASTROFÍSICA’.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 7
-SQL> SELECT COUNT(DNI)
-  2  FROM(SELECT DISTINCT DNI
-  3  FROM PROFESOR NATURAL JOIN AREA NATURAL JOIN DEPARTAMENTO
-  4  WHERE D='ASTROFISICA');
+SQL> SELECT COUNT(P)
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  WHERE D = 'ASTROFISICA';
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-COUNT(DNI)                                                                      
+  COUNT(P)                                                                      
 ----------                                                                      
-         1                                                                           
+         1                                                                            
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 8
 \chapter{Hallar para cada departamento el número de profesores que tiene. Ordena la salida alfabéticamente.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 8
-SQL> SELECT D, COUNT(DNI)
-  2  FROM PROFESOR NATURAL JOIN AREA NATURAL JOIN DEPARTAMENTO
+SQL> SELECT D, COUNT(P)
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
   3  GROUP BY D
   4  ORDER BY D;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-D                                                            COUNT(DNI)         
+D                                                              COUNT(P)         
 ------------------------------------------------------------ ----------         
 ANALISIS MATEMATICO                                                   3         
 ASTROFISICA                                                           1         
 ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                    7         
-MATEMATICA FUNDAMENTAL                                                1         
-                                                                            
+MATEMATICA FUNDAMENTAL                                                1                                                                     
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 9
 \chapter{Hallar en cuantas titulaciones imparte el departamento de ‘ESTADÍSTICA, INVESTIGACIÓN OPERATIVA Y COMPUTACIÓN’.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 9
-SQL> SELECT COUNT(DISTINCT(T)) Num_titulaciones
-  2  FROM ASIGNATURA WHERE CAS IN
-  3  (SELECT CAS FROM AREA NATURAL JOIN DEPARTAMENTO
-  4  WHERE D='ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION');
+SQL> SELECT COUNT(T)
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN ASIGNATURA
+  3  WHERE D = 'ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION';
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-NUM_TITULACIONES                                                                
-----------------                                                                
-               4                                                                       
+  COUNT(T)                                                                      
+----------                                                                      
+         7                                                                        
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 10
 \chapter{Hallar el número de profesores adscritos a áreas cuyo nombre (el de las áreas) empiece por ‘A’.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 10
 SQL> SELECT COUNT(P)
   2  FROM AREA NATURAL JOIN PROFESOR
   3  WHERE AR LIKE 'A%';
@@ -290,16 +293,19 @@ SQL> SELECT COUNT(P)
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 11
 \chapter{Hallar para cada titulación el número de asignaturas que tiene. Ordena la salida alfabéticamente.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 11
 SQL> SELECT T, COUNT(CAS)
   2  FROM ASIGNATURA
   3  GROUP BY T
   4  ORDER BY T;
   \end{verbatim}
+
+  \newpage
+
   \item{Resultado:}
   \begin{verbatim}
 T    COUNT(CAS)                                                                 
@@ -311,14 +317,15 @@ MII           2
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 12
 \chapter{Listar el nombre de la asignatura con más créditos teóricos.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 12
 SQL> SELECT A
   2  FROM ASIGNATURA
-  3  WHERE CT IN(SELECT MAX(CT) FROM ASIGNATURA);
+  3  WHERE CT IN
+  4  (SELECT MAX(CT) FROM ASIGNATURA);
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -328,14 +335,16 @@ DIDACTICA DE LA MATEMATICA
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 13
 \chapter{Listar el nombre de la asignatura con menos créditos teóricos.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 13
 SQL> SELECT A
   2  FROM ASIGNATURA
-  3  WHERE CT IN(SELECT MIN(CT) FROM ASIGNATURA);
+  3  WHERE CT IN
+  4  (SELECT MIN(CT)
+  5  FROM ASIGNATURA);
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -347,17 +356,17 @@ MINERIA DE DATOS
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 14
 \chapter{Listar para cada asignatura el número total de créditos que tiene.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 14
-SQL> SELECT A, CT+CP+CL AS "Creditos Totales"
+SQL> SELECT A, CT+CP+CL AS "CREDITOS TOTALES"
   2  FROM ASIGNATURA;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-A                                                  Creditos Totales             
+A                                                  CREDITOS TOTALES             
 -------------------------------------------------- ----------------             
 BASES DE DATOS                                                    6             
 INTELIGENCIA ARTIFICIAL                                           6             
@@ -371,22 +380,23 @@ GESTION DE RIESGOS                                                6
 ASTRONOMIA                                                        6             
 DIDACTICA DE LA MATEMATICA                                        6             
 
-A                                                  Creditos Totales             
+A                                                  CREDITOS TOTALES             
 -------------------------------------------------- ----------------             
 ANALISIS COMPLEJO                                               7.5             
 
-12 rows selected.                                                                             
+12 rows selected.                                                                            
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 15
 \chapter{Listar el nombre de la asignatura con más créditos.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 15
 SQL> SELECT A
-  2  FROM ASIGNATURA WHERE CT+CP+CL IN
-  3  (SELECT MAX(CT+CP+CL) FROM ASIGNATURA);
+  2  FROM ASIGNATURA
+  3  WHERE CT+CP+CL = (SELECT MAX(CT+CP+CL)
+  4  FROM ASIGNATURA);
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -396,14 +406,15 @@ ANALISIS COMPLEJO
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 16
 \chapter{Listar el nombre de la asignatura con menos créditos.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 16
 SQL> SELECT A
-  2  FROM ASIGNATURA WHERE CT+CP+CL IN
-  3  (SELECT MIN(CT+CP+CL) FROM ASIGNATURA);
+  2  FROM ASIGNATURA
+  3  WHERE CT+CP+CL = (SELECT MIN(CT+CP+CL)
+  4  FROM ASIGNATURA);
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -414,15 +425,15 @@ MINERIA DE DATOS
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 17
 \chapter{Listar el nombre del área a la que está adscrita la asignatura con más créditos.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 17
 SQL> SELECT AR
-  2  FROM AREA WHERE CAR IN
-  3  (SELECT CAR FROM ASIGNATURA WHERE CT+CP+CL IN
-  4  (SELECT MAX(CT+CP+CL) FROM ASIGNATURA));
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  WHERE CP+CT+CL = (SELECT MAX(CP+CT+CL)
+  4  FROM ASIGNATURA);
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -432,49 +443,53 @@ ANALISIS MATEMATICO
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 18
 \chapter{Hallar el número de asignaturas impartidas por el profesor con DNI 1111.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 18
-SQL> SELECT COUNT(CAS)
-  2  FROM PLAN_DOCENTE WHERE DNI=1111 AND FF IS NULL;
+SQL> SELECT COUNT(A)
+  2  FROM ASIGNATURA NATURAL JOIN PROFESOR
+  3  WHERE DNI = 1111;
   \end{verbatim}
+
+  \newpage
+
   \item{Resultado:}
   \begin{verbatim}
-COUNT(CAS)                                                                      
+  COUNT(A)                                                                      
 ----------                                                                      
          1                                                                     
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 19
 \chapter{Hallar el número de créditos impartidos por el profesor con DNI 1111.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 19
-SQL> SELECT SUM(CTA+CPA+CLA) Creditos_1111
-  2  FROM PLAN_DOCENTE WHERE DNI=1111;
+SQL> SELECT SUM(CTA+CPA+CLA) CREDITOS_1111
+  2  FROM PLAN_DOCENTE
+  3  WHERE DNI = 1111;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
 CREDITOS_1111                                                                   
 -------------                                                                   
-            9                                                                          
+            9                                                                         
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 20
 \chapter{Hallar el nombre del profesor que más créditos imparte actualmente.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 20
 SQL> SELECT P
-  2  FROM PROFESOR
-  3  WHERE DNI IN
-  4  (SELECT DNI FROM PLAN_DOCENTE WHERE (CTA+CPA+CLA) 
-  5  IN (SELECT MAX(CTA+CPA+CLA) FROM PLAN_DOCENTE)
-  6  AND FF IS NULL);
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  3  WHERE CPA+CTA+CLA = (SELECT MAX(CPA+CTA+CLA)
+  4  FROM PLAN_DOCENTE
+  5  WHERE FF IS NULL);
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -484,14 +499,16 @@ MARIO
   \end{verbatim}
 \end{itemize}
 
+\newpage
+
+% Capitulo 21
 \chapter{Hallar el número medio de asignaturas adscritas a cada área.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 21
-SQL> SELECT AVG(COUNT(A)) Media
-  2  FROM ASIGNATURA
-  3  GROUP BY CAR;
+SQL> SELECT AVG(COUNT(P))
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  GROUP BY D;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -501,39 +518,38 @@ SQL> SELECT AVG(COUNT(A)) Media
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 22
 \chapter{Hallar el número medio de profesores de cada departamento.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 22
-SQL> SELECT AVG(COUNT(P)) Media_Profesores
-  2  FROM PROFESOR, AREA
-  3  WHERE PROFESOR.CAR=AREA.CAR
-  4  GROUP BY CD;
+SQL> SELECT AVG(COUNT(P)) AS "NUM MEDIO PROFE DEPARTAMENTO"
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  GROUP BY D;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-MEDIA_PROFESORES                                                                
-----------------                                                                
-               3                                                                               
+NUM MEDIO PROFE DEPARTAMENTO                                                    
+----------------------------                                                    
+                           3                                                                               
   \end{verbatim}
 \end{itemize}
 
+% Capitulo 23
 \chapter{Hallar los nombres de las áreas que tengan más de 3 asignaturas.}
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 23
 SQL> SELECT AR
-  2  FROM AREA
-  3  WHERE CAR IN
-  4  (SELECT CAR FROM ASIGNATURA
-  5  GROUP BY CAR
-  6  HAVING COUNT(CAR)>6);
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  GROUP BY AR
+  4  HAVING COUNT(A) > 3;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
-no rows selected                                                                       
+AR                                                                              
+------------------------------------------------------------                    
+LENGUAJES Y SISTEMAS INFORMATICOS                                                                        
   \end{verbatim}
 \end{itemize}
 
@@ -541,13 +557,10 @@ no rows selected
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 24
 SQL> SELECT AR
-  2  FROM AREA
-  3  WHERE CAR IN
-  4  (SELECT CAR FROM ASIGNATURA
-  5  GROUP BY CAR
-  6  HAVING COUNT(CAR)>3);
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  GROUP BY AR
+  4  HAVING COUNT(A) > 6;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
@@ -561,15 +574,12 @@ LENGUAJES Y SISTEMAS INFORMATICOS
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REM 25
 SQL> SELECT D
-  2  FROM DEPARTAMENTO, AREA, PROFESOR
-  3  WHERE PROFESOR.CAR=AREA.CAR AND AREA.CD=DEPARTAMENTO.CD
-  4  GROUP BY D
-  5  HAVING COUNT(DNI)=(SELECT MIN(COUNT(DNI))
-  6  FROM DEPARTAMENTO, AREA, PROFESOR
-  7  WHERE PROFESOR.CAR=AREA.CAR AND AREA.CD=DEPARTAMENTO.CD
-  8  GROUP BY D);
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  HAVING COUNT(P) = (SELECT MIN(COUNT(P))
+  4  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  5  GROUP BY D)
+  6  GROUP BY D;
   \end{verbatim}
   \item{Resultado:}
   \begin{verbatim}
