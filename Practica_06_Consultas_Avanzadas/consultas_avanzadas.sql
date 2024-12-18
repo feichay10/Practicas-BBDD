@@ -32,3 +32,64 @@ SELECT COUNT(P)
 FROM PROFESOR NATURAL JOIN DEPARTAMENTO NATURAL JOIN AREA
 WHERE D = 'ASTROFISICA';
 
+-- Consulta 8: Hallar para cada departamento el número de profesores que tiene. Ordena la salida alfabéticamente.
+SELECT D, COUNT(P)
+FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+GROUP BY D
+ORDER BY D;
+
+-- Consulta 9: Hallar en cuantas titulaciones imparte el departamento de ‘ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION'
+SELECT COUNT(T)
+FROM ASIGNATURA NATURAL JOIN DEPARTAMENTO NATURAL JOIN AREA
+WHERE D = 'ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION';
+
+-- Consulta 10: Hallar el número de profesores adscritos a áreas cuyo nombre (el de las áreas) empiece por 'A'
+SELECT COUNT(P)
+FROM PROFESOR NATURAL JOIN AREA
+WHERE AR LIKE 'A%';
+
+-- Consulta 11: Hallar para cada titulación el número de asignatuas que tiene. Ordena la salida alfabéticamente.
+SELECT T, COUNT(A)
+FROM ASIGNATURA
+GROUP BY T
+ORDER BY T;
+
+-- Consulta 12: Listar el nombre de la asignatura con más créditos teóricos.
+SELECT A
+FROM ASIGNATURA
+WHERE CT IN (SELECT MAX(CT)
+             FROM ASIGNATURA);
+
+-- Consulta 13: Listar el nombre de la asignatura con menos créditos teóricos.
+SELECT A
+FROM ASIGNATURA
+WHERE CT IN (SELECT MIN(CT)
+             FROM ASIGNATURA);
+
+-- Consulta 14: Listar para cada asignatura el número total de créditos que tiene.
+SELECT A, CT+CP+CL AS "CREDITOS TOTALES"
+FROM ASIGNATURA;
+
+-- Consulta 15: Listar el nombre de las asignatura con más créditos.
+SELECT A
+FROM ASIGNATURA
+WHERE CT+CP+CL IN (SELECT MAX(CT+CP+CL)
+                   FROM ASIGNATURA);
+
+-- Consulta 16: Listar el nombre de la asignatura con menos créditos.
+SELECT A
+FROM ASIGNATURA
+WHERE CT+CP+CL IN (SELECT MIN(CT+CP+CL)
+                   FROM ASIGNATURA);
+
+-- Consulta 17: Listar el nombre del área a la que está adscrita la asignatura con más créditos.
+SELECT AR
+FROM AREA NATURAL JOIN ASIGNATURA
+WHERE CP+CT+CL IN (SELECT MAX(CP+CT+CL)
+                   FROM ASIGNATURA);
+
+-- Consulta 18: Hallar el número de asignaturas impartidas por el profesor con DNI 1111
+SELECT COUNT(A)
+FROM ASIGNATURA NATURAL JOIN PROFESOR
+WHERE DNI = 1111
+GROUP BY A;

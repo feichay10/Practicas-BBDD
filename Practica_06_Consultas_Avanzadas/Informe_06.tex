@@ -395,7 +395,7 @@ ANALISIS COMPLEJO                                               7.5
   \begin{verbatim}
 SQL> SELECT A
   2  FROM ASIGNATURA
-  3  WHERE CT+CP+CL = (SELECT MAX(CT+CP+CL)
+  3  WHERE CT+CP+CL IN (SELECT MAX(CT+CP+CL)
   4  FROM ASIGNATURA);
   \end{verbatim}
   \item{Resultado:}
