@@ -197,7 +197,9 @@ GM   MATEMATICAS Y FISICA
 GII  ESIT                                                                                                                                                                                               
 MII  ESIT                                                                                                                                                                                               
 
-SQL> REVOKE ALL ON DEPARTAMENTO FROM ALUMNO;
+SQL> REVOKE, SELECT, INSERT, UPDATE, DELETE
+  2  ON DEPARTAMENTO
+  3  FROM ALUMNO;
 
 Revoke succeeded.
 

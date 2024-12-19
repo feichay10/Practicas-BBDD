@@ -236,6 +236,8 @@ SQL> INSERT INTO ALU0101364544.DEPARTAMENTO
   \end{verbatim}
 \end{itemize}
 
+\newpage
+
 %Pregunta 7:
 \chapter{Modificar el nombre del departamento con código 5 al valor ‘ECONOMÍA APLICADA’.}
 \begin{itemize}
@@ -331,6 +333,8 @@ ORA-01031: insufficient privileges
   \end{verbatim}
 \end{itemize}
 
+\newpage
+
 %Pregunta 13:
 \chapter{Listar las t-uplas de la tabla AREA}
 \begin{itemize}
@@ -382,8 +386,6 @@ SQL> DELETE FROM ALU0101364544.AREA
 3 row deleted.
   \end{verbatim}
 \end{itemize}
-
-\newpage
 
 %Pregunta 16:
 \chapter{Insertar la t-upla (5, ‘ECONOMÍA APLICADA’) en la tabla DEPARTAMENTO}
@@ -546,7 +548,7 @@ MII  ESIT
 \begin{itemize}
   \item Consulta:
   \begin{verbatim}
-SQL> REVOKE ALL
+SQL> REVOKE, SELECT, INSERT, UPDATE, DELETE
   2  ON DEPARTAMENTO
   3  FROM ALUMNO;
   \end{verbatim}
@@ -569,6 +571,8 @@ SQL> REVOKE ALL
 Revoke succeeded.
   \end{verbatim}
 \end{itemize}
+
+\newpage
 
 \chapter{Hacer permanentes los cambios}
 \begin{itemize}
